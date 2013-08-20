@@ -1,6 +1,12 @@
 # SQLite version 3.x
 #   gem install sqlite3
 #
+# Common setup for Postgres
+common: &common
+  adapter: postgresql
+  encoding: unicode
+  host: localhost
+  pool: 5
 #   Ensure the SQLite 3 gem is defined in your Gemfile
 #   gem 'sqlite3'
 development:
@@ -19,7 +25,4 @@ test:
   timeout: 5000
 
 production:
-  adapter: sqlite3
-  database: db/production.sqlite3
-  pool: 5
-  timeout: 5000
+  <<: *common
