@@ -1,0 +1,65 @@
+<%= form_for(@product) do |f| %>
+  <% if @product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+      <% @product.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :productNr %><br>
+    <%= f.number_field :productNr %>
+  </div>
+  <div class="field">
+    <%= f.label :price %><br>
+    <%= f.text_field :price %>
+  </div>
+  <div class="field">
+    <%= f.label :promotionPrice %><br>
+    <%= f.text_field :promotionPrice %>
+  </div>
+  <div class="field">
+    <%= f.label :promotionStartDate %><br>
+    <%= f.datetime_select :promotionStartDate %>
+  </div>
+  <div class="field">
+    <%= f.label :promotionEndDate %><br>
+    <%= f.datetime_select :promotionEndDate %>
+  </div>
+  <div class="field">
+    <%= f.label :image %><br>
+    <%= f.text_field :image %>
+  </div>
+  <div class="field">
+    <%= f.label :isActivate %><br>
+    <%= f.check_box :isActivate %>
+  </div>
+  <div class="field">
+    <%= f.label :inStock %><br>
+    <%= f.number_field :inStock %>
+  </div>
+  <div class="field">
+    <%= f.label :saleStartDate %><br>
+    <%= f.datetime_select :saleStartDate %>
+  </div>
+  <div class="field">
+    <%= f.label :salesEndDate %><br>
+    <%= f.datetime_select :salesEndDate %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

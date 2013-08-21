@@ -1,0 +1,1 @@
+json.extract! @product, :title, :description, :productNr, :price, :promotionPrice, :promotionStartDate, :promotionEndDate, :image, :isActivate, :inStock, :saleStartDate, :salesEndDate, :created_at, :updated_at

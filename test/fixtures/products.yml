@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: MyString
+  description: MyText
+  productNr: 1
+  price: 9.99
+  promotionPrice: 9.99
+  promotionStartDate: 2013-08-21 11:26:36
+  promotionEndDate: 2013-08-21 11:26:36
+  image: MyString
+  isActivate: false
+  inStock: 1
+  saleStartDate: 2013-08-21 11:26:36
+  salesEndDate: 2013-08-21 11:26:36
+
+two:
+  title: MyString
+  description: MyText
+  productNr: 1
+  price: 9.99
+  promotionPrice: 9.99
+  promotionStartDate: 2013-08-21 11:26:36
+  promotionEndDate: 2013-08-21 11:26:36
+  image: MyString
+  isActivate: false
+  inStock: 1
+  saleStartDate: 2013-08-21 11:26:36
+  salesEndDate: 2013-08-21 11:26:36

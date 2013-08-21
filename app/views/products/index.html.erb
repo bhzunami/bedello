@@ -1,0 +1,21 @@
+<h1>All products</h1>
+<% @products.each do |product| %>
+  <div class="row">
+    <div class="col-md-4">
+      <%= image_tag "logo/test_img.jpg" %>
+    </div>
+
+    <div class="col-md-6">
+      <small><%= product.productNr %></small>
+      <h4><%= product.title %></h4>
+      <%= product.description %>
+    </div>
+
+    <div class="col-md-2">
+      <p class="pull-right">Verfügbar: <%= product.inStock %></p>
+      <p class="pull-right"><%= product.price %> CHF </p><br />
+      <button type="button" class="btn btn-primary pull-right">In Stock</button>
+    </div>
+  </div>
+  <hr>
+<% end %>
