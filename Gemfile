@@ -44,7 +44,7 @@ end
 
 # User postgres for production
 group :production do
-	gem 'pg'
+	gem 'pg' '0.15.1'
 	gem 'rails_12factor', '0.0.2' # Vor visiting logs in heroku
 end
 
