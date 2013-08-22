@@ -1,3 +1,24 @@
+# == Schema Information
+#
+# Table name: products
+#
+#  id                 :integer          not null, primary key
+#  title              :string(255)
+#  description        :text
+#  productNr          :integer
+#  price              :decimal(, )
+#  promotionPrice     :decimal(, )
+#  promotionStartDate :datetime
+#  promotionEndDate   :datetime
+#  image              :string(255)
+#  isActivate         :boolean
+#  inStock            :integer
+#  saleStartDate      :datetime
+#  salesEndDate       :datetime
+#  created_at         :datetime
+#  updated_at         :datetime
+#
+
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
@@ -15,9 +36,9 @@ one:
   salesEndDate: 2013-08-21 11:26:36
 
 two:
-  title: MyString
+  title: MyString2
   description: MyText
-  productNr: 1
+  productNr: 2
   price: 9.99
   promotionPrice: 9.99
   promotionStartDate: 2013-08-21 11:26:36

@@ -1,64 +1,20 @@
-<p id="notice"><%= notice %></p>
+<h1> <%= @product.title %></h1>
+ 
+<div class="row">
+  <div class="col-md-4">
+    <%= image_tag "logo/test_img.jpg" %>
+  </div>
 
-<p>
-  <strong>Title:</strong>
-  <%= @product.title %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @product.description %>
-</p>
-
-<p>
-  <strong>Productnr:</strong>
-  <%= @product.productNr %>
-</p>
-
-<p>
-  <strong>Price:</strong>
-  <%= @product.price %>
-</p>
-
-<p>
-  <strong>Promotionprice:</strong>
-  <%= @product.promotionPrice %>
-</p>
-
-<p>
-  <strong>Promotionstartdate:</strong>
-  <%= @product.promotionStartDate %>
-</p>
-
-<p>
-  <strong>Promotionenddate:</strong>
-  <%= @product.promotionEndDate %>
-</p>
-
-<p>
-  <strong>Image:</strong>
-  <%= @product.image %>
-</p>
-
-<p>
-  <strong>Isactivate:</strong>
-  <%= @product.isActivate %>
-</p>
-
-<p>
-  <strong>Instock:</strong>
-  <%= @product.inStock %>
-</p>
-
-<p>
-  <strong>Salestartdate:</strong>
-  <%= @product.saleStartDate %>
-</p>
-
-<p>
-  <strong>Salesenddate:</strong>
-  <%= @product.salesEndDate %>
-</p>
-
-<%= link_to 'Edit', edit_product_path(@product) %> |
-<%= link_to 'Back', products_path %>
+  <div class="col-md-8">
+    <small><%= @product.productNr %></small>
+    <h3>Beschreibung</h3>
+    <%= @product.description %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4">
+    <p>Verfügbar: <%= @product.inStock %></p>
+    <p><%= @product.price %> CHF </p><br />
+    <button type="button" class="btn btn-primary">In Stock</button>
+  </div>
+</div>
