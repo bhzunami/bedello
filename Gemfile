@@ -26,6 +26,9 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
+# New Relic addon for Heroku ping
+gem 'newrelic_rpm'
+
 
 # Twitter Bootstrap integration
 gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
