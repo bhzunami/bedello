@@ -31,9 +31,10 @@ gem 'newrelic_rpm'
 
 
 # Twitter Bootstrap integration
-gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
-                          :github => 'anjlab/bootstrap-rails',
-                          :branch => '3.0.0'
+gem 'bootstrap-sass', '2.3.2.0'
+# gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
+#                           :github => 'anjlab/bootstrap-rails',
+#                           :branch => '3.0.0'
                           
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

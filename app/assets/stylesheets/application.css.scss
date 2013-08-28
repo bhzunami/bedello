@@ -14,7 +14,8 @@
 
 
  // import original bootstrap
-@import "twitter/bootstrap";
+@import "bootstrap";
+@import "bootstrap-responsive";
 
 /* universal */
 
@@ -23,7 +24,7 @@ html {
 }
 
 body {
-  padding-top: 60px;
+  padding-top: 90px;
 }
 
 section {
@@ -33,50 +34,14 @@ section {
 textarea {
   resize: vertical;
 }
- 
+
+p {
+  font-size: 1.1em;
+  line-height: 1.7em;
+}
 a {
- 	background-color: transparent !important;
- }
-
-.navbar {
-	padding: 20px;
-	#logo {
-		margin-left: 110px;
-	}
-	#Kasse {
-		margin-right: 20px;
-	}
+	color: black;
 }
-
-.container {
-	margin-top: 40px !important;
-}
-
-.categories {
-	margin-top: 25px;
-	ul {
-		list-style: none;
-		margin: 0px;
-		padding: 0px;
-		li {
-			margin-top: 15px;
-			overflow: auto;
-			a {
-				padding: 5px;
-  			&:hover {
-					color: #0404B4;
-					background-color: transparent !important;
-					text-decoration: none;
-					border-bottom: 1px #0404B4 dotted;
-				}
-			}
-		}
-		ul {
-			padding-left: 15px;
-		}
-	}
-}
-
 /* footer */
 
 footer {
@@ -84,35 +49,33 @@ footer {
   padding-top: 5px;
   border-top: 1px solid #eaeaea;
   color: #999;
-	a {
-  	color: #555;
-  	&:hover {
-			color: black;
-			background-color: #D8D8D8 !important;
-			text-decoration: none;
-		}
-	}
-  ul {
-  	list-style: none;
-  	li {
-			margin-left: 10px;
-		}
-	}
 }
 
-#error_explanation {
-  color: #f00;
-  ul {
-    list-style: none;
-    margin: 0 0 18px 0;
-  }
+footer a {
+  color: #555;
 }
 
-.field_with_errors {
-  margin-bottom: 0px !important;
-  @extend .control-group;
-  @extend .error;
-
+footer a:hover {
+  color: #222;
 }
 
+footer small {
+  float: left;
+}
 
+footer ul {
+  list-style: none;
+}
+
+.right {
+	text-align: right;
+	align: right;
+}
+
+.navbar-right {
+	top: 20px;
+}
+
+.nav-list {
+	padding-top: 20px;
+}

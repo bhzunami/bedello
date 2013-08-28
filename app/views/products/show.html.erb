@@ -1,20 +1,20 @@
 <h1> <%= @product.title %></h1>
  
 <div class="row">
-  <div class="col-md-4">
+  <div class="span3">
     <%= image_tag "logo/test_img.jpg" %>
   </div>
 
-  <div class="col-md-8">
+  <div class="span7">
     <small><%= @product.productNr %></small>
     <h3>Beschreibung</h3>
     <%= @product.description %>
   </div>
 </div>
 <div class="row">
-  <div class="col-md-4">
+  <div class="span4">
     <p>Verfügbar: <%= @product.inStock %></p>
     <p><%= @product.price %> CHF </p><br />
-    <button type="button" class="btn btn-primary">In Stock</button>
+    <button type="button" class="btn">In Stock</button>
   </div>
 </div>

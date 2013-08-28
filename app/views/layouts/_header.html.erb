@@ -1,19 +1,27 @@
-<header class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
-  <div class="navbar-header">
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-      <span class="sr-only">Toggle navigation</span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
-    <%= link_to image_tag("logo/banner_shop.jpg"), '#', id: "logo" %>
-  </div>
-  <div class="collapse navbar-collapse navbar-ex1-collapse">
 
-  <ul class="nav navbar-nav navbar-right">
-    <li><%= link_to " Home", root_path, id: "Home", class: "glyphicon glyphicon-home" %></li>
-    <li><%= link_to " Warenkorb", '#', id: "Warenkorb", class: "glyphicon glyphicon-shopping-cart" %></li>
-    <li><%= link_to " Kasse", '#', id: "Kasse", class: "glyphicon glyphicon-ok-sign" %></li>
-  </ul>
-</div>
+
+<header class="navbar navbar-default navbar-fixed-top navbar-inverse">
+  <div class="navbar-inner">
+    <div class="container">
+ 
+      <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+ 
+      <!-- Be sure to leave the brand out there if you want it shown -->
+      <%= link_to image_tag("logo/banner_shop.jpg"), '#', id: "logo", class: "brand" %>
+ 
+      <!-- Everything you want hidden at 940px or less, place within here -->
+      <div class="nav-collapse collapse">
+        <ul class="nav navbar-nav navbar-right pull-right">
+          <li><%= link_to " Home", root_path %></li>
+          <li><%= link_to " Warenkorb", '#' %></li>
+          <li><%= link_to " Kasse", '#' %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </header>

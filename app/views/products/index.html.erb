@@ -1,20 +1,20 @@
 <h1>All products</h1>
 <% @products.each do |product| %>
   <div class="row">
-    <div class="col-md-4">
+    <div class="span3">
       <%= image_tag "logo/test_img.jpg" %>
     </div>
 
-    <div class="col-md-6">
+    <div class="span5">
       <small><%= product.productNr %></small>
       <h4><%= link_to product.title, product %></h4>
       <%= product.description %>
     </div>
 
-    <div class="col-md-2">
-      <p class="pull-right">Verfügbar: <%= product.inStock %></p>
-      <p class="pull-right"><%= product.price %> CHF </p><br />
-      <button type="button" class="btn btn-primary pull-right">In Stock</button>
+    <div class="span2 pull-right">
+      <p class="right">Verfügbar: <%= product.inStock %></p>
+      <p class="right"><%= product.price %> CHF </p><br />
+      <button type="button" class="btn pull-right">In Stock</button>
     </div>
   </div>
   <hr>
