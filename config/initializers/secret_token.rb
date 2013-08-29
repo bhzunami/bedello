@@ -9,4 +9,20 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Bedello::Application.config.secret_key_base = 'e73478fca7fa61468509c0ef3f41573db3280da3c60d42219d8132936a16fe2333117ad1a63f25c04f4a4ded744933812867cd27c82139f8eaf8cdf3d2f9122c'
+
+require 'securerandom'
+
+def secure_token
+  token_file = Rails.root.join('.secret')
+  if File.exist?(token_file)
+    # Use the existing token.
+    File.read(token_file).chomp
+  else
+    # Generate a new token and store it in token_file.
+    token = SecureRandom.hex(64)
+    File.write(token_file, token)
+    token
+  end
+end
+
+Bedello::Application.config.secret_key_base = secure_token
