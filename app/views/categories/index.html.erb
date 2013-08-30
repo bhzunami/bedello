@@ -1,0 +1,35 @@
+<h1>Kategorien</h1>
+<%= link_to "New category", new_category_path, class: "btn btn-mini" %>
+<div class="row">
+	<div class="span10">
+		<table class="table table-striped table-condensed">
+			<colgroup>
+    		<col class="span2">
+    		<col class="span4">
+    		<col class="span2">
+    		<col class="span2">
+  	</colgroup>
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Beschreibung</th>
+					<th>Angelegt am</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+			<% @categories.each do |c| %>
+			<tr>
+				<td><%= link_to c.name, c %> </td>
+				<td><%= c.description %></td>
+				<td><%= c.created_at.to_formatted_s(:long)  %></td>
+				<td> <%= link_to "Edit", edit_category_path(c), class: "btn btn-mini" %>
+					<%= link_to "Delete", c, confirm: 'Are you sure?', method: :delete, class: "btn btn-mini btn-danger" %>
+				</td>
+			</tr>
+			<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>
+	

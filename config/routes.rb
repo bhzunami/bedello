@@ -1,6 +1,8 @@
 Bedello::Application.routes.draw do
+  get "categories/new"
   resources :products
 
+  resources :categories
   root 'static_pages#home'
 
   # The priority is based upon order of creation: first created -> highest priority.
