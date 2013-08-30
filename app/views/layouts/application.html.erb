@@ -9,18 +9,20 @@
   
 </head>
 <body>
-	
 	<%= render 'layouts/header' %>
 	<div class="container">
-  <div class="row">
-    <div class="span2 bs-docs-sidebar">
-			<%= render 'layouts/sidebar' %>
+		<% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+      <% end %>
+  	<div class="row">
+    	<div class="span2 bs-docs-sidebar">
+				<%= render 'layouts/sidebar' %>
+			</div>
+			<div class="span10">
+				<%= yield %>
+			</div>
 		</div>
-		<div class="span10">
-			<%= yield %>
-		</div>
-	</div>
-	<%= render 'layouts/footer' %>
+		<%= render 'layouts/footer' %>
 	</div>
 </body>
 </html>

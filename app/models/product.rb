@@ -8,7 +8,7 @@
 #  productNr          :integer
 #  price              :decimal(, )
 #  promotionPrice     :decimal(, )
-#  promotionStartDate :datetime
+#  promotionStartDate :date
 #  promotionEndDate   :datetime
 #  image              :string(255)
 #  isActivate         :boolean
@@ -24,11 +24,11 @@ class Product < ActiveRecord::Base
 
 	validates :title, :productNr, uniqueness: true
 	validates :productNr, numericality: { greater_than_or_equal_to: 0 }
-	validates :inStock, numericality: true
+	validates :inStock, numericality: { greater_than_or_equal_to: 0 }
 	validates :title, :description, :productNr, :price, :inStock, :saleStartDate, :salesEndDate, presence: true
 
 	validates :price, numericality: { greater_than_or_equal_to: 0.01 }
-	validates :promotionPrice, numericality: { greater_than_or_equal_to: 0.00 }
+	validates :promotionPrice, numericality: { greater_than_or_equal_to: 0.00 }, allow_nil: true
 
 
 end

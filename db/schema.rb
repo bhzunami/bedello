@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130821092636) do
+ActiveRecord::Schema.define(version: 20130830090404) do
 
   create_table "products", force: true do |t|
     t.string   "title"
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20130821092636) do
     t.integer  "productNr"
     t.decimal  "price"
     t.decimal  "promotionPrice"
-    t.datetime "promotionStartDate"
+    t.date     "promotionStartDate"
     t.datetime "promotionEndDate"
     t.string   "image"
     t.boolean  "isActivate"

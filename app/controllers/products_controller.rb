@@ -42,7 +42,9 @@ class ProductsController < ApplicationController
   def update
     respond_to do |format|
       if @product.update(product_params)
-        format.html { redirect_to @product, notice: 'Product was successfully updated.' }
+        format.html { 
+          redirect_to @product
+          flash[:success] = "Product successfully updated" }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

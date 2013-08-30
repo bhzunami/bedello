@@ -1,61 +1,27 @@
-
-<%= form_for(@product, html: {class: "form-horizontal"}) do |f| %>
+<p>Erstellen eines neuen Produkt.</p>
+<%= simple_form_for(@product, html: {class: 'form-horizontal' }) do |f| %>
   <% if @product.errors.any? %>
     <%= render 'shared/error_messages', object: f.object %>
   <% end %>
+  <h4>Information</h4>
+  <hr class="featurette-divider">
+  <%= f.input :title %>
+  <%= f.input :description, input_html: { class: "span6", rows: "5"} %>
+  <%= f.input :productNr, as: :string%>
+  <%= f.input :price, label: "Price"%>
+  <%= f.input :inStock %>
+  <h4>Visible options</h4>
+  <hr class="featurette-divider">
+  <%= f.input :saleStartDate, as: :date_picker%>
+  <%= f.input :salesEndDate, as: :date_picker %>
+  <%= f.input :isActivate %>
 
+  <h4>Actions</h4>
+  <hr class="featurette-divider">
+  <%= f.input :promotionPrice, as: :decimal%>
+  <%= f.input :promotionStartDate, as: :date_picker %>
+  <%= f.input :promotionEndDate, as: :date_picker%>
 
-    <div class="form-group">
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </div>
-</div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description, rows: 6 %>
-  </div>
-  <div class="field">
-    <%= f.label :productNr %><br>
-    <%= f.number_field :productNr %>
-  </div>
-  <div class="field">
-    <%= f.label :price %><br>
-    <%= f.text_field :price %>
-  </div>
-  <div class="field">
-    <%= f.label :promotionPrice %><br>
-    <%= f.text_field :promotionPrice %>
-  </div>
-  <div class="field">
-    <%= f.label :promotionStartDate %><br>
-    <%= f.datetime_select :promotionStartDate %>
-  </div>
-  <div class="field">
-    <%= f.label :promotionEndDate %><br>
-    <%= f.datetime_select :promotionEndDate %>
-  </div>
-  <div class="field">
-    <%= f.label :image %><br>
-    <%= f.text_field :image %>
-  </div>
-  <div class="field">
-    <%= f.label :isActivate %><br>
-    <%= f.check_box :isActivate %>
-  </div>
-  <div class="field">
-    <%= f.label :inStock %><br>
-    <%= f.number_field :inStock %>
-  </div>
-  <div class="field">
-    <%= f.label :saleStartDate %><br>
-    <%= f.datetime_select :saleStartDate %>
-  </div>
-  <div class="field">
-    <%= f.label :salesEndDate %><br>
-    <%= f.datetime_select :salesEndDate %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= f.button :submit %>
+
 <% end %>

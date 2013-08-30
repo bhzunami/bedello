@@ -2,10 +2,13 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org
 
-jQuery ($) ->
-	$(".bs-docs-sidenav li a").click (e) ->
-		$(".bs-docs-sidenav li").removeClass "active"
-		$this = $(this)
-		$this.addClass "active"  unless $this.hasClass("active")
-		e.preventDefault()
-		
+$ ->
+	$("#product_promotionStartDate").datepicker dateFormat: "dd.mm.yy"
+	$("#product_promotionEndDate").datepicker dateFormat: "dd.mm.yy"
+	$("#product_saleStartDate").datepicker dateFormat: "dd.mm.yy"
+	$("#product_salesEndDate").datepicker dateFormat: "dd.mm.yy"
+	
+	$(".datepicker").each (i) ->
+		unless $(this).val() is ''
+  		date = new Date( $(this).val() )
+  		$(this).val $.datepicker.formatDate("dd.mm.yy", date)

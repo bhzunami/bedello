@@ -8,7 +8,7 @@
 #  productNr          :integer
 #  price              :decimal(, )
 #  promotionPrice     :decimal(, )
-#  promotionStartDate :datetime
+#  promotionStartDate :date
 #  promotionEndDate   :datetime
 #  image              :string(255)
 #  isActivate         :boolean

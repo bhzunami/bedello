@@ -19,6 +19,7 @@ gem 'bcrypt-ruby', '3.0.1'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+gem "jquery-ui-rails"
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
@@ -29,6 +30,8 @@ gem 'jbuilder', '~> 1.2'
 # New Relic addon for Heroku ping
 gem 'newrelic_rpm'
 
+# Simpel forms for input fomrs
+gem 'simple_form', '~> 3.0.0.rc'
 
 # Twitter Bootstrap integration
 gem 'bootstrap-sass', '2.3.2.0'
