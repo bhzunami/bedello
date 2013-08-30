@@ -19,6 +19,7 @@ pickle-email-*.html
 *.out
 doc/Castage_Docu.log
 original_files
+.secret
 
 # Ignore application configuration
 /config/application.yml

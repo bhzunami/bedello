@@ -24,7 +24,7 @@ html {
 }
 
 body {
-  padding-top: 90px;
+  padding-top: 50px;
 }
 
 section {
@@ -42,6 +42,23 @@ p {
 a {
 	color: black;
 }
+
+/* header */
+
+#logo {
+  float: left;
+  font-size: 1.8em;
+  color: #fff;
+  font-weight: bold;
+  font-style:italic;
+  line-height: 1;
+}
+
+#logo:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
 /* footer */
 
 footer {
@@ -70,10 +87,6 @@ footer ul {
 .right {
 	text-align: right;
 	align: right;
-}
-
-.navbar-right {
-	top: 20px;
 }
 
 .nav-list {
