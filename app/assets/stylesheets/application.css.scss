@@ -99,6 +99,14 @@ input, textarea, select, .uneditable-input {
   @include box_sizing;
 }
 
+.debug_dump {
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-top: 45px;
+  @include box_sizing;
+}
+
 .right {
 	text-align: right;
 	align: right;
