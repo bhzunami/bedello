@@ -15,4 +15,6 @@
 //= require turbolinks
 //= require jquery.ui.datepicker
 //= require bootstrap
+//= require BEDELLO
+//= require custom
 //= require_tree .

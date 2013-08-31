@@ -1,15 +1,12 @@
-<ul class="nav nav-list bs-docs-sidenav affix">
+<ul class="nav nav-list">
   <li class="nav-header">Categories</li>
- <li><%= link_to "Couverturen", products_path, id: "category_couverturen" %></li>
-    <li><%= link_to "Hohlkörper", products_path, id: "category_hohlkörper" %></li>
-    <li><%= link_to "Marzipan", new_product_path, id: "Marzipan" %></li>
-    <li><%= link_to "Gianduja", '#', id: "Gianduja" %></li>
-    <li class="nav-header">Zubehör</li>
-        <li><%= link_to "Thermometer", '#', id: "Gianduja" %></li>
-        <li><%= link_to "Tortenzubehör", '#', id: "Tortenzubehör" %></li>
-        <li><%= link_to "Trempiergabeln", '#', id: "Trempiergabeln" %></li>
-        <li><%= link_to "Dressiesäcke", '#', id: "Dressiesäcke" %></li>
-        <li class="divider"></li>
-    <li><%= link_to "Diverses", '#', id: "Diverses" %></li>
+
+  <% categories.each do |c| %>
+  <li>
+    <%= link_to c.name, products_path(category_id: c.id), id: c.id %>
+  </li>
+
+  <% end %>
 </ul>
 
+  

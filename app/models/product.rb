@@ -22,16 +22,19 @@
 
 class Product < ActiveRecord::Base
 
-	belongs_to :category, foreign_key: "category_id"
+	belongs_to :category
 
 
 	validates :title, :productNr, uniqueness: true
 	validates :productNr, numericality: { greater_than_or_equal_to: 0 }
 	validates :inStock, numericality: { greater_than_or_equal_to: 0 }
-	validates :title, :description, :productNr, :price, :inStock, :saleStartDate, :salesEndDate, presence: true
+	validates :title, :description, :productNr, :price, :inStock, :saleStartDate, :salesEndDate, :category_id, presence: true
 
 	validates :price, numericality: { greater_than_or_equal_to: 0.01 }
 	validates :promotionPrice, numericality: { greater_than_or_equal_to: 0.00 }, allow_nil: true
 
 
+def getProducts(category)
+	category.products.all
+end
 end

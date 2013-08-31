@@ -26,6 +26,12 @@
   box-sizing: border-box;
 }
 
+@mixin navlist_style {
+  background-color: #0088cc !important;
+  color: #ffffff;
+  text-shadow: none;
+}
+
 html {
   overflow-y: scroll;
 }
@@ -119,3 +125,13 @@ input, textarea, select, .uneditable-input {
 .datepicker {
   height: 30px !important;
 }
+
+.nav-list {
+  .active {
+    @include navlist_style;
+    a:hover {
+      @include navlist_style;
+    }
+  }
+}
+
