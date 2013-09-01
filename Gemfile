@@ -33,6 +33,9 @@ gem 'newrelic_rpm'
 # Simpel forms for input fomrs
 gem 'simple_form', '~> 3.0.0.rc'
 
+# Secure Passwords with
+gem 'bcrypt-ruby', '3.0.1'
+
 # Twitter Bootstrap integration
 gem 'bootstrap-sass', '2.3.2.0'
 # gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
@@ -48,6 +51,12 @@ end
 group :development, :test do
 	gem 'sqlite3', '1.3.8'
 	gem 'rspec-rails', '2.13.1'
+end
+
+group :test do
+  gem 'selenium-webdriver', '2.0.0'
+  gem 'capybara', '2.1.0'
+  gem 'factory_girl_rails', '4.2.1'
 end
 
 # User postgres for production

@@ -1,8 +1,20 @@
 Bedello::Application.routes.draw do
-  get "categories/new"
   resources :products
-
   resources :categories
+  resources :users
+
+  resources :sessions, only: [:new, :create, :destroy]
+
+  match '/signup', to: 'users#new', via: 'get'
+  match '/signin', to: 'sessions#new', via: 'get'
+  match '/signout', to: 'sessions#destroy', via: 'delete'
+
+  get "/password_reset", to: 'users#show_password_reset', as: :password_reset
+  post "/password_reset", to:'users#password_reset'
+  get "/edit_password_reset/:id", to: 'users#edit_password_reset', as: :edit_password_reset
+  post "/update_password_reset/:id", to: 'users#update_password_reset'
+
+
   root 'static_pages#home'
 
   # The priority is based upon order of creation: first created -> highest priority.

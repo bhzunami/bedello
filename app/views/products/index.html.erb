@@ -1,3 +1,8 @@
+<div class="row">
+  <div class="span2">
+    <%= render 'layouts/sidebar' %>
+  </div>
+  <div class="span10">
 <h1>All products of <category.name></h1>
 <% if @products.any? %>
 <% @products.each do |product| %>
@@ -26,3 +31,5 @@
     Gehen sie zurück auf die <%= link_to "Startseite", root_path, class: "btn btn-large" %>
   </div>
 <% end %>
+</div>
+</div>
