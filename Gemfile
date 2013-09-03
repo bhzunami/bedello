@@ -36,6 +36,9 @@ gem 'simple_form', '~> 3.0.0.rc'
 # Secure Passwords with
 gem 'bcrypt-ruby', '3.0.1'
 
+# For adding example data
+gem 'faker', '1.1.2'
+
 # Twitter Bootstrap integration
 gem 'bootstrap-sass', '2.3.2.0'
 # gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
