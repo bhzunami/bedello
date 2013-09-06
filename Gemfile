@@ -39,6 +39,10 @@ gem 'bcrypt-ruby', '3.0.1'
 # For adding example data
 gem 'faker', '1.1.2'
 
+# For pagination
+gem 'will_paginate', '3.0.4'
+gem 'bootstrap-will_paginate', '0.0.9'
+
 # Twitter Bootstrap integration
 gem 'bootstrap-sass', '2.3.2.0'
 # gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
