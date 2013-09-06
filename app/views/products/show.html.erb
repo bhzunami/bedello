@@ -26,7 +26,7 @@
       <small><%= @product.productNr %></small>
       
     <h3>Beschreibung</h3>
-    <%= @product.description %>
+    <%= sanitize(@product.description) %>
   </div>
 </div>
 <div class="control-group"></div>
@@ -36,7 +36,7 @@
     <% if isSale?(@product) %>
       <p class="pull-left sale"><%= @product.price %> CHF </p> <p class="text-middle"><%= @product.promotionPrice %> CHF</p>
     <% else %>
-      <p><%= @product.price %> CHF </p>
+      <p><%= number_to_currency(@product.price) %> CHF </p>
     <% end %>
     <% if admin? %>
       <p>Verkaufen von: <%= l @product.saleStartDate %>  bis <%= l @product.salesEndDate %> </p>

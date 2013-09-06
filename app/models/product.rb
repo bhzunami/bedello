@@ -24,6 +24,9 @@ class Product < ActiveRecord::Base
 
 	belongs_to :category
 
+	scope :active, -> { where(isActivate: true) }
+	scope :activeDate, -> { active.where("? BETWEEN saleStartDate AND salesEndDate", Date.today)}
+	default_scope order: 'title'
 
 	validates :title, :productNr, uniqueness: true
 	validates :productNr, numericality: { greater_than_or_equal_to: 0 }
@@ -32,10 +35,6 @@ class Product < ActiveRecord::Base
 
 	validates :price, numericality: { greater_than_or_equal_to: 0.01 }
 	validates :promotionPrice, numericality: { greater_than_or_equal_to: 0.00 }, allow_nil: true
-
-	scope :active, -> { where(isActivate: true) }
-	scope :activeDate, -> { active.where("? BETWEEN saleStartDate AND salesEndDate", Date.today)}
-
 	# range = (saleStartDate..salesEndDate)
 	# range.cover?(Time.now)
 end
