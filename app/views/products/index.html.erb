@@ -3,33 +3,16 @@
     <%= render 'layouts/sidebar' %>
   </div>
   <div class="span10">
-<h1>All products of <category.name></h1>
-<% if @products.any? %>
-<% @products.each do |product| %>
-  <div class="row">
-    <div class="span3">
-      <%= image_tag "logo/test_img.jpg" %>
-    </div>
-
-    <div class="span5">
-      <small><%= product.productNr %></small>
-      <h4><%= link_to product.title, product %></h4>
-      <%= product.description %>
-    </div>
-
-    <div class="span2 pull-right">
-      <p class="right">Verfügbar: <%= product.inStock %></p>
-      <p class="right"><%= product.price %> CHF </p><br />
-      <button type="button" class="btn pull-right">In Stock</button>
-    </div>
+    <h1>All products of <category.name></h1>
+    <% if @products.any? %>
+      <% @products.each do |product| %>       
+          <%= render product %>
+      <% end %>
+    <% else %>
+      <div class="lead">
+        Leider keine Produkte für diese Kategorie gefunden.<br />
+        Gehen sie zurück auf die <%= link_to "Startseite", root_path, class: "btn btn-large" %>
+      </div>
+    <% end %>
   </div>
-  <hr>
-<% end %>
-<% else %>
-  <div class="lead">
-    Leider keine Produkte für diese Kategorie gefunden.<br />
-    Gehen sie zurück auf die <%= link_to "Startseite", root_path, class: "btn btn-large" %>
-  </div>
-<% end %>
-</div>
 </div>

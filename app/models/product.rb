@@ -9,12 +9,12 @@
 #  price              :decimal(, )
 #  promotionPrice     :decimal(, )
 #  promotionStartDate :date
-#  promotionEndDate   :datetime
+#  promotionEndDate   :date
 #  image              :string(255)
 #  isActivate         :boolean
 #  inStock            :integer
-#  saleStartDate      :datetime
-#  salesEndDate       :datetime
+#  saleStartDate      :date
+#  salesEndDate       :date
 #  created_at         :datetime
 #  updated_at         :datetime
 #  category_id        :integer
@@ -33,8 +33,9 @@ class Product < ActiveRecord::Base
 	validates :price, numericality: { greater_than_or_equal_to: 0.01 }
 	validates :promotionPrice, numericality: { greater_than_or_equal_to: 0.00 }, allow_nil: true
 
+	scope :active, -> { where(isActivate: true) }
+	scope :activeDate, -> { active.where("? BETWEEN saleStartDate AND salesEndDate", Date.today)}
 
-def getProducts(category)
-	category.products.all
-end
+	# range = (saleStartDate..salesEndDate)
+	# range.cover?(Time.now)
 end

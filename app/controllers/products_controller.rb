@@ -4,7 +4,13 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    @products = Product.where(category_id: params[:category_id] )
+    # check if we get all products or only active
+    if admin?
+      @products = Product.where(category_id: params[:category_id] )
+    else
+      @products = Product.activeDate.where(category_id: params[:category_id])
+      #@products = Product.activeDate
+    end
   end
 
   # GET /products/1

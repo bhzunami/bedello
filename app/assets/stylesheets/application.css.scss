@@ -138,6 +138,9 @@ input, textarea, select, .uneditable-input {
   @extend .error;
 }
 
+.sale {
+  text-decoration:line-through;
+}
 .users {
   list-style: none;
   margin: 0;

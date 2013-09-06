@@ -32,6 +32,13 @@ module SessionsHelper
     user == current_user
   end
 
+  def signed_in_user
+    unless signed_in?
+      store_location
+      redirect_to signin_url, notice: "Please sign in."
+    end
+   end
+
   # Signout stuff
   def sign_out
     self.current_user = nil
@@ -52,5 +59,17 @@ module SessionsHelper
   		store_location
   		redirect_to login_url, notice: "Bitte zuerst einloggen"
   	end
+  end
+
+  def admin_user
+    redirect_to(root_url) unless current_user.admin?
+  end
+
+  def admin?
+    if current_user
+      current_user.admin?
+    else
+      return false
+    end
   end
 end

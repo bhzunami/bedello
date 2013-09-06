@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="span3">
+      <%= image_tag "logo/test_img.jpg" %>
+    </div>
+
+    <div class="span5">
+      <% if admin? && !product.isActivate %>
+        <p class="alert alert-error">Product is inactive</p>
+      <% end %>
+      <% if admin? && !activeProduct?(product) %>
+        <p class="alert">Product is not seasonally</p>
+      <% end %>
+      <% if isSale?(product) %>
+        <p class="text-error"> <strong><%= number_with_precision promotionPercent(product), precision: 0%> % Reduktion</strong></p>
+      <% end %>
+      <small><%= product.productNr %></small>
+      <% if admin? %>
+        <p><%= link_to "Edit", edit_product_path(product), class: "btn pull-right" %></p>
+      <% end %>
+      <h4><%= link_to product.title, product %></h4>
+      <%= product.description %>
+    </div>
+
+    <div class="span2 pull-right">
+      <p class="text-right">Verfügbar: <%= product.inStock %></p>
+     
+      <% if isSale?(product) %>
+      
+        <p class="pull-left sale"><%= product.price %> CHF</p><p class="text-right"><strong><%= product.promotionPrice %> CHF </strong></p>
+      
+      <% else %>
+        <p class="text-right"><%= product.price %> CHF </p>
+      <% end %>
+
+
+      <p> <button type="button" class="btn btn-success pull-right">In Stock</button> </p>
+    </div>
+  </div>
+  <hr>
