@@ -6,10 +6,6 @@ module CartsHelper
     current_cart = Cart.create
     session[:cart_session] = current_cart.cartSession
     current_cart
-
-    # cart = Cart.create
-    # session[:cartSession] = cart.cartSession
-    # cart
   end
 
   def current_cart?(cart)

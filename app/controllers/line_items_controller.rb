@@ -4,6 +4,12 @@ class LineItemsController < ApplicationController
 
 	end
 
+	def destroy
+		@line_item = LineItem.find(params[:id])
+		@line_item.destroy
+		redirect_to root_url
+	end
+
 	def create
 		@cart = current_cart
 		product = Product.find(params[:id])

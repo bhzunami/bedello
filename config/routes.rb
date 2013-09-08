@@ -1,11 +1,10 @@
 Bedello::Application.routes.draw do
-  get "carts/create"
   resources :products
   resources :categories
   resources :users
 
   resources :line_items
-  resources :carts, only: :show
+  resources :carts, only: [:show, :destroy, :create]
   resources :sessions, only: [:new, :create, :destroy]
 
   match '/signup', to: 'users#new', via: 'get'
