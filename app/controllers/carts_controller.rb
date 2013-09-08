@@ -3,11 +3,6 @@ class CartsController < ApplicationController
   before_action :correct_cart, only: [:show, :edit, :update, :destroy]
 	before_action :set_cart, only: [:show, :edit, :update, :destroy]
 
-  def create
-  end
-
-	def new
-	end
 
 	def show
 	end

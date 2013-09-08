@@ -5,10 +5,9 @@ class LineItemsController < ApplicationController
 	end
 
 	def create
-		
 		@cart = current_cart
-		product = Product.find(params[:product_id])
-		@line_item = @cart.add_product(product.id)
+		product = Product.find(params[:id])
+		@line_item = @cart.add_product(params[:id], params[:quantity])
 
 		if @line_item.save
 			flash[:success] =  "#{product.title} was successfull added to line item"
