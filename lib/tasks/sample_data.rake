@@ -46,16 +46,16 @@ end
 
 
 def make_products
-  5.times do |n|
+  10.times do |n|
     title = Faker::Commerce.product_name
-    description = "Only Testproduct"
-    productNr = n
+    description = Faker::Lorem.paragraph(sentence_count = 5)
+    productNr = Faker::Number.number(3)
     isActivate = true
-    inStock = 20
+    inStock = Faker::Number.digit
     saleStartDate = Time.now.to_date
     salesEndDate = (Time.now + 3.weeks).to_date
-    category_id = 2
-    price = 20
+    category_id = rand(1..9)
+    price = Faker::Number.number(2)
     Product.create!(title: title,
                     description: description,
                     productNr: productNr,

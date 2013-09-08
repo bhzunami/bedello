@@ -16,7 +16,12 @@
       <div class="nav-collapse collapse">
         <ul class="nav navbar-nav navbar-right pull-right">
           <li><%= link_to " Home", root_path %></li>
-          <li><%= link_to " Warenkorb", cart_path(current_cart) %></li>
+          <% if quantity_of_carts > 0 %>
+            <li><%= link_to " Warenkorb (#{quantity_of_carts})", cart_path(current_cart) %></li>
+            <% else %>
+              <li><%= link_to " Warenkorb", cart_path(current_cart) %></li>
+            <% end %>
+          
           <li><%= link_to " Kasse", '#' %></li>
           <% if signed_in? %>
             <li><%= link_to "Users", '#' %></li>
