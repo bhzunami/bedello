@@ -37,7 +37,7 @@ gem 'simple_form', '~> 3.0.0.rc'
 gem 'bcrypt-ruby', '3.0.1'
 
 # For adding example data
-gem 'faker', '1.1.2'
+gem 'faker', '1.2.0'
 
 # For pagination
 gem 'will_paginate', '3.0.4'

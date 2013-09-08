@@ -6,12 +6,12 @@
 #  title              :string(255)
 #  description        :text
 #  productNr          :integer
-#  price              :decimal(, )
-#  promotionPrice     :decimal(, )
+#  price              :decimal(8, 2)
+#  promotionPrice     :decimal(8, 2)
 #  promotionStartDate :date
 #  promotionEndDate   :date
 #  image              :string(255)
-#  isActivate         :boolean
+#  isActivate         :boolean          default(TRUE)
 #  inStock            :integer
 #  saleStartDate      :date
 #  salesEndDate       :date
@@ -23,6 +23,9 @@
 class Product < ActiveRecord::Base
 
 	belongs_to :category
+	has_many :line_items
+
+	before_destroy :ensure_not_referenced_by_any_line_item
 
 	scope :active, -> { where(isActivate: true) }
 	scope :activeDate, -> { active.where("? BETWEEN saleStartDate AND salesEndDate", Date.today)}
@@ -37,4 +40,15 @@ class Product < ActiveRecord::Base
 	validates :promotionPrice, numericality: { greater_than_or_equal_to: 0.00 }, allow_nil: true
 	# range = (saleStartDate..salesEndDate)
 	# range.cover?(Time.now)
+
+	private
+
+		def ensure_not_referenced_by_any_line_item
+			if line_items.empty?
+				return true
+			else
+				errors.add(:base, 'Line Items present')
+				return false
+			end
+		end
 end

@@ -5,4 +5,7 @@ class ApplicationController < ActionController::Base
 
   #include StaticPagesHelper
   include SessionsHelper
+  include CartsHelper
+ 
+	
 end

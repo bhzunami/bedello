@@ -32,8 +32,7 @@
         <p class="text-right"><%= product.price %> CHF </p>
       <% end %>
 
-
-      <p> <button type="button" class="btn btn-success pull-right">In Stock</button> </p>
+      <p><%= button_to "Add to Cart", line_items_path(product_id: product.id), class: "btn btn-success pull-right" %></p>
     </div>
   </div>
   <hr>
