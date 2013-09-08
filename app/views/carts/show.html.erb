@@ -1,7 +1,11 @@
 <h2>Your Pragmatic Cart</h2>
 <%= @title %>
+<% if @cart.line_items.any? %>
 <ul>
 	<% @cart.line_items.each do |item| %> 
 		<li><%= item.quantity %> &times; <%= item.product.title %></li>
 	<% end %>
 </ul>
+<% else %>
+No item in your cart!
+<% end %>

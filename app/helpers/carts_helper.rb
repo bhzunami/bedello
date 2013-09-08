@@ -5,7 +5,6 @@ module CartsHelper
   rescue ActiveRecord::RecordNotFound
     current_cart = Cart.create
     session[:cart_session] = current_cart.cartSession
-    flash[:notice] = "Created cart with id #{current_cart.id}"
     current_cart
 
     # cart = Cart.create

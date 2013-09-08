@@ -10,6 +10,8 @@
 #
 
 class Cart < ActiveRecord::Base
+	extend FriendlyId
+	friendly_id :cartSession
 
 	has_many :line_items, dependent: :destroy
 

@@ -16,11 +16,11 @@ class CartsController < ApplicationController
 	private
 
 	def set_cart
-		@cart = Cart.find(params[:id])
+		@cart = Cart.friendly.find(params[:id])
 	end
 
 	def correct_cart
-		@cart = Cart.find(params[:id])
+		@cart = Cart.friendly.find(params[:id])
     redirect_to(root_url) unless current_cart?(@cart) or admin?
 	end
 
