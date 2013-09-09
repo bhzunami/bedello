@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   #include StaticPagesHelper
   include SessionsHelper
   include CartsHelper
+  #include ProductsHelper
  
 	
 end

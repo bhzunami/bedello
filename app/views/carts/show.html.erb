@@ -1,25 +1,50 @@
-<h2>Your Pragmatic Cart</h2>
+<h2>Your cart</h2>
 <% if @cart.line_items.any? %>
-
-<table>
-	<% @cart.line_items.each do |item| %> 
-	<tr>
-		<td><%= item.quantity %> &times; </td>
-		<td><%= item.product.title %></td>
-		<td><%= number_to_currency(item.total_price) %></td>
-		<td><%= button_to "delete", item, method: :delete, class: "btn btn-danger btn-small", confirm: "are you ready" %></td>
+<div class="row">
+	<div class="span10">
+		<%= button_to 'Empty cart', @cart, method: :delete, class: "btn btn-danger pull-right", confirm: 'Are you sure?' %>
+		<table class="table table-striped table-condensed">
+			<thead>
+				<tr>
+					<th>ProductNr</th>
+					<th>Name</th>
+					<th>Menge</th>
+					<th class="rightCell">Preis</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @cart.line_items.each do |item| %> 
+				<tr>
+					
+				<td><%= item.product.productNr %></td>
+				<td><%= item.product.title %></td>
+				<td>
+					<%= form_tag(line_item_path, method: "put", class: "form-inline table_form") do %>
+      	<%= hidden_field_tag("product_id", value = item.product.id) %>
+      <label>
+        <%= number_field_tag "quantity", value = item.quantity, in: 1...11, class: "quantity_input"%>
+        <%= submit_tag "update", class: "btn btn-mini" %>
+      </label>
+			
+    <% end %>
+				</td>
+				<td class="rightCell"><%= number_to_currency(item.total_price) %></td>
+				<td >
+					<%= link_to "delete", item, method: :delete, class: "btn btn-danger btn-small", confirm: "are you ready" %></td>
+			</tr>
+		<% end %>
+	<tr >
+		
+		<td colspan="3"><strong>Total</strong></td>
+		<td class="rightCell"><strong><%= number_to_currency(@cart.total_price) %></strong></td>
+		<td></td>
 	</tr>
-	<% end %>
-
-	<tr>
-		<td colspan="2">Total</td>
-		<td><%= number_to_currency(@cart.total_price) %>
-	</tr>
+	</tbody>
 </table>
-
-<%= button_to 'Empty cart', @cart, method: :delete, class: "btn btn-danger", confirm: 'Are you sure?' %>
+<%= button_to 'Buy cart', @cart, method: :delete, class: "btn btn-success pull-right", confirm: 'Are you sure?' %>
 <% else %>
 No item in your cart!
 <% end %>
-
+</div>
+</div>
 

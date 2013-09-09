@@ -158,3 +158,12 @@ input, textarea, select, .uneditable-input {
   width: 50px;
 }
 
+.table th.rightCell,
+.table td.rightCell {
+  text-align: right;
+}
+
+.table_form {
+  margin: 0px !important;
+}
+

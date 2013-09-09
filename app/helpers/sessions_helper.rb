@@ -63,7 +63,9 @@ module SessionsHelper
 
   def admin_user
     store_location
-    redirect_to(root_url) unless admin?
+    if !admin?
+      redirect_to root_url, notice: "Please sign in"
+    end
   end
 
   def admin?

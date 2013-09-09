@@ -23,4 +23,15 @@ class LineItemsController < ApplicationController
 			render 'new'
 		end
 	end
+
+
+	def update
+		@cart = current_cart
+		@line_item = @cart.update_product(params[:product_id], params[:quantity])
+		if @line_item.save
+			flash[:success] =  "Change successfull"
+			#redirect_to  @line_item.cart
+			redirect_to current_cart
+		end
+	end
 end

@@ -40,7 +40,7 @@ def make_categories
 
   couverturen.each  do |c|
     category = Category.create!(name: c,
-                                description: "Als Kuvertüre oder Couverture (von frz. couvert, „bedeckt“) wird eine Schokoladen-Grundmasse bezeichnet. Kuvertüre ist eine hochwertige Schokolade.")
+                                description: "Als Kuvertüre oder Couverture (von frz. couvert, „bedeckt“) wird eine Schokoladen-Grundmasse bezeichnet.")
   end
 end
 
