@@ -4,9 +4,7 @@ Bedello::Application.routes.draw do
   resources :users
 
   resources :line_items
-  resources :carts, only: [:show, :destroy, :create] do
-    resources :line_items
-  end
+  resources :carts, only: [:show, :destroy, :create]
   resources :sessions, only: [:new, :create, :destroy]
 
   match '/signup', to: 'users#new', via: 'get'
