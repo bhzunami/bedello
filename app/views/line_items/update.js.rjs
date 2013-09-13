@@ -1,2 +1,1 @@
-
 $('#cart_table').replaceWith("<%= escape_javascript(render @cart) %>");
