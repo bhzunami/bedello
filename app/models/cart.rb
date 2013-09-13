@@ -36,7 +36,11 @@ class Cart < ActiveRecord::Base
 
 
 	def total_price
-		line_items.to_a.sum { |item| item.total_price }
+		total_price = line_items.to_a.sum { |item| item.total_price }
+		if total_price < 200
+			total_price += 16
+		end
+		total_price
 	end
 	
 	private

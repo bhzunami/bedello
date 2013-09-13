@@ -1,0 +1,18 @@
+<tr>
+	<td><%= line_item.product.productNr %></td>
+	<td><%= line_item.product.title %></td>
+	<td>
+		<!-- Form for edit quantity -->
+		<%= form_tag(line_item_path, method: "put", remote: true, class: "form-inline table_form") do %>
+		<%= hidden_field_tag("product_id", value = line_item.product.id) %>
+		<label>
+			<%= number_field_tag "quantity", value = line_item.quantity, in: 1...11, class: "quantity_input"%>
+			<%= submit_tag "update", class: "btn btn-mini" %>
+		</label>
+		<% end %>
+		<!-- End Form -->
+	</td>
+	<td class="rightCell"><%= number_to_currency(line_item.total_price) %></td>
+	<td >
+		<%= link_to "delete", line_item, method: :delete, class: "btn btn-danger btn-small pull-right", confirm: "are you ready" %></td>
+</tr>

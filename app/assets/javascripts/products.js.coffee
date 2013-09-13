@@ -18,6 +18,7 @@ class @InitalizeData
 		@initalizeSideNav()
 
 	initalizeSideNav: ->
+		console.log("sidebar")
 		category = location.search.substring(1).split('=')
 		$("#" + category[1]).addClass('active')
 

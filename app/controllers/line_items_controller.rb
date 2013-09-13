@@ -7,7 +7,7 @@ class LineItemsController < ApplicationController
 	def destroy
 		@line_item = LineItem.find(params[:id])
 		@line_item.destroy
-		redirect_to root_url
+		redirect_to current_cart
 	end
 
 	def create
@@ -24,14 +24,20 @@ class LineItemsController < ApplicationController
 		end
 	end
 
+	def show
+		redirect_to current_cart
+	end
 
 	def update
 		@cart = current_cart
 		@line_item = @cart.update_product(params[:product_id], params[:quantity])
-		if @line_item.save
-			flash[:success] =  "Change successfull"
-			#redirect_to  @line_item.cart
-			redirect_to current_cart
+		respond_to do |format|
+			if @line_item.save
+				format.html { redirect_to current_cart, notice: 'Changed' }
+				format.js
+			else
+				format.html { render action: "new" }
+			end
 		end
 	end
 end
