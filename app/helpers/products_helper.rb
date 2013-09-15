@@ -3,7 +3,7 @@ module ProductsHelper
 	# if we don't have any we have to print the sorry text
 
 	def activeProduct?(product)
-		range = (product.saleStartDate..product.salesEndDate)
+		range = (product.sale_start_date..product.sale_end_date)
 		range.cover?(Time.now)
 	end
 

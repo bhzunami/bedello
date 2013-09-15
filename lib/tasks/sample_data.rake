@@ -52,8 +52,8 @@ def make_products
     productNr = Faker::Number.number(3)
     isActivate = true
     inStock = Faker::Number.digit
-    saleStartDate = Time.now.to_date
-    salesEndDate = (Time.now + 3.weeks).to_date
+    sale_start_date = Time.now.to_date
+    sale_end_date = (Time.now + 3.weeks).to_date
     category_id = rand(1..9)
     price = Faker::Number.number(2)
     Product.create!(title: title,
@@ -61,8 +61,8 @@ def make_products
                     productNr: productNr,
                     isActivate: isActivate,
                     inStock: inStock,
-                    saleStartDate: saleStartDate,
-                    salesEndDate: salesEndDate,
+                    sale_start_date: sale_start_date,
+                    sale_end_date: sale_end_date,
                     category_id: category_id,
                     price: price )
   end

@@ -39,7 +39,7 @@
       <p><%= number_to_currency(@product.price) %> CHF </p>
     <% end %>
     <% if admin? %>
-      <p>Verkaufen von: <%= l @product.saleStartDate %>  bis <%= l @product.salesEndDate %> </p>
+      <p>Verkaufen von: <%= l @product.sale_start_date %>  bis <%= l @product.sale_end_date %> </p>
     <% end %>    
     <button type="button" class="btn">In Stock</button>
   </div>

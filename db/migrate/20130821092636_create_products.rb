@@ -11,8 +11,8 @@ class CreateProducts < ActiveRecord::Migration
       t.string :image
       t.boolean :isActivate, default: true
       t.integer :inStock
-      t.datetime :saleStartDate
-      t.datetime :salesEndDate
+      t.datetime :sale_start_date
+      t.datetime :sale_end_date
 
       t.timestamps
     end

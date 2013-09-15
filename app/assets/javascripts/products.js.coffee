@@ -29,8 +29,8 @@ class @InitalizeDatePicker
 	setupDatePicker: ->
 		$("#product_promotionStartDate").datepicker dateFormat: "dd/mm/yy"
 		$("#product_promotionEndDate").datepicker dateFormat: "dd/mm/yy"
-		$("#product_saleStartDate").datepicker dateFormat: "dd/mm/yy"
-		$("#product_salesEndDate").datepicker dateFormat: "dd/mm/yy"
+		$("#product_sale_start_date").datepicker dateFormat: "dd/mm/yy"
+		$("#product_sale_end_date").datepicker dateFormat: "dd/mm/yy"
 	
 		$(".datepicker").each (i) ->
 			unless $(this).val() is ''

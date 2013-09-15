@@ -31,17 +31,17 @@ class Product < ActiveRecord::Base
 	before_destroy :ensure_not_referenced_by_any_line_item
 
 	scope :active, -> { where(isActivate: true) }
-	scope :activeDate, -> { active.where("? BETWEEN saleStartDate AND salesEndDate", Date.today)}
+	scope :activeDate, -> { active.where("? BETWEEN sale_start_date AND sale_end_date", Date.today)}
 	default_scope order: 'title'
 
 	validates :title, :productNr, uniqueness: true
 	validates :productNr, numericality: { greater_than_or_equal_to: 0 }
 	validates :inStock, numericality: { greater_than_or_equal_to: 0 }
-	validates :title, :description, :productNr, :price, :inStock, :saleStartDate, :salesEndDate, :category_id, presence: true
+	validates :title, :description, :productNr, :price, :inStock, :sale_start_date, :sale_end_date, :category_id, presence: true
 
 	validates :price, numericality: { greater_than_or_equal_to: 0.01 }
 	validates :promotionPrice, numericality: { greater_than_or_equal_to: 0.00 }, allow_nil: true
-	# range = (saleStartDate..salesEndDate)
+	# range = (sale_start_date..sale_end_date)
 	# range.cover?(Time.now)
 
 	private

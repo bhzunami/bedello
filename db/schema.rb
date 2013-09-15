@@ -59,8 +59,8 @@ ActiveRecord::Schema.define(version: 20130908132116) do
     t.string   "image"
     t.boolean  "isActivate",                                 default: true
     t.integer  "inStock"
-    t.date     "saleStartDate"
-    t.date     "salesEndDate"
+    t.date     "sale_start_date"
+    t.date     "sale_end_date"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "category_id"
