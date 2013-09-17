@@ -17,7 +17,7 @@
         <ul class="nav navbar-nav navbar-right pull-right">
           <li><%= link_to " Home", root_path %></li>
           <% if quantity_of_carts > 0 %>
-            <li><%= link_to " Warenkorb (#{quantity_of_carts})", cart_path(current_cart) %></li>
+            <li id="quantity_of_carts"><%= link_to " Warenkorb (#{quantity_of_carts})", cart_path(current_cart) %></li>
             <% else %>
               <li><%= link_to " Warenkorb", cart_path(current_cart) %></li>
             <% end %>

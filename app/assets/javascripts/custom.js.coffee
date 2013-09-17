@@ -22,4 +22,4 @@ jQuery ($) ->
 # Turbo Links need this!!!!
 $(document).on "page:change", ->
 	new CUSTOM_LOADER()
-
+	
