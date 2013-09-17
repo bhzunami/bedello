@@ -4,18 +4,14 @@
 @BEDELLO.carts = 
 	init: ->
 
-	edit: ->
+	show: ->
 		new UpdateQuantity()
-
-	update: ->
-		new UpdateQuantity()
-
 
 class @UpdateQuantity
 	constructor: ->
 		@updateQuant()
 
 	updateQuant: ->	
-		consle.log("Update")
-		$("#quantity").change ->
-  		alert "Handler for .change() called."
+		#console.log("Update")
+		#$("#quantity").change ->
+  	#	$(this).closest("form").submit()

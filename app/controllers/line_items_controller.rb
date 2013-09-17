@@ -1,4 +1,5 @@
 class LineItemsController < ApplicationController
+	before_action :setCorrectCart, only: [:destroy, :create, :update]
 
 	def new
 
@@ -7,17 +8,22 @@ class LineItemsController < ApplicationController
 	def destroy
 		@line_item = LineItem.find(params[:id])
 		@line_item.destroy
-		redirect_to current_cart
+		
+		# Show a notice 
+		flash.keep[:success] = "Cart is deleted" if @cart.line_items.empty?
+			
+		respond_to do |format|
+			format.html { redirect_to current_cart notice: "Product deleted"}
+			format.js { render 'update' }
+		end
 	end
 
 	def create
-		@cart = current_cart
 		product = Product.find(params[:id])
 		@line_item = @cart.add_product(params[:id], params[:quantity])
 
 		if @line_item.save
 			flash[:success] =  "#{params[:quantity]} #{product.title} was successfull added to line item"
-			#redirect_to  @line_item.cart
 			go_back_to_product @line_item.cart
 		else
 			render 'new'
@@ -29,7 +35,6 @@ class LineItemsController < ApplicationController
 	end
 
 	def update
-		@cart = current_cart
 		@line_item = @cart.update_product(params[:product_id], params[:quantity])
 		respond_to do |format|
 			if @line_item.save
@@ -39,5 +44,11 @@ class LineItemsController < ApplicationController
 				format.html { render action: "new" }
 			end
 		end
+	end
+
+	private
+
+	def setCorrectCart
+		@cart = current_cart
 	end
 end

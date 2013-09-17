@@ -1,3 +1,7 @@
 
-$('#cart_table').html("<%= escape_javascript(render @cart) %>");
-$('#quantity_of_carts a').html("Warenkorb (<%= quantity_of_carts %>)");
+<% if @cart.line_items.any? %>
+	$('#cart_table').html("<%= escape_javascript(render 'line_items/line_item', cart: @cart) %>");
+	$('#quantity_of_carts a').html("Warenkorb (<%= quantity_of_carts %>)");
+<% else %>
+	window.location.replace("<%= root_path %>");
+<% end %>
