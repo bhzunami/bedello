@@ -17,6 +17,11 @@ class LineItem < ActiveRecord::Base
 
 
 	def total_price
-		product.price * quantity
+		if (product.promotionStartDate..product.promotionEndDate).cover?(Time.now)
+			product.promotionPrice * quantity
+		else
+			product.price * quantity
+		end
+		
 	end
 end

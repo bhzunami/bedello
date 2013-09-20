@@ -25,7 +25,7 @@
 			</td>
 			<td class="rightCell"><%= number_to_currency(line_item.total_price) %></td>
 			<td >
-				<%= link_to "delete", line_item, method: :delete, class: "btn btn-danger btn-small pull-right", remote: true, confirm: "are you ready" %></td>
+				<%= link_to "delete", line_item, method: :delete, class: "btn btn-danger btn-small pull-right", remote: true, confirm: "Are you sure" %></td>
 		</tr>
 		<% end %>
 		<% if cart.total_price < 200 %>
