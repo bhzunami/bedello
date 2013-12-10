@@ -11,8 +11,7 @@ class @CartMessage
 	constructor: ->
 		cartStorage = new CartStorage()
 		cart = cartStorage.getObject()
-		if not cart?
-			console.log("RETURN")
+		if cartStorage.isEmpty()
 			return
 		$.post "/products/listOfProducts",
 			data: cart
@@ -28,10 +27,8 @@ class @CartMessage
 		$(".btn_delete").each (index) ->
 			$( this ).click (event) ->
 				cartStorage = new CartStorage()
-				alert("Delete " +this.form.product_id.value)
-				cartStorage.deleteLineItem(this.form.product_id.value, cartStorage.getObject() )
-				if(cartStorage.isEmpty(cartStorage.getObject()))
-					console.log("EMPTY")
+				cartStorage.deleteLineItem( this.form.product_id.value )
+				if(cartStorage.isEmpty() )
 					location.reload()
 				else
 					new CartMessage()

@@ -16,7 +16,6 @@
 		cartStorage = new CartStorage()
 		$(".addToCart").each (index) ->
 			$( this ).submit (event) -> # Fange Submit ab
-				console.log("id: " + this.id.value + " quantity: " + this.quantity.value)
 				cartStorage.addLineItem(this.id.value, this.quantity.value)
 				event.preventDefault() # Damit es nicht weiter an den Server gesendet wird
 

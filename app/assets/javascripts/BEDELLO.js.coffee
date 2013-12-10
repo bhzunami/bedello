@@ -4,8 +4,7 @@ class @BEDELLO
 @BEDELLO.common =
 	init: ->
 		new MenubarController()
-		#cartStorage = new CartStorage()
-		console.log("init of common")
+		cartStorage = new CartStorage()
 		cartStorage.updateCartSum(cartStorage.getQuantityOfLineItem())
 		
 		# visit page with javascript
@@ -24,6 +23,7 @@ class @CartStorage
 		JSON.parse localStorage.getItem("cart")
 
 	deleteOpbject: ->
+		console.log("Remoe Local Storage")
 		localStorage.clear()
 
 	addLineItem: (productId, quan) ->
@@ -36,6 +36,7 @@ class @CartStorage
 				quantity : quan
 			cart = 
 				lineItems : lineItems
+				length : 1
 		else
 			cart = @getObject()
 			if cart.lineItems[productId]?
@@ -43,7 +44,8 @@ class @CartStorage
 			else
 				cart.lineItems[productId] =
 					product_id : productId
-					quantity : quan				
+					quantity : quan
+				cart.length += 1
 
 		@setObject(cart)
 		@updateCartSum(@getQuantityOfLineItem())
@@ -59,30 +61,22 @@ class @CartStorage
 		return sum
 
 	updateCartSum: (sum) ->
-		console.log("Update: " +sum)
 		if sum > 0
 			$("#quantity_of_carts a").first().text("Warenkorb ("+sum+")")
 
-	deleteLineItem: (productId, cart) ->
-		#cart = @getObject()
+	deleteLineItem: (productId) ->
+		cart = @getObject()
 		delete cart.lineItems[productId]
-		@isEmpty(cart)
+		cart.length -= 1
 		@setObject(cart)
 		@updateCartSum(@getQuantityOfLineItem())
 
-	isEmpty: (cart) ->
+	isEmpty: ->
+		cart =  @getObject()
 		if cart?
-			console.log("cart is not empty")
-			if cart.lineItems?
-				console.log("lineItems is not empty")
-				true
+			if cart.length == 0
+				true 
 			else
-			console.log("lineItems is empty")
-			@deleteOpbject()
-			false
+				false
 		else
-			console.log("cart is empty")
-			false
-
-cartStorage = new CartStorage()
-console.log("I'm OUT")
+			true
