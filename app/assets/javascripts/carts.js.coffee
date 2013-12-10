@@ -42,13 +42,14 @@ class @CartMessage
 
 	processData: (data, textStatus, jqXHR) ->
 		$("#cart").html(data)
+		cartStorage = new CartStorage()
 		# This class 'update_cart' exist avert html replace
 		$(".btn_update").each (index) ->
 			$( this ).click (event) ->
-				alert("Update " +this.form.product_id.value)
+				cartStorage.updateLineItem(this.form.product_id.value, this.form.quantity.value)
+				location.reload()
 		$(".btn_delete").each (index) ->
 			$( this ).click (event) ->
-				cartStorage = new CartStorage()
 				cartStorage.deleteLineItem( this.form.product_id.value )
 				if(cartStorage.isEmpty() )
 					location.reload()
