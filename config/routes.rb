@@ -4,7 +4,7 @@ Bedello::Application.routes.draw do
   resources :users
 
   resources :line_items
-  resources :carts, only: [:show, :destroy, :create]
+  resources :carts, only: [:show, :destroy, :create, :index]
   resources :sessions, only: [:new, :create, :destroy]
 
   match '/signup', to: 'users#new', via: 'get'
@@ -16,6 +16,7 @@ Bedello::Application.routes.draw do
   get "/edit_password_reset/:id", to: 'users#edit_password_reset', as: :edit_password_reset
   post "/update_password_reset/:id", to: 'users#update_password_reset'
 
+  post "/products/listOfProducts", to: 'products#listOfProducts'
 
   root 'static_pages#home'
 

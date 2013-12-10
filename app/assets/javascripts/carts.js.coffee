@@ -4,14 +4,38 @@
 @BEDELLO.carts = 
 	init: ->
 
-	show: ->
-		new UpdateQuantity()
-
-class @UpdateQuantity
+	index: ->
+		new CartMessage()
+		
+class @CartMessage
 	constructor: ->
-		@updateQuant()
+		cartStorage = new CartStorage()
+		cart = cartStorage.getObject()
+		if not cart?
+			console.log("RETURN")
+			return
+		$.post "/products/listOfProducts",
+			data: cart
+			dataType: 'json'
+			@processData
 
-	updateQuant: ->	
-		#console.log("Update")
-		#$("#quantity").change ->
-  	#	$(this).closest("form").submit()
+	processData: (data, textStatus, jqXHR) ->
+		$("#cart").html(data)
+		# This class 'update_cart' exist avert html replace
+		$(".btn_update").each (index) ->
+			$( this ).click (event) ->
+				alert("Update " +this.form.product_id.value)
+		$(".btn_delete").each (index) ->
+			$( this ).click (event) ->
+				cartStorage = new CartStorage()
+				alert("Delete " +this.form.product_id.value)
+				cartStorage.deleteLineItem(this.form.product_id.value, cartStorage.getObject() )
+				if(cartStorage.isEmpty(cartStorage.getObject()))
+					console.log("EMPTY")
+					location.reload()
+				else
+					new CartMessage()
+
+
+
+			

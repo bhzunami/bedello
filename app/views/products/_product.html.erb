@@ -32,7 +32,7 @@
         <p class="text-right"><%= product.price %> CHF </p>
       <% end %>
 
-      <%= form_tag(line_items_path, method: "post", class: "form-inline") do %>
+      <%= form_tag({}, class: "form-inline addToCart") do %>
 
       <%= hidden_field_tag("id", value = product.id) %>   
       

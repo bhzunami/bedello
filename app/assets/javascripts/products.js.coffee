@@ -12,13 +12,26 @@
 	edit: ->
 		new InitalizeDatePicker()
 
+	index: ->
+		cartStorage = new CartStorage()
+		$(".addToCart").each (index) ->
+			$( this ).submit (event) -> # Fange Submit ab
+				console.log("id: " + this.id.value + " quantity: " + this.quantity.value)
+				cartStorage.addLineItem(this.id.value, this.quantity.value)
+				event.preventDefault() # Damit es nicht weiter an den Server gesendet wird
+
+
 
 class @InitalizeData
 	constructor: ->
 		@initalizeSideNav()
+		#console.log("Called Product")
+		# if cartStorage?
+		# 	console.log("Leer")
+		# else
+		# 	console.log(this)
 
 	initalizeSideNav: ->
-		console.log("sidebar")
 		category = location.search.substring(1).split('=')
 		$("#" + category[1]).addClass('active')
 
@@ -34,6 +47,7 @@ class @InitalizeDatePicker
 	
 		$(".datepicker").each (i) ->
 			unless $(this).val() is ''
-				console.log("Date" + $(this).val())
+				#console.log("Date" + $(this).val())
 				date = new Date( $(this).val() )
 				$(this).val $.datepicker.formatDate("dd/mm/yy", date)
+

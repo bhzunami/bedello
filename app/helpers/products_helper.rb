@@ -17,4 +17,30 @@ module ProductsHelper
 
 	end
 
+	def getPrizeOfOneProduct(cart_line)
+		product = cart_line[:product]
+		quantity = cart_line[:quantity].to_d()
+		if (product.promotionStartDate..product.promotionEndDate).cover?(Time.now)
+			product.promotionPrice * quantity
+		else
+			product.price * quantity
+		end
+	end
+
+	def getProduct(cart_line)
+		cart_line[:product]
+	end
+
+	def getQuantity(cart_line)
+		cart_line[:quantity]
+	end
+
+	def getTotalPrice(cart)
+		total_price = cart.to_a.sum { |c| getPrizeOfOneProduct(c) }
+		if total_price < 200
+			total_price += 16
+		end
+		total_price
+	end
+
 end

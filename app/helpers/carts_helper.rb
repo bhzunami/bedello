@@ -3,11 +3,12 @@ module CartsHelper
   def current_cart
     Cart.find_by_cartSession!(session[:cart_session])
   rescue ActiveRecord::RecordNotFound
-    current_cart = Cart.create
-    session[:cart_session] = current_cart.cartSession
-    current_cart
+ #   current_cart = Cart.create
+ #   session[:cart_session] = current_cart.cartSession
+ #   current_cart
   end
 
+# Wenn der übergebene cart gleich ist wie der current_cart dann gibt true zurück
   def current_cart?(cart)
     cart == current_cart
   end
@@ -23,8 +24,10 @@ module CartsHelper
 
   def quantity_of_carts
     quantity = 0
-    current_cart.line_items.each do |line|
-      quantity += line.quantity
+    if current_cart != nil
+      current_cart.line_items.each do |line|
+        quantity += line.quantity
+      end
     end
     quantity
   end

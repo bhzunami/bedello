@@ -18,10 +18,12 @@ class Cart < ActiveRecord::Base
 	before_create :generate_cart_token
 
 	def add_product(product_id, quantity)
+		# Wenn es das Produkt schon gibt, zählen wir die Menge herauf
 		current_item = line_items.find_by_product_id(product_id)
 		if current_item
 			current_item.quantity += quantity.to_f
 		else
+			# Falls nicht, erstellen wir ein neues line_item
 			current_item = line_items.build(product_id: product_id)
 			current_item.quantity = quantity.to_f
 		end

@@ -1,0 +1,22 @@
+<% provide(:title, 'Cart') %>
+<div class="row">
+	<div class="span2">
+		<%= render 'layouts/sidebar' %>
+	</div>
+	<div class="span10">
+<h2>Your cart</h2>
+<% if cart.line_items.any? %>
+	<div class="row">
+		<div class="span7">
+			<%= button_to 'Empty cart', cart, method: :delete, class: "btn btn-danger pull-right", confirm: 'Are you sure?' %>
+			<div id="cart_table">
+				<%= render 'line_items/line_item', cart: @cart %>
+			</div>
+			<%= button_to 'Konditionen gelesen -> Kaufen', cart, method: :delete, class: "btn btn-success pull-right", confirm: 'Are you sure?' %>
+		</div>
+	</div>
+<% else %>
+	No item in your cart!
+<% end %>
+</div>
+</div>

@@ -71,6 +71,17 @@ class ProductsController < ApplicationController
     end
   end
 
+  def listOfProducts
+    @cart = Array.new 
+    lineItems = params[:data][:lineItems]
+    lineItems.each do |key, li|
+      product = Product.find( li[:product_id] )
+      cart = {product: product, quantity: li[:quantity]}
+      @cart.push(cart)
+    end
+    render layout: false
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product
@@ -80,5 +91,9 @@ class ProductsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
       params.require(:product).permit(:title, :description, :productNr, :price, :promotionPrice, :promotionStartDate, :promotionEndDate, :image, :isActivate, :inStock, :sale_start_date, :sale_end_date, :category_id)
+    end
+
+    def products_params
+      param.require(:product)
     end
 end
