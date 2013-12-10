@@ -13,6 +13,28 @@ class @CartMessage
 		cart = cartStorage.getObject()
 		if cartStorage.isEmpty()
 			return
+		# Add spinner
+		opts = {
+			lines: 13
+			length: 21
+			width: 8
+			radius: 58
+			corners: 1
+			rotate: 48
+			direction: 1
+			color: '#000'
+			speed: 1
+			trail: 65
+			shadow: false
+			hwaccel: false
+			className: 'spinner'
+			zIndex: 2e9
+			top: 'auto'
+			left: 'auto'
+		};
+		target = document.getElementById("cart")
+		spinner = new Spinner(opts).spin(target)
+
 		$.post "/products/listOfProducts",
 			data: cart
 			dataType: 'json'
