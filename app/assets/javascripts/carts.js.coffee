@@ -16,7 +16,7 @@ class @CartMessage
 		# Add spinner
 		opts = {
 			lines: 13
-			length: 21
+			length: 15
 			width: 8
 			radius: 58
 			corners: 1
@@ -32,7 +32,7 @@ class @CartMessage
 			top: 'auto'
 			left: 'auto'
 		};
-		target = document.getElementById("cart")
+		target = document.getElementById("spinner")
 		spinner = new Spinner(opts).spin(target)
 
 		$.post "/products/listOfProducts",
@@ -42,12 +42,14 @@ class @CartMessage
 
 	processData: (data, textStatus, jqXHR) ->
 		$("#cart").html(data)
+		
 		cartStorage = new CartStorage()
 		# This class 'update_cart' exist avert html replace
 		$(".btn_update").each (index) ->
 			$( this ).click (event) ->
 				cartStorage.updateLineItem(this.form.product_id.value, this.form.quantity.value)
 				location.reload()
+				$(".alert").alert()
 		$(".btn_delete").each (index) ->
 			$( this ).click (event) ->
 				cartStorage.deleteLineItem( this.form.product_id.value )
