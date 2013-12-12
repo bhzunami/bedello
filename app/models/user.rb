@@ -35,6 +35,7 @@ class User < ActiveRecord::Base
     generate_token(:password_reset_token)
     self.password_reset_sent_at = Time.zone.now
     self.password = "H458hj!2dn"
+    self.password_confirmation = "H458hj!2dn"
     save!
     UserMailer.password_reset(self).deliver
   end

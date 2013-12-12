@@ -49,6 +49,41 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
 
+  # RESET Functionality
+    # Password reset
+  def show_password_reset
+    render 'password_reset'
+  end
+
+  def password_reset
+    user = User.find_by_email(params[:email])
+    if user
+      user.send_password_reset 
+      flash[:success] = "Ein Mail wurde an ihre Adresse gesendet."
+      redirect_to root_url
+    else
+      flash[:error] = "Zu dieser E-Mail Adresse ist kein Benutzer registriert."
+      render 'password_reset'
+    end  
+  end
+
+  def edit_password_reset
+    @user = User.find_by_password_reset_token!(params[:id])
+  end
+
+  def update_password_reset
+    @user = User.find_by_password_reset_token!(params[:id])
+    if @user.password_reset_sent_at < 2.hours.ago
+      flash[:error] = "Dieser Link ist abgelaufen, bitte lassen Sie sich einen neuen zukommen"
+      render 'password_reset'
+    elsif @user.update_attributes(params[:user])
+      sign_in @user
+      redirect_to root_url, :notice => "Das Passwort wurde geändert"
+    else
+      render 'edit_password_reset'
+    end    
+  end
+
 
   private
 
