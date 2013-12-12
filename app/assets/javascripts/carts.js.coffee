@@ -49,7 +49,6 @@ class @CartMessage
 			$( this ).click (event) ->
 				cartStorage.updateLineItem(this.form.product_id.value, this.form.quantity.value)
 				location.reload()
-				$(".alert").alert()
 		$(".btn_delete").each (index) ->
 			$( this ).click (event) ->
 				cartStorage.deleteLineItem( this.form.product_id.value )
@@ -57,7 +56,11 @@ class @CartMessage
 					location.reload()
 				else
 					new CartMessage()
-
-
+		$(".btn_order").click  ->
+			console.log(cartStorage.getObject())
+			$.post "/orders/create",
+				data: cartStorage.getObject()
+				dataType: 'json'
+			
 
 			

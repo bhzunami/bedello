@@ -17,6 +17,8 @@ Bedello::Application.routes.draw do
 
   post "/products/listOfProducts", to: 'products#listOfProducts'
 
+  post "carts/create", to: 'cart#create'
+
   root 'static_pages#home'
 
   # The priority is based upon order of creation: first created -> highest priority.

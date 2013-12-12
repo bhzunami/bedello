@@ -11,14 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131019160644) do
-
-  create_table "carts", force: true do |t|
-    t.string   "create"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "cartSession"
-  end
+ActiveRecord::Schema.define(version: 20130908132116) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -39,27 +32,6 @@ ActiveRecord::Schema.define(version: 20131019160644) do
   add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
-
-  create_table "images", force: true do |t|
-    t.string   "name"
-    t.string   "description"
-    t.integer  "imageable_id"
-    t.string   "imageable_type"
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.string   "image_file_size"
-    t.string   "image_updated_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "line_items", force: true do |t|
-    t.integer  "product_id"
-    t.integer  "cart_id"
-    t.integer  "quantity",   default: 1
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "products", force: true do |t|
     t.string   "title"
