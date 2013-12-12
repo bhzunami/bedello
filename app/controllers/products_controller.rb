@@ -6,7 +6,6 @@ class ProductsController < ApplicationController
   # GET /products.json
   def index
     # check if we get all products or only active
-    store_product_category
     if admin?
       @products = Product.where(category_id: params[:category_id] )
     else
