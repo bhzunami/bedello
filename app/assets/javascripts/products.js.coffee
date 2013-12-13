@@ -19,6 +19,28 @@
 				cartStorage.addLineItem(this.id.value, this.quantity.value)
 				event.preventDefault() # Damit es nicht weiter an den Server gesendet wird
 
+				cart = $("#quantity_of_carts")
+				imageToDrag = $(this).parent('.pull-right').parent('.row').find("img").eq(0)
+				if imageToDrag
+					imgClone = imageToDrag.clone().offset(
+						top: imageToDrag.offset().top
+						left: imageToDrag.offset().left
+					).css(
+						opacity: "0.5"
+						position: "absolute"
+						"z-index": "100"
+					).appendTo($("body")).animate(
+						top: cart.offset().top + 40
+						left: cart.offset().left + 50
+						width: 75
+						height: 75
+					, 1000, "easeInOutExpo")
+					imgClone.animate
+						width: 0
+						height: 0
+					, ->
+						$(this).detach()
+
 
 
 class @InitalizeData
