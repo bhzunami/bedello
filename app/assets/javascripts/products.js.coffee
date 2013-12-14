@@ -13,11 +13,12 @@
 		new InitalizeDatePicker()
 
 	index: ->
-		cartStorage = new CartStorage()
 		$(".addToCart").each (index) ->
 			$( this ).submit (event) -> # Fange Submit ab
-				cartStorage.addLineItem(this.id.value, this.quantity.value)
 				event.preventDefault() # Damit es nicht weiter an den Server gesendet wird
+				cartStorage = new CartStorage()
+				cartStorage.addLineItem(this.id.value, this.quantity.value)
+				
 
 
 
