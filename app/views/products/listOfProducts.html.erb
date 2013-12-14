@@ -16,21 +16,26 @@
 
           <% @cart.each do |p| %>
           <tr>
-            <%= form_tag({}, class: "form-inline table_form update_cart") do %>
-            <td><%= getProduct(p).productNr%></td>
-            <td><%= getProduct(p).title %></td>
-            <td>
-              <!-- Form for edit quantity -->
-              <%= hidden_field_tag("product_id", value = getProduct(p).id) %>
-              <%= number_field_tag "quantity", value = getQuantity(p), in: 1...11, class: "quantity_input"%>
-              <%= button_tag "update", class: "btn btn-mini btn_update", type: "button" %>
-              <!-- End Form -->
-            </td>
-            <td class="rightCell"><%= number_to_currency(getPrizeOfOneProduct(p)) %></td>
-            <td >
-              <%= button_tag "delete", class: "btn btn-danger btn-small pull-right btn_delete", data: {confirm: 'Are you sure'}, type: "button" %></td>
-              
-            <% end %>
+            
+              <td ><%= getProduct(p).productNr%></td>
+              <td><%= getProduct(p).title %></td>
+              <td>
+                <%= form_tag(class: "form-inline table_form update_cart") do %>
+                <!-- Form for edit quantity -->
+                <%= hidden_field_tag("product_id", value = getProduct(p).id) %>
+                <%= number_field_tag "quantity", value = getQuantity(p), in: 1...11, class: "quantity_input"%>
+                <%= submit_tag "Update", class: "btn btn-small btn_update", name: "update" %>
+                <% end %>
+              </td>
+              <td class="rightCell"><%= number_to_currency(getPrizeOfOneProduct(p)) %></td>
+              <td >
+                <%= form_tag(class: "form-inline table_form delete_cart") do %>
+                <%= hidden_field_tag("product_id", value = getProduct(p).id) %>
+                <%= submit_tag "Delete", class: "btn btn-danger btn-small pull-right btn_delete", name: "delete" %>
+                <% end %>
+              </td>
+            
+            <!-- End Form -->
           </tr>
           <% end %>
           <tr>

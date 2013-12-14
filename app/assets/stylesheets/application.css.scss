@@ -121,7 +121,7 @@ input, textarea, select, .uneditable-input {
 }
 
 .datepicker {
-  height: 30px !important;
+  height: 32px !important;
 }
 
 .nav-list {
@@ -164,8 +164,14 @@ input, textarea, select, .uneditable-input {
   text-align: right;
 }
 
-.table_form {
+form {
   margin: 0px !important;
+}
+.update_form {
+   margin: 0px !important;
+}
+.delete_form {
+   margin: 0px !important;
 }
 
 #spinner {

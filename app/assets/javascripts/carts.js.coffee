@@ -47,15 +47,22 @@ class @CartMessage
 		# This class 'update_cart' exist avert html replace
 		$(".btn_update").each (index) ->
 			$( this ).click (event) ->
+				
 				cartStorage.updateLineItem(this.form.product_id.value, this.form.quantity.value)
 				location.reload()
+				event.preventDefault()
 		$(".btn_delete").each (index) ->
 			$( this ).click (event) ->
+				#console.log($('form').serialize())			
+				parent = $(this).parent('tr')
+				console.log(parent)
 				cartStorage.deleteLineItem( this.form.product_id.value )
 				if(cartStorage.isEmpty() )
 					location.reload()
 				else
 					new CartMessage()
+				event.preventDefault()
+
 		$(".btn_order").click  ->
 			console.log(cartStorage.getObject())
 			$.post "/orders/create",
