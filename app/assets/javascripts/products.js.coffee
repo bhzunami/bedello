@@ -42,7 +42,6 @@
 						$(this).detach()
 
 
-
 class @InitalizeData
 	constructor: ->
 		@initalizeSideNav()

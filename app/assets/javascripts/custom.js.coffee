@@ -17,8 +17,7 @@ class @CUSTOM_LOADER
 		BEDELLO[controller]?[action]?()
 
 
-
 # Turbo Links need this!!!!
-$(document).on "page:change", ->
+$(document).on "ready page:load", ->
 	new CUSTOM_LOADER()
 	
