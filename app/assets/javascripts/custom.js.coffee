@@ -16,8 +16,7 @@ class @CUSTOM_LOADER
 		action = 'init' unless action?
 		BEDELLO[controller]?[action]?()
 
-jQuery ($) ->
-	new CUSTOM_LOADER()
+
 
 # Turbo Links need this!!!!
 $(document).on "page:change", ->
