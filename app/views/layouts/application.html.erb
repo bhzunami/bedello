@@ -10,6 +10,7 @@
 </head>
 	<body data-controller="<%= controller_name %>" data-action="<%= action_name %>">
 	<%= render 'layouts/header' %>
+  <noscript><h4 class="alert alert-danger text-center">JavaScript is off. Please enable to view full site.</h1></noscript>
 	<div class="container">
 		<% flash.each do |key, value| %>
         <%= content_tag(:div, value, class: "alert alert-#{key}") %>
