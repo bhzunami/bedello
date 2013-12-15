@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
-  before_action :admin_user, only: [:new, :create, :edit, :update, :destroy]
+  before_action :admin_user, only: [:new, :create, :edit, :update, :destroy, :allProducts]
 
   # GET /products
   # GET /products.json
@@ -12,6 +12,11 @@ class ProductsController < ApplicationController
       @products = Product.activeDate.where(category_id: params[:category_id])
       #@products = Product.activeDate
     end
+  end
+
+  def allProducts
+    @products = Product.all( order: "title")
+    render action: 'index'
   end
 
   # GET /products/1
@@ -35,7 +40,7 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.save
-        format.html { redirect_to @product, notice: 'Product was successfully created.' }
+        format.html { redirect_to @product, notice: "Product #{@product.title} was successfully created." }
         format.json { render action: 'show', status: :created, location: @product }
       else
         format.html { render action: 'new' }
@@ -51,7 +56,7 @@ class ProductsController < ApplicationController
       if @product.update(product_params)
         format.html { 
           redirect_to @product
-          flash[:success] = "Product successfully updated" }
+          flash[:success] = "Product #{@product.title} successfully updated" }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -65,7 +70,9 @@ class ProductsController < ApplicationController
   def destroy
     @product.destroy
     respond_to do |format|
-      format.html { redirect_to products_url }
+      format.html { 
+        redirect_to allProducts_path
+        flash[:success] = "Product #{@product.title} successfully deleted" }
       format.json { head :no_content }
     end
   end

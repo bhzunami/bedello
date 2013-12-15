@@ -3,15 +3,16 @@
     <%= render 'layouts/sidebar' %>
   </div>
   <div class="span10">
-    <h1>All products of <category.name></h1>
     <% if @products.any? %>
+      <h1>All products of <category.name></h1>
       <% @products.each do |product| %>       
           <%= render product %>
       <% end %>
     <% else %>
       <div class="lead">
+        <br />
         Leider keine Produkte für diese Kategorie gefunden.<br />
-        Gehen sie zurück auf die <%= link_to "Startseite", root_path, class: "btn btn-large" %>
+        Gehen sie zurück auf die <%= link_to "Startseite", root_path %>
       </div>
     <% end %>
   </div>

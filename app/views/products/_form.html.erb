@@ -10,7 +10,7 @@
   <%= f.input :productNr, as: :string%>
   <%= f.association :category %>
   <%= f.input :price, label: "Price"%>
-  <%= f.input :inStock %>
+  <%= f.input :inStock, input_html: {value: 1}%>
   <h4>Visible options</h4>
   <hr class="featurette-divider">
   <%= f.input :sale_start_date, as: :date_picker%>
@@ -23,6 +23,6 @@
   <%= f.input :promotionStartDate, as: :date_picker %>
   <%= f.input :promotionEndDate, as: :date_picker%>
 
-  <%= f.button :submit %>
+  <%= f.button :submit, class: "btn-success" %>
 
 <% end %>

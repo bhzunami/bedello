@@ -16,8 +16,13 @@ Bedello::Application.routes.draw do
   post "/update_password_reset/:id", to: 'users#update_password_reset'
 
   post "/products/listOfProducts", to: 'products#listOfProducts'
+  get "/allProducts", to: 'products#allProducts'
 
   post "carts/create", to: 'cart#create'
+
+  #static pages
+  get "/about", to: "static_pages#about"
+  get "/contact", to: "static_pages#contact"
 
   root 'static_pages#home'
 

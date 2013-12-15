@@ -44,7 +44,6 @@ class @CartMessage
 		$("#cart").html(data)
 		
 		cartStorage = new CartStorage()
-		console.log("Successful")
 		# This class 'update_cart' exist avert html replace
 		$(".btn_update").each (index) ->
 			$( this ).click (event) ->

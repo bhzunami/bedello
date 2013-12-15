@@ -4,6 +4,10 @@ class StaticPagesController < ApplicationController
 		@categories = Category.all
 	end
 
-	def cart
-	end
+  def about
+  end
+
+  def contact
+  end
+
 end

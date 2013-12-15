@@ -26,9 +26,6 @@ class Product < ActiveRecord::Base
   friendly_id :title, use: :slugged
 
 	belongs_to :category
-	has_many :line_items
-
-	before_destroy :ensure_not_referenced_by_any_line_item
 
 	scope :active, -> { where(isActivate: true) }
 	scope :activeDate, -> { active.where("? BETWEEN sale_start_date AND sale_end_date", Date.today)}
@@ -44,14 +41,5 @@ class Product < ActiveRecord::Base
 	# range = (sale_start_date..sale_end_date)
 	# range.cover?(Time.now)
 
-	private
 
-		def ensure_not_referenced_by_any_line_item
-			if line_items.empty?
-				return true
-			else
-				errors.add(:base, 'Line Items present')
-				return false
-			end
-		end
 end
