@@ -1,6 +1,6 @@
 module StaticPagesHelper
 
 	def categories
-		@categories = Category.all
+		Category.all( order: "category_order")
 	end
 end

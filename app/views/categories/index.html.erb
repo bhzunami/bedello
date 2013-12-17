@@ -10,6 +10,7 @@
   	</colgroup>
 			<thead>
 				<tr>
+					<th>#</th>
 					<th>Name</th>
 					<th>Beschreibung</th>
 					<th>Angelegt am</th>
@@ -18,6 +19,7 @@
 			<tbody>
 			<% @categories.each do |c| %>
 			<tr>
+				<td><%= c.category_order %></td>
 				<td><%= link_to c.name, c %> </td>
 				<td><%= c.description %></td>
 				<td><%= c.created_at.to_formatted_s(:long)  %></td>

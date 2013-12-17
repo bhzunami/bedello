@@ -45,9 +45,10 @@ def make_categories
                  "Marzipan",
                  "Diverses"]
 
-  couverturen.each  do |c|
+  couverturen.each_with_index  do |c, index|
     category = Category.create!(name: c,
-                                description: "Als Kuvertüre oder Couverture (von frz. couvert, „bedeckt“) wird eine Schokoladen-Grundmasse bezeichnet.")
+                                description: "Als Kuvertüre oder Couverture (von frz. couvert, „bedeckt“) wird eine Schokoladen-Grundmasse bezeichnet.",
+                                category_order: index+1)
   end
 end
 

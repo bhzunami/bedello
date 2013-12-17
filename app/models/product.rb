@@ -13,11 +13,12 @@
 #  image              :string(255)
 #  isActivate         :boolean          default(TRUE)
 #  inStock            :integer
-#  saleStartDate      :date
-#  salesEndDate       :date
+#  sale_start_date    :date
+#  sale_end_date      :date
 #  created_at         :datetime
 #  updated_at         :datetime
 #  category_id        :integer
+#  slug               :string(255)
 #
 
 class Product < ActiveRecord::Base

@@ -8,6 +8,11 @@
 
   <%= f.input :name %>
   <%= f.input :description, input_html: { class: "span6", rows: "5"}  %>
+  <% if @category.id %>
+    <%= f.input :category_order %>
+  <% else %>
+    <%= f.input :category_order, input_html: {value: "#{lastOrder}"}%>
+  <% end %>
 
    <%= f.button :submit %>
 
