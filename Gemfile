@@ -46,8 +46,15 @@ gem 'bootstrap-will_paginate', '0.0.9'
 # How about to use friendly url
 gem "friendly_id", "~> 5.0.0.rc1"
 
+# Uploading images
+gem "paperclip", "~> 3.0"
+
 # Twitter Bootstrap integration
 gem 'bootstrap-sass', '2.3.2.0'
+
+# Image popUp
+gem "fancybox2-rails", "0.2.4"
+
 # gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
 #                           :github => 'anjlab/bootstrap-rails',
 #                           :branch => '3.0.0'

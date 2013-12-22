@@ -28,6 +28,9 @@ class Product < ActiveRecord::Base
 
 	belongs_to :category
 
+	has_attached_file :image, styles: { medium: "300x300>", large: "500x500>", small: "100x100>" }, default_url: "/images/:style/default.jpg"
+
+
 	scope :active, -> { where(isActivate: true) }
 	scope :activeDate, -> { active.where("? BETWEEN sale_start_date AND sale_end_date", Date.today)}
 	default_scope order: 'title'
@@ -39,6 +42,10 @@ class Product < ActiveRecord::Base
 
 	validates :price, numericality: { greater_than_or_equal_to: 0.01 }
 	validates :promotionPrice, numericality: { greater_than_or_equal_to: 0.00 }, allow_nil: true
+
+	validates_attachment_presence :image
+	validates_attachment_size :image, :less_than => 3.megabytes
+	validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png']
 	# range = (sale_start_date..sale_end_date)
 	# range.cover?(Time.now)
 

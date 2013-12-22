@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require jquery.ui.all
+//= require fancybox
 //= require bootstrap
 //= require spinWheel
 //= require BEDELLO
