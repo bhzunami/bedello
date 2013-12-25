@@ -48,8 +48,9 @@
 
       <% if getTotalPrice(@cart) < 30 %>
         <%= button_tag "Order", class: "btn btn-success btn btn_order disabled pull-right", type: "button" %></td>
-      <% else %> 
-        <%= button_tag "Order", class: "btn btn-success btn btn_order pull-right", type: "button" %></td>
+      <% else %>
+        <!-- <%= button_tag "Order", class: "btn btn-success btn btn_order pull-right", type: "button" %></td> -->
+        <%= link_to " Order", new_order_path, class: "btn btn-success btn btn_order pull-right", type: "button"%>
       <% end %>
       </div>
     </div>

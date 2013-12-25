@@ -7,7 +7,6 @@
 #  description    :text
 #  created_at     :datetime
 #  updated_at     :datetime
-#  order          :integer
 #  category_order :integer
 #
 

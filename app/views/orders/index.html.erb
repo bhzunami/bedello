@@ -1,0 +1,9 @@
+<h1> All Orders </h1>
+
+<% @orders.each do |o| %>
+
+id: <%= o.id %> <br />
+ip: <%= o.ip %><br />
+<%= link_to "Edit", edit_order_path(o), class: "btn btn-mini" %>
+<br />
+<% end %>

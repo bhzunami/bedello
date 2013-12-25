@@ -1,0 +1,11 @@
+<h1>New Order</h1>
+<p>This is a order </p>
+<% @order.line_items.each do |i| %>
+
+<%= i.product.title %> <%= i.quantity %> <br />
+
+
+<% end %>
+
+
+

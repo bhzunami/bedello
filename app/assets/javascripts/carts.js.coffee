@@ -59,11 +59,3 @@ class @CartMessage
 					new CartMessage()
 				event.preventDefault()
 
-		$(".btn_order").click  ->
-			console.log(cartStorage.getObject())
-			$.post "/orders/create",
-				data: cartStorage.getObject()
-				dataType: 'json'
-			
-
-			

@@ -1,7 +1,11 @@
 Bedello::Application.routes.draw do
+#  get "line_items/new"
+#  get "line_items/create"
+#  get "orders/new"
   resources :products
   resources :categories
   resources :users
+  resources :orders
 
   resources :carts, only: [:index]
   resources :sessions, only: [:new, :create, :destroy]
@@ -18,7 +22,7 @@ Bedello::Application.routes.draw do
   post "/products/listOfProducts", to: 'products#listOfProducts'
   get "/allProducts", to: 'products#allProducts'
 
-  post "carts/create", to: 'cart#create'
+  post '/orders/createNewOrder', to: 'orders#createNewOrder'
 
   #static pages
   get "/about", to: "static_pages#about"

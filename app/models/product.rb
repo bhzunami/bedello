@@ -19,6 +19,10 @@
 #  updated_at         :datetime
 #  category_id        :integer
 #  slug               :string(255)
+#  image_file_name    :string(255)
+#  image_content_type :string(255)
+#  image_file_size    :integer
+#  image_updated_at   :datetime
 #
 
 class Product < ActiveRecord::Base
@@ -27,6 +31,7 @@ class Product < ActiveRecord::Base
   friendly_id :title, use: :slugged
 
 	belongs_to :category
+	has_many :line_items
 
 	has_attached_file :image, styles: { medium: "300x300>", large: "500x500>", small: "100x100>" }, default_url: "/images/:style/default.jpg"
 
@@ -43,7 +48,6 @@ class Product < ActiveRecord::Base
 	validates :price, numericality: { greater_than_or_equal_to: 0.01 }
 	validates :promotionPrice, numericality: { greater_than_or_equal_to: 0.00 }, allow_nil: true
 
-	validates_attachment_presence :image
 	validates_attachment_size :image, :less_than => 3.megabytes
 	validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png']
 	# range = (sale_start_date..sale_end_date)
