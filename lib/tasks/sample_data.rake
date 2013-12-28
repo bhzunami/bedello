@@ -6,6 +6,8 @@ namespace :db do
     make_users
     make_categories
     make_products
+    make_shipments
+    make_payments
   end
 end
 
@@ -75,3 +77,35 @@ def make_products
                     price: price )
   end
 end
+
+def make_shipments
+    name = ["Per Post",
+            "wird abgeholt"]
+    costs = 0.00
+    name.each do |n|
+        Shipment.create!(name: n, costs: costs )
+    end
+
+end
+
+def make_payments
+    name = ["Vorauszahlung",
+            "per Nachnahme (+15.-)",
+            "Rechnung (Stammkunde)",
+            "Bar (Ware wird abgeholt)"]
+    costs = [0.00,
+             15.00,
+             0.00,
+             0.00 ]
+    name.each_with_index do |n, index|
+        Payment.create!(name: n, costs: costs[index] )
+    end
+
+end
+
+
+
+
+
+
+

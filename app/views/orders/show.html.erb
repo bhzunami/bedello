@@ -21,18 +21,14 @@
             <td class="rightCell"><%= number_to_currency(getPrice(l)) %></td>
           </tr>
           <% end %>
-          <% if @order.shipment.costs > 0 %>
           <tr>
-            <td colspan="3">Shipment costs</td>
+            <td colspan="3">Shipment <%= (@order.shipment.name) %></td>
             <td class="rightCell"><%= number_to_currency(@order.shipment.costs) %></td> 
           </tr>
-          <% end %>
-          <% if @order.payment.costs > 0 %>
           <tr>
-            <td colspan="3">Payment costs</td>
+            <td colspan="3">Payment <%= (@order.payment.name) %></td>
             <td class="rightCell"><%= number_to_currency(@order.payment.costs) %></td> 
           </tr>
-          <%end%>
           <tr>
             <td colspan="3"><strong>Total</strong></td>
             <td class="rightCell"><strong><%= number_to_currency(getShipPrice(@order)) %></strong></td> 
