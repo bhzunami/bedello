@@ -50,6 +50,8 @@ class @CartStorage
   updateCartSum: (sum) ->
     if sum > 0
       $("#quantity_of_carts a").first().text("Warenkorb ("+sum+")")
+    if sum == 0
+      $("#quantity_of_carts a").first().text("Warenkorb")
 
   deleteLineItem: (productId) ->
     cart = @getObject()

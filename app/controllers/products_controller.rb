@@ -88,6 +88,26 @@ class ProductsController < ApplicationController
     render layout: false
   end
 
+  def checkQuantity
+    quantity = params[:quantity]
+    @product = Product.find(params[:id])
+    if !@product
+      render(file: File.join(Rails.root, 'public/500.html'), status: 500, layout: false)
+      return
+    end
+    if @product.inStock - quantity.to_f < 0
+      render(file: File.join(Rails.root, 'public/500.html'), status: 500, layout: false)
+      return
+    end
+
+    @product.inStock -= quantity.to_f
+    respond_to do |format|
+      #if @product.save
+        format.json { render json: @product }
+      #end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product

@@ -19,7 +19,7 @@
     </div>
 
     <div class="span2 pull-right">
-      <p class="text-right">Verfügbar: <%= product.inStock %></p>
+      <p class="text-right inStock">Verfügbar: <%= product.inStock %></p>
      
       <% if isSale?(product) %>
         <p class="pull-left sale"><%= number_to_currency(product.price) %> CHF</p><p class="text-right"><strong><%= product.promotionPrice %> CHF </strong></p>

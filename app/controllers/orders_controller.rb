@@ -1,11 +1,13 @@
 class OrdersController < ApplicationController
-before_action :set_order, only: [:show, :edit, :update, :destroy]
+before_action :set_order, only: [:show, :edit, :update, :destroy, :pending]
+before_action :admin_user, only: [:index]
 
 
   def new
+    @order = Order.new
 
   end
-  
+
   def createNewOrder
     lineItems = params[:data][:lineItems]
     if not lineItems
@@ -13,6 +15,8 @@ before_action :set_order, only: [:show, :edit, :update, :destroy]
       redirect root_path
     end
     @order = Order.new
+    customer = Customer.new
+    @order.customer = customer
     
     lineItems.each do |key, li|
       lineItem = LineItem.new
@@ -20,26 +24,51 @@ before_action :set_order, only: [:show, :edit, :update, :destroy]
       lineItem.quantity = li[:quantity]
       @order.line_items << lineItem if LineItem
     end
+
     render layout: false
   end
 
   def create
+    @order = Order.new(order_params)
+    
+    respond_to do |format|
+      if @order.save
+        format.html { redirect_to @order, notice: "Order was successfully created." }
+        format.json { render action: 'show', status: :created, location: @order }
+      else
+        format.html { redirect_to new_order_path, notice: "Missing Fields"}
+        format.json { render json: @order.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
-    # @order.ip = request.remote_ip
-    # if @order.save
-    #   render action: 'show', status: :created, location: @order
-    # else
-    #   redirect_to root_path
-    # end
-
+  def destroy
+    @order.destroy
+    redirect_to root_path
+    flash[:success] = "Bestellung abgebrochen"
   end
 
   def index
-    @orders = Order.all
+    @pending_orders = Order.with_state(:pending)
+  end
+
+  def show
+    if @order.state != 'newOrder' && !admin?
+      redirect_to root_path
+    end
   end
 
 
-  def edit
+# State machine
+  def pending
+    if @order.pending
+      flash[:success] = "Bestellung erfolgreich abgeschlossen."
+    else
+      booking.errors.full_messages.each do |msg|
+        flash[:error]= msg
+      end
+    end
+    redirect_to root_path
   end
 
   private
@@ -49,7 +78,7 @@ before_action :set_order, only: [:show, :edit, :update, :destroy]
     end
 
   def order_params
-    params.require(:order).permit(:line_items, :ip, :customer_id)
+    params.require(:order).permit(:ip, :payment_id, :shipment_id, line_items_attributes: [:product_id, :quantity], customer_attributes: [:formOfAddress, :firstname, :lastname, :streetname, :addressAdditive, :plz, :city, :email, :phone])
   end
 
 end

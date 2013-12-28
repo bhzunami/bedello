@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131222162919) do
+ActiveRecord::Schema.define(version: 20131228095042) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -19,6 +19,20 @@ ActiveRecord::Schema.define(version: 20131222162919) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "category_order"
+  end
+
+  create_table "customers", force: true do |t|
+    t.string   "formOfAddress"
+    t.string   "firstname"
+    t.string   "lastname"
+    t.string   "streetname"
+    t.string   "addressAdditive"
+    t.integer  "plz"
+    t.string   "city"
+    t.string   "email"
+    t.string   "phone"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "friendly_id_slugs", force: true do |t|
@@ -50,6 +64,16 @@ ActiveRecord::Schema.define(version: 20131222162919) do
     t.string   "ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "payment_id"
+    t.integer  "shipment_id"
+    t.string   "state"
+  end
+
+  create_table "payments", force: true do |t|
+    t.string   "name"
+    t.decimal  "costs",      precision: 8, scale: 2
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "products", force: true do |t|
@@ -76,6 +100,13 @@ ActiveRecord::Schema.define(version: 20131222162919) do
   end
 
   add_index "products", ["slug"], name: "index_products_on_slug", unique: true
+
+  create_table "shipments", force: true do |t|
+    t.string   "name"
+    t.decimal  "costs",      precision: 8, scale: 2
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "name"

@@ -1,0 +1,32 @@
+
+  <div class="row-fluid">
+    <div class="span7">
+      <h4>Adresse</h4>
+      <hr class="featurette-divider">
+      <%= f.simple_fields_for :customer do |c| %>
+      <%= c.input :formOfAddress %>
+      <%= c.input :firstname %>
+      <%= c.input :lastname %>
+      <%= c.input :streetname %>
+      <%= c.input :addressAdditive %>
+      <%= c.input :plz %>
+      <%= c.input :city %>
+      <%= c.input :email %>
+      <%= c.input :phone %>
+      <% end %>
+
+    </div>
+    <div class="span5">
+      <h4>Bezahlung</h4>
+      <hr class="featurette-divider">
+      <%= f.association :payment%>
+      <%= f.association :shipment %>
+      <h4>Bedingung</h4>
+      <hr class="featurette-divider">
+      <p>Die Lieferung erfolgt gegen Vorauszahlung oder per Nachnahme (zusätzlich belastete Kosten: Fr. 15.-). Ab der dritten Bestellung können Sie Waren auch auf Rechnung beziehen (Zahlungsfrist: 10 Tage). Gegen Barzahlung können Sie die Ware auch bei uns abholen.</p>
+
+      <p>Durch 'drücken' auf den Bestell-Button bestätigen Sie, dass Sie die <%= link_to "AGB", agb_path %> gelesen und mit ihnen einverstanden sind.</p>
+      <%= f.button :submit, class: "btn-success" %>
+    </div>
+  </div>
+  

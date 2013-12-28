@@ -1,0 +1,34 @@
+<h1>Shipments</h1>
+<div class="row">
+  <div class="span12">
+    <table class="table table-striped table-condensed">
+      <colgroup>
+        <col class="span2">
+        <col class="span2">
+        <col class="span2">
+    </colgroup>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Kosten</th>
+          <th>Angelegt am</th>
+
+        </tr>
+      </thead>
+      <tbody>
+      <% @shipments.each do |p| %>
+      <tr>
+        <td><%= link_to p.name, p %> </td>
+        <td><%= p.costs %></td>
+        <td><%= p.created_at.to_formatted_s(:long)  %></td>
+        <td> <%= link_to "Edit", edit_shipment_path(p), class: "btn btn-mini" %></td>
+          <td><%= link_to "Delete", p, confirm: 'Are you sure?', method: :delete, class: "btn btn-mini btn-danger" %>
+        </td>
+      </tr>
+      <% end %>
+      </tbody>
+    </table>
+    <%= link_to "New shipment", new_shipment_path, class: "btn btn-mini" %>
+  </div>
+</div>
+  

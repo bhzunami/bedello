@@ -1,0 +1,13 @@
+<%= link_to 'Cancel', shipments_path, class: "btn btn-danger pull-right" %>
+
+<p>Erstellen einer neuen Lieferung.</p>
+<%= simple_form_for(@shipment, html: {class: 'form-horizontal' }) do |f| %>
+  <% if @shipment.errors.any? %>
+    <%= render 'shared/error_messages', object: f.object %>
+  <% end %>
+
+  <%= f.input :name %>
+  <%= f.input :costs %>
+  <%= f.button :submit %>
+
+<% end %>

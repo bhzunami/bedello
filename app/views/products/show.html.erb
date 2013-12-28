@@ -10,7 +10,7 @@
      <a class="fancybox" href="<%= image_path(@product.image.url(:large)) %>" rel="<%= @product.title %>" title="<%= @product.title %>">
         <%= image_tag @product.image.url(:medium) %>
       </a>
-     <p>Verfügbar: <%= @product.inStock %></p>
+     <p class="inStock">Verfügbar: <%= @product.inStock %></p>
     <% if isSale?(@product) %>
       <p class="pull-left sale"><%= @product.price %> CHF </p> <p class="text-middle"><%= @product.promotionPrice %> CHF</p>
     <% else %>

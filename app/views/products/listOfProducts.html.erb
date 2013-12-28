@@ -31,6 +31,7 @@
               <td >
                 <%= form_tag(class: "form-inline table_form delete_cart") do %>
                 <%= hidden_field_tag("product_id", value = getProduct(p).id) %>
+                <%= hidden_field_tag "quantity", value = getQuantity(p)%>
                 <%= submit_tag "Delete", class: "btn btn-danger btn-small pull-right btn_delete", name: "delete" %>
                 <% end %>
               </td>

@@ -1,0 +1,72 @@
+<h1>Bestellung abschliessen</h1>
+<div class="row">
+  <div class="span6">
+    <h4> Bestellung </h4>
+    <div id="cart_table">
+      <table class="table  table-hover table-condensed">
+        <thead>
+          <tr>
+            <th>ProductNr</th>
+            <th>Name</th>
+            <th>Menge</th>
+            <th class="rightCell">Preis</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @order.line_items.each do |l| %>
+          <tr>    
+            <td ><%= l.product.productNr%></td>
+            <td><%= l.product.title %></td>
+            <td><%=  l.quantity %> </td>
+            <td class="rightCell"><%= number_to_currency(getPrice(l)) %></td>
+          </tr>
+          <% end %>
+          <% if @order.shipment.costs > 0 %>
+          <tr>
+            <td colspan="3">Shipment costs</td>
+            <td class="rightCell"><%= number_to_currency(@order.shipment.costs) %></td> 
+          </tr>
+          <% end %>
+          <% if @order.payment.costs > 0 %>
+          <tr>
+            <td colspan="3">Payment costs</td>
+            <td class="rightCell"><%= number_to_currency(@order.payment.costs) %></td> 
+          </tr>
+          <%end%>
+          <tr>
+            <td colspan="3"><strong>Total</strong></td>
+            <td class="rightCell"><strong><%= number_to_currency(getShipPrice(@order)) %></strong></td> 
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="span2">
+    <h4>Adresse </h4>
+    <address>
+      <strong><%= @order.customer.firstname %> <%= @order.customer.lastname %> </strong><br />
+      <%= @order.customer.streetname %><br />
+      <% if @order.customer.addressAdditive %>
+      <%= @order.customer.addressAdditive %> <br />
+      <% end %>
+      <%= @order.customer.plz %> <%= @order.customer.city %><br />
+      <%= @order.customer.email %>
+      <%= @order.customer.phone %>
+    </address>
+  </div>
+  <div class="span4">
+    <h4>Bedingungen </h4>
+    <strong>Lieferung:</strong> <%= @order.shipment.name %> <br />
+    <strong>Bezahlung:</strong> <%= @order.payment.name %>
+  </div>
+  <div class="span4 offset8">
+    <% if not admin? %>
+      <%= link_to "Bestellung abschliessen", order_pending_path(@order, id: @order.id), { method: :post, class: "btn btn-success" } %>
+      <%= link_to "Abbrechen", @order, confirm: 'Sind Sie sicher?', method: :delete, class: "btn btn-danger" %>
+    <% else %>
+      <%= link_to "Bestellung akzeptieren", order_accept_path(@order, id: @order.id), { method: :post, class: "btn btn-success" } %>
+      <%= link_to "Bestellung ablehnen", order_reject_path(@order, id: @order.id), { method: :post, class: "btn btn-danger" } %>
+    <% end %>
+  </div>
+</div>
+

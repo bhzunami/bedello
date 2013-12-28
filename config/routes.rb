@@ -1,11 +1,19 @@
 Bedello::Application.routes.draw do
+  get "customers/new"
 #  get "line_items/new"
 #  get "line_items/create"
 #  get "orders/new"
   resources :products
   resources :categories
   resources :users
-  resources :orders
+  resources :orders do
+    post "accept"
+    post "reject"
+    post "archive"
+    post "pending"
+  end
+  resources :payments
+  resources :shipments
 
   resources :carts, only: [:index]
   resources :sessions, only: [:new, :create, :destroy]
@@ -23,10 +31,12 @@ Bedello::Application.routes.draw do
   get "/allProducts", to: 'products#allProducts'
 
   post '/orders/createNewOrder', to: 'orders#createNewOrder'
+  post '/products/checkQuantity', to: 'products#checkQuantity'
 
   #static pages
   get "/about", to: "static_pages#about"
   get "/contact", to: "static_pages#contact"
+  get "/agb", to: "static_pages#agb"
 
   root 'static_pages#home'
 

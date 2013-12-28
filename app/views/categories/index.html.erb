@@ -24,7 +24,7 @@
 				<td><%= c.description %></td>
 				<td><%= c.created_at.to_formatted_s(:long)  %></td>
 				<td> <%= link_to "Edit", edit_category_path(c), class: "btn btn-mini" %></td>
-					<td><%= link_to "Delete", c, confirm: 'Are you sure?', method: :delete, class: "btn btn-mini btn-danger" %>
+				<td><%= link_to "Delete", c, confirm: 'Are you sure?', method: :delete, class: "btn btn-mini btn-danger" %>
 				</td>
 			</tr>
 			<% end %>

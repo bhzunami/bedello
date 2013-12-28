@@ -11,3 +11,8 @@
       dataType: 'json'
       (data) -> 
         $("#order").html(data)
+
+  show: ->
+    cartStorage = new CartStorage()
+    cartStorage.deleteOpbject()
+    cartStorage.updateCartSum(0)

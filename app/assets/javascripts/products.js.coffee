@@ -15,63 +15,122 @@
 	index: ->
 		$(".addToCart").each (index) ->
 			$( this ).submit (event) -> # Fange Submit ab
+				event.preventDefault()
+				# Check Quantity
+				inputQuantity = parseInt(this.quantity.value)
 				cartStorage = new CartStorage()
-				cartStorage.addLineItem(this.id.value, this.quantity.value)
-				event.preventDefault() # Damit es nicht weiter an den Server gesendet wird
+				cart = cartStorage.getObject()
 
-				cart = $("#quantity_of_carts")
-				imageToDrag = $(this).parent('.pull-right').parent('.row').find("img").eq(0)
-				if imageToDrag
-					imgClone = imageToDrag.clone().offset(
-						top: imageToDrag.offset().top
-						left: imageToDrag.offset().left
-					).css(
-						opacity: "0.5"
-						position: "absolute"
-						"z-index": "100"
-					).appendTo($("body")).animate(
-						top: cart.offset().top + 40
-						left: cart.offset().left + 50
-						width: 75
-						height: 75
-					, 1000, "easeInOutExpo")
-					imgClone.animate
-						width: 0
-						height: 0
-					, ->
-						$(this).detach()
+				# Check if this product is in the cart
+				if cart
+					if cart.lineItems[this.id.value]?
+						# get the product quantity of the cart
+						oldQuantity = parseInt(cart.lineItems[this.id.value].quantity)
 
+				# save a variable for post request checkQuantity
+				quant = parseInt(this.quantity.value)
+				# if we have a oldQuantity add it to quant
+				if oldQuantity
+					quant += oldQuantity
+					# More than 10 are not allowed
+					if quant > 10
+						alert "Mehr als 10 Stk. sind nicht erlaubt!"
+						return
+					
+				button = this
+				product =
+					id : this.id.value
+					quantity : quant
+
+				$.ajax "/products/checkQuantity",
+					type: 'POST'
+					data: product
+					dataType: 'json'
+					success: (response) ->
+						$(button).parent('.pull-right').find('.inStock').html("Verfügbar: " +response['inStock'])
+						new ProductHandler(product.id, inputQuantity, $(button).parent('.pull-right').parent('.row').find("img").eq(0))
+
+					error: ->
+						inStock = $(button).parent('.pull-right').find('.inStock').text()
+						oldQuntity = parseInt(inStock.substr(inStock.length-1) )
+						if (oldQuntity - inputQuantity) < 0
+							$(button).parent('.pull-right').find('.inStock').html("Verfügbar: 0")
+						else 
+							$(button).parent('.pull-right').find('.inStock').html("Verfügbar: " +(oldQuntity - inputQuantity))
+						alert "Es hat nicht mehr soviele Produkte"
 
 	show: ->
 		$(".addToCart").each (index) ->
 			$( this ).submit (event) -> # Fange Submit ab
+				event.preventDefault()
+				# Check Quantity
+				inputQuantity = parseInt(this.quantity.value)
 				cartStorage = new CartStorage()
-				cartStorage.addLineItem(this.id.value, this.quantity.value)
-				event.preventDefault() # Damit es nicht weiter an den Server gesendet wird
+				cart = cartStorage.getObject()
 
-				cart = $("#quantity_of_carts")
-				#imageToDrag = $(this).parent('.pull-right').parent('.addToCart').parent('.span7').parent('.row').find("img").eq(0)
-				imageToDrag = $(".span3").find("img").eq(0)
-				console.log(imageToDrag)
-				if imageToDrag
-					imgClone = imageToDrag.clone().offset(
-						top: imageToDrag.offset().top
-						left: imageToDrag.offset().left
-					).css(
-						opacity: "0.5"
-						position: "absolute"
-						"z-index": "100"
-					).appendTo($("body")).animate(
-						top: cart.offset().top + 40
-						left: cart.offset().left + 50
-						width: 75
-						height: 75
-					, 1000, "easeInOutExpo")
-					imgClone.animate
-						width: 0
-						height: 0
-					, ->
-						$(this).detach()
+				# Check if this product is in the cart
+				if cart
+					if cart.lineItems[this.id.value]?
+						# get the product quantity of the cart
+						oldQuantity = parseInt(cart.lineItems[this.id.value].quantity)
+
+				# save a variable for post request checkQuantity
+				quant = parseInt(this.quantity.value)
+				# if we have a oldQuantity add it to quant
+				if oldQuantity
+					quant += oldQuantity
+					# More than 10 are not allowed
+					if quant > 10
+						alert "Mehr als 10 Stk. sind nicht erlaubt!"
+						return
+					
+				button = this
+				product =
+					id : this.id.value
+					quantity : quant
+
+				$.ajax "/products/checkQuantity",
+					type: 'POST'
+					data: product
+					dataType: 'json'
+					success: (response) ->
+						$(".span3").find('.inStock').html("Verfügbar: " +response['inStock'])
+						new ProductHandler(product.id, inputQuantity, $(".span3").find("img").eq(0))
+
+					error: ->
+						inStock = $(button).parent('.pull-right').find('.inStock').text()
+						oldQuntity = parseInt(inStock.substr(inStock.length-1) )
+						if (oldQuntity - inputQuantity) < 0
+							$(button).parent('.pull-right').find('.inStock').html("Verfügbar: 0")
+						else 
+							$(button).parent('.pull-right').find('.inStock').html("Verfügbar: " +(oldQuntity - inputQuantity))
+						alert "Es hat nicht mehr soviele Produkte"
+					
+
+class @ProductHandler
+	constructor: (product, quantity, imageToDrag) ->
+		cartStorage = new CartStorage()
+		cartStorage.addLineItem(product, quantity)
+		cart = $("#quantity_of_carts")
+		if imageToDrag
+			imgClone = imageToDrag.clone().offset(
+				top: imageToDrag.offset().top
+				left: imageToDrag.offset().left
+			).css(
+				opacity: "0.5"
+				position: "absolute"
+				"z-index": "100"
+			).appendTo($("body")).animate(
+				top: cart.offset().top + 40
+				left: cart.offset().left + 50
+				width: 75
+				height: 75
+				, 1000, "easeInOutExpo")
+			imgClone.animate
+				width: 0
+				height: 0
+			, ->
+				$(this).detach()
 
 
 class @InitalizeData

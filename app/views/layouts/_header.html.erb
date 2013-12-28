@@ -16,6 +16,13 @@
       <div class="nav-collapse collapse">
         <ul class="nav navbar-nav navbar-right pull-right">
           <% if admin? %>
+          <li id="fat-menu" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Bestellungen <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><%= link_to "Bestellungen", orders_path() %></li>
+              </ul> 
             <li id="fat-menu" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 Products <b class="caret"></b>
@@ -29,7 +36,7 @@
           <li id="quantity_of_carts"><%= link_to " Warenkorb", carts_path %></li>
           <% end %>
           <% if signed_in? %>
-            <li><%= link_to "Users", users_path %></li>
+            <!-- <li><%= link_to "Users", users_path %></li> -->
             <li id="fat-menu" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 Account <b class="caret"></b>

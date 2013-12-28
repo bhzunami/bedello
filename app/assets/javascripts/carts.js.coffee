@@ -47,15 +47,31 @@ class @CartMessage
 		# This class 'update_cart' exist avert html replace
 		$(".btn_update").each (index) ->
 			$( this ).click (event) ->
-				cartStorage.updateLineItem(this.form.product_id.value, this.form.quantity.value)
-				location.reload()
 				event.preventDefault()
+				if this.form.quantity.value > 10
+					alert "Mehr als 10 Artikel sind nicht erlaubt!"
+					return
+
+				product =
+					id : this.form.product_id.value
+					quantity : this.form.quantity.value
+
+				$.ajax "/products/checkQuantity",
+					type: 'POST'
+					data: product
+					dataType: 'json'
+					success: (response) ->
+						cartStorage.updateLineItem(product.id, product.quantity)
+						location.reload()
+					error: ->
+						location.reload()
+						alert "Es hat nicht mehr genug Produkte"
 		$(".btn_delete").each (index) ->
 			$( this ).click (event) ->
+				event.preventDefault()
 				cartStorage.deleteLineItem( this.form.product_id.value )
 				if(cartStorage.isEmpty() )
 					location.reload()
 				else
 					new CartMessage()
-				event.preventDefault()
-
+					
