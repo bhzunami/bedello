@@ -76,7 +76,7 @@ class UsersController < ApplicationController
     if @user.password_reset_sent_at < 2.hours.ago
       flash[:error] = "Dieser Link ist abgelaufen, bitte lassen Sie sich einen neuen zukommen"
       render 'password_reset'
-    elsif @user.update_attributes(params[:user])
+    elsif @user.update_attributes(user_params)
       sign_in @user
       redirect_to root_url, :notice => "Das Passwort wurde geändert"
     else
