@@ -67,6 +67,9 @@ GEM
     fancybox2-rails (0.2.4)
       railties (>= 3.1.0)
     ffi (1.9.3)
+    figaro (0.7.0)
+      bundler (~> 1.0)
+      rails (>= 3, < 5)
     friendly_id (5.0.2)
       activerecord (~> 4.0.0)
     hike (1.2.3)
@@ -191,6 +194,7 @@ DEPENDENCIES
   factory_girl_rails (= 4.2.1)
   faker (= 1.2.0)
   fancybox2-rails (= 0.2.4)
+  figaro
   friendly_id (~> 5.0.0.rc1)
   jbuilder (~> 1.2)
   jquery-rails

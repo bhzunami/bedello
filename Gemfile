@@ -57,6 +57,8 @@ gem "fancybox2-rails", "0.2.4"
 
 gem 'state_machine'
 
+# hide configurations file
+gem 'figaro'
 # gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
 #                           :github => 'anjlab/bootstrap-rails',
 #                           :branch => '3.0.0'
