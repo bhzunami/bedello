@@ -1,38 +1,49 @@
 <div class="row">
-    <div class="span3">
-      <%= image_tag product.image.url(:medium) %>
-    </div>
+  <div class="span3">
+    <%= image_tag product.image.url(:medium) %>
+  </div>
 
-    <div class="span5">
-      <% if admin? && !product.isActivate %>
-        <p class="alert alert-error">Product is inactive</p>
-      <% end %>
-      <% if admin? && !activeProduct?(product) %>
-        <p class="alert">Product is not seasonally</p>
-      <% end %>
-      <% if isSale?(product) %>
-        <p class="text-error"> <strong><%= number_with_precision promotionPercent(product), precision: 0%> % Reduktion</strong></p>
-      <% end %>
-      <small><%= product.productNr %></small>
-      <h4><%= link_to product.title, product %></h4>
-      <%= truncate(strip_tags(sanitize(product.description)),length: 500 ) %>
-    </div>
+  <div class="span5">
+    <!-- Show the admin user all Products include inActive -->
+    <% if admin? && !product.isActivate %>
+      <p class="alert alert-error">Product is inactive</p>
+    <% end %>
 
-    <div class="span2 pull-right">
-      <p class="text-right inStock">Verfügbar: <%= product.inStock %></p>
-     
-      <% if isSale?(product) %>
-        <p class="pull-left sale"><%= number_to_currency(product.price) %> CHF</p><p class="text-right"><strong><%= product.promotionPrice %> CHF </strong></p>
-      <% else %>
-        <p class="text-right"><%= product.price %> CHF </p>
-      <% end %>
+    <!-- Show if product is not seasonally -->
+    <% if !activeProduct?(product) %>
+      <p class="alert">Product is not seasonally</p>
+    <% end %>
 
-      <% if admin? %>
+    <!-- Check if we have to show sale price -->
+    <% if isSale?(product) %>
+      <p class="text-error"> <strong><%= number_with_precision promotionPercent(product), precision: 0%> % Reduktion</strong></p>
+    <% end %>
+
+    <small><%= product.productNr %></small>
+    <h4><%= link_to product.title, product %></h4>
+    <%= truncate(strip_tags(sanitize(product.description)),length: 500 ) %>
+  </div>
+
+<!-- Left side -->
+  <div class="span2 pull-right">
+    <p class="text-right inStock">Verfügbar: <%= product.inStock %></p>
+
+    <% if isSale?(product) %>
+      <p class="pull-left sale"><%= number_to_currency(product.price) %> CHF</p><p class="text-right"><strong><%= product.promotionPrice %> CHF </strong></p>
+    <% else %>
+      <p class="text-right"><%= product.price %> CHF </p>
+    <% end %>
+
+    <!-- Check if admin (show edit and delete buttons) -->
+    <% if admin? %>
       <p class="pull-right">
         <%= link_to "Edit", edit_product_path(product), class: "btn" %>
         <%= link_to "Delete", product, method: :delete, data: {confirm: "You sure you want to delete #{product.title}"}, class: "btn btn-danger"  %>
       </p>
-      <% else %>
+    <!-- Otherwise show the order function -->  
+    <% else %>
+    <!-- If product not seasonally remove order button -->
+      <% if activeProduct?(product) && product.inStock > 0%>
         <%= form_tag({}, class: "form-inline addToCart") do %>
           <%= hidden_field_tag("id", value = product.id) %>   
           <label class="pull-right">
@@ -40,7 +51,13 @@
             <%= submit_tag "to Cart", class: "btn btn-success btn_add", name: "add" %>
           </label>
         <% end %>
+        <!-- Form -->
+        <% else %>
+          <p class="pull-right">Product ist momentan nicht Verfügbar</p>
       <% end %>
-    </div>
+      <!-- Check if seasonally -->
+    <% end %>
+    <!-- Admin user -->
   </div>
-  <hr>
+</div>
+<hr>

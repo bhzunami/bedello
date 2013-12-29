@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(version: 20131228095042) do
   create_table "products", force: true do |t|
     t.string   "title"
     t.text     "description"
-    t.integer  "productNr"
+    t.string   "productNr"
     t.decimal  "price",              precision: 8, scale: 2
     t.decimal  "promotionPrice",     precision: 8, scale: 2
     t.date     "promotionStartDate"

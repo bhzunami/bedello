@@ -30,7 +30,7 @@ before_action :admin_user, only: [:index]
 
   def create
     @order = Order.new(order_params)
-    
+    recalcProductInStore(@order, 'decrease')
     respond_to do |format|
       if @order.save
         format.html { redirect_to @order, notice: "Order was successfully created." }
@@ -43,6 +43,7 @@ before_action :admin_user, only: [:index]
   end
 
   def destroy
+    recalcProductInStore(@order, 'increase')
     @order.destroy
     redirect_to root_path
     flash[:success] = "Bestellung abgebrochen"
@@ -79,6 +80,17 @@ before_action :admin_user, only: [:index]
 
   def order_params
     params.require(:order).permit(:ip, :payment_id, :shipment_id, line_items_attributes: [:product_id, :quantity], customer_attributes: [:formOfAddress, :firstname, :lastname, :streetname, :addressAdditive, :plz, :city, :email, :phone])
+  end
+
+  def recalcProductInStore(order, option)
+    order.line_items.each do |l|
+      if option == 'decrease'
+        l.product.inStock -= l.quantity
+      else 
+        l.product.inStock += l.quantity
+      end
+      l.product.save
+    end
   end
 
 end

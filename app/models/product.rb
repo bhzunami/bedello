@@ -5,7 +5,7 @@
 #  id                 :integer          not null, primary key
 #  title              :string(255)
 #  description        :text
-#  productNr          :integer
+#  productNr          :string(255)
 #  price              :decimal(8, 2)
 #  promotionPrice     :decimal(8, 2)
 #  promotionStartDate :date
@@ -33,7 +33,7 @@ class Product < ActiveRecord::Base
 	belongs_to :category
 	has_many :line_items
 
-	has_attached_file :image, styles: { medium: "300x300>", large: "500x500>", small: "100x100>" }, default_url: "/images/:style/default.jpg"
+	has_attached_file :image, styles: { medium: "300x300>", large: "700x700>", small: "100x100>" }, default_url: "/images/:style/default.jpg"
 
 
 	scope :active, -> { where(isActivate: true) }
@@ -41,7 +41,6 @@ class Product < ActiveRecord::Base
 	default_scope order: 'title'
 
 	validates :title, :productNr, uniqueness: true
-	validates :productNr, numericality: { greater_than_or_equal_to: 0 }
 	validates :inStock, numericality: { greater_than_or_equal_to: 0 }
 	validates :title, :description, :productNr, :price, :inStock, :sale_start_date, :sale_end_date, :category_id, presence: true
 

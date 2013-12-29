@@ -4,53 +4,61 @@
   </div>
   <div class="span10">
     <h1> <%= @product.title %></h1>
- 
-<div class="row">
-  <div class="span3">
-     <a class="fancybox" href="<%= image_path(@product.image.url(:large)) %>" rel="<%= @product.title %>" title="<%= @product.title %>">
+
+    <div class="row">
+      <div class="span3">
+       <a class="fancybox" href="<%= image_path(@product.image.url(:large)) %>" rel="<%= @product.title %>" title="<%= @product.title %>">
         <%= image_tag @product.image.url(:medium) %>
       </a>
-     <p class="inStock">Verfügbar: <%= @product.inStock %></p>
-    <% if isSale?(@product) %>
-      <p class="pull-left sale"><%= @product.price %> CHF </p> <p class="text-middle"><%= @product.promotionPrice %> CHF</p>
-    <% else %>
-      <p><%= number_to_currency(@product.price) %> CHF </p>
-    <% end %>
-    <% if admin? %>
-      <p>Verkaufen von: <%= l @product.sale_start_date %>  bis <%= l @product.sale_end_date %> </p>
-    <% end %>    
-  </div>
+      <br /><br />
+      <p class="inStock">Verfügbar: <%= @product.inStock %></p>
 
-  <div class="span7">
-    <% if admin? && !@product.isActivate %>
+      <% if isSale?(@product) %>
+        <p class="sale">Alter Preis: <%= @product.price %> </p>
+        Aktions Preis: <%= @product.promotionPrice %>
+      <% else %>
+        <p>Preis: <%= number_to_currency(@product.price) %></p>
+      <% end %>
+
+      <% if admin? %>
+        <p>Verkaufen von: <%= l @product.sale_start_date %>  bis <%= l @product.sale_end_date %> </p>
+      <% end %>    
+    </div>
+
+    <div class="span7">
+      <% if admin? && !@product.isActivate %>
         <p class="alert alert-error">Product is inactive</p>
       <% end %>
-      <% if admin? && !activeProduct?(@product) %>
+
+      <% if !activeProduct?(@product) %>
         <p class="alert">Product is not seasonally</p>
       <% end %>
+
       <% if isSale?(@product) %>
         <p class="text-error"> <strong><%= number_with_precision promotionPercent(@product), precision: 0%> % Reduktion</strong></p>
       <% end %>
+
       <p class="pull-right">
         <% if admin? %>
           <%= link_to "Edit", edit_product_path(@product), class: "btn" %>
           <%= link_to "Delete", @product, method: :delete, data: {confirm: "You sure you want to delete #{@product.title}"}, class: "btn btn-danger"  %>
         <% else %>
-          <%= form_tag({}, class: "form-inline addToCart") do %>
-            <%= hidden_field_tag("id", value = @product.id) %>   
-      
-            <label class="pull-right">
-              <%= number_field_tag "quantity", value = 1, in: 1...11, class: "quantity_input"%>
-              <%= submit_tag "to Cart", class: "btn btn-success btn_add", name: "add" %>
-            </label>
-          <% end %> <!-- end form -->
+          <% if activeProduct?(@product) && @product.inStock > 0%>
+            <%= form_tag({}, class: "form-inline addToCart") do %>
+              <%= hidden_field_tag("id", value = @product.id) %>   
+              <label class="pull-right">
+                <%= number_field_tag "quantity", value = 1, in: 1...11, class: "quantity_input"%>
+                <%= submit_tag "to Cart", class: "btn btn-success btn_add", name: "add" %>
+              </label>
+            <% end %> <!-- end form -->
+          <% end %>
         <% end %>
-       </p>
+      </p>
       <small><%= @product.productNr %></small>
-    <h3>Beschreibung</h3>
-    <%= sanitize(@product.description) %>
-  </div>
-</div><!-- row -->
+      <h3>Beschreibung</h3>
+      <%= sanitize(@product.description) %>
+    </div>
+  </div><!-- row -->
 
 </div>
 </div>
