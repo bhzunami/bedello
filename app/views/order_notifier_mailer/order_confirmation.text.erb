@@ -7,7 +7,7 @@ Ihre Bestellung:
 
 <%= render @order.line_items -%>
 
-<% if flatrate?(@order) %>
+<% if isFlatrate?(@order) %>
 Pauschale: 16 CHF
 <% end %>
 Lieferkosten: <%= number_to_currency(@order.shipment.costs) %>
