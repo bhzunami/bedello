@@ -29,7 +29,13 @@
         <td class="rightCell"><%= number_to_currency(getPrice(l)) %></td>
       </tr>
     <% end %>
-       <tr>
+     <% if isFlatrate?(@order) %>
+      <tr>
+        <td colspan="3">Pauschale</td>
+        <td class="rightCell"><%= number_to_currency(16) %></td> 
+      </tr>
+      <% end %>
+      <tr>
         <td colspan="3"><strong>Total</strong></td>
         <td class="rightCell"><strong><%= number_to_currency(getTotPrice(@order.line_items)) %></strong></td> 
       </tr>

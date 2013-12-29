@@ -36,20 +36,21 @@ class Order < ActiveRecord::Base
     end
 
     event :archive do
-      transition accepted: :archive
-      transition rejected: :archive
+      transition accepted: :archived
+      transition rejected: :archived
     end
 
     event :pending do
       transition newOrder: :pending
     end
 
+    state :archived do
+    end
+
     state :accepted do
-      # To be define
     end
 
     state :rejected do
-      # To be define
     end
 
     state :pending do
@@ -58,5 +59,10 @@ class Order < ActiveRecord::Base
     state :newOrder do
     end
       
+  end
+ 
+  def sendNotifierMail
+    OrderNotifierMailer.order_confirmation(self).deliver
+    OrderNotifierMailer.order_notification(self).deliver
   end
 end

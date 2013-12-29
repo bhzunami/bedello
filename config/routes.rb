@@ -33,6 +33,8 @@ Bedello::Application.routes.draw do
   post '/orders/createNewOrder', to: 'orders#createNewOrder'
   post '/products/checkQuantity', to: 'products#checkQuantity'
 
+  match '/archived_orders', to: 'orders#archived_orders', via: 'get'
+
   #static pages
   get "/about", to: "static_pages#about"
   get "/contact", to: "static_pages#contact"

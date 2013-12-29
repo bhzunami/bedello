@@ -1,0 +1,36 @@
+<%= "Sehr geehrte/r #{@order.customer.firstname} #{@order.customer.lastname}" %>
+
+Besten Dank für Ihre Bestellung am <%= l @order.created_at %> bei bedello.ch
+
+Ihre Bestellung:
+--------------------------
+
+<%= render @order.line_items -%>
+
+<% if flatrate?(@order) %>
+Pauschale: 16 CHF
+<% end %>
+Lieferkosten: <%= number_to_currency(@order.shipment.costs) %>
+Zahlungskosten: <%= number_to_currency(@order.payment.costs) %>
+
+Total: <%= number_to_currency(getShipPrice(@order) ) %>
+
+Bitte beachten Sie folgendes zu Ihrer Bestellung:
+
+<% if @order.payment.name != 'Vorauszahlung' %>
+Sie erhalten Ihre Ware innerhalb der nächsten Tage per Post zugestellt.
+
+<% else %>
+Wir bitten Sie, den Betrag von Fr. <%= number_to_currency(getShipPrice(@order) )%> auf folgendes Postkonto einzuzahlen:
+
+bedello.ch
+Jürg Bechtel
+In den Schorenmatten 23
+4058 Basel
+Postkonto 60-771554-0
+
+Nach erfolgtem Zahlungseingang erhalten Sie Ihre bestellte Ware innerhalb der nächsten Tage per Post zugestellt.
+<% end %>
+
+Mit freundlichen Grüssen
+Jürg Bechtel

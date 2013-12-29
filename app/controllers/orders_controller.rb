@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
-before_action :set_order, only: [:show, :edit, :update, :destroy, :pending]
-before_action :admin_user, only: [:index]
+before_action :set_order, only: [:show, :edit, :update, :destroy, :pending, :accept, :reject, :archive]
+before_action :admin_user, only: [:index, :archived_orders]
 
 
   def new
@@ -51,11 +51,19 @@ before_action :admin_user, only: [:index]
 
   def index
     @pending_orders = Order.with_state(:pending)
+    @accepted_orders = Order.with_state(:accepted)
+    @rejected_orders = Order.with_state(:rejected)
+  end
+
+
+  def archived_orders
+    @archived_orders = Order.with_state(:archived)
   end
 
   def show
     if @order.state != 'newOrder' && !admin?
-      redirect_to root_path
+      # Store url and go back to root_url show login pleas
+      admin_user
     end
   end
 
@@ -65,11 +73,51 @@ before_action :admin_user, only: [:index]
     if @order.pending
       flash[:success] = "Bestellung erfolgreich abgeschlossen."
     else
-      booking.errors.full_messages.each do |msg|
+      @order.errors.full_messages.each do |msg|
         flash[:error]= msg
       end
     end
+    @order.sendNotifierMail()
     redirect_to root_path
+  end
+
+   def accept
+    if @order.pending?
+      if @order.accept
+        flash[:success] = "Bestellung akzeptiert."
+      else
+        @order.errors.full_messages.each do |msg|
+          flash[:error]= msg
+        end
+      end
+    end
+    redirect_to orders_path
+  end
+
+  def reject
+    if @order.pending?
+      if @order.reject
+        flash[:success] = "Bestellung abgelehnt."
+      else
+        @order.errors.full_messages.each do |msg|
+          flash[:error]= msg
+        end
+      end
+    end
+    redirect_to orders_path
+  end
+
+  def archive
+    if @order.accepted? || @order.rejected?
+      if @order.update_attribute(:state, "archived")
+        flash[:success] = "Bestellung archiviert."
+      else
+        @order.errors.full_messages.each do |msg|
+          flash[:error]= msg
+        end
+      end
+    end
+    redirect_to orders_path
   end
 
   private

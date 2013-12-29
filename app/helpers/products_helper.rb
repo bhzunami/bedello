@@ -43,4 +43,13 @@ module ProductsHelper
 		total_price
 	end
 
+	def flatrate?(cart)
+    total_price = cart.to_a.sum { |c| getPrizeOfOneProduct(c) }
+    if total_price < 200
+      return true
+    else
+      return false
+    end
+  end
+
 end

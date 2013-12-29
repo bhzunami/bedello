@@ -6,12 +6,12 @@
   <div class="span5">
     <!-- Show the admin user all Products include inActive -->
     <% if admin? && !product.isActivate %>
-      <p class="alert alert-error">Product is inactive</p>
+      <p class="alert alert-error">Produkt ist nicht <strong>aktiv</strong></p>
     <% end %>
 
     <!-- Show if product is not seasonally -->
     <% if !activeProduct?(product) %>
-      <p class="alert">Product is not seasonally</p>
+      <p class="alert">Nur während der Vorweihnachtszeit erhältlich</p>
     <% end %>
 
     <!-- Check if we have to show sale price -->

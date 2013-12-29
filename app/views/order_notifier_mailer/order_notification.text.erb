@@ -1,0 +1,37 @@
+Hallo Bedello
+
+Eine gibt eine neue Bestellung.
+
+<%= order_url(@order.id) %>
+
+#------ Order From <%= Time.now.strftime("%d.%m.%Y, %H:%M:%S") %> -------#
+To= j.bechtel@vtxmail.ch
+Date= <%= Time.now.strftime("%d.%m.%Y, %H:%M:%S") %>
+Remote_Addr= ????
+Trnr= <%= Time.now.strftime("%d.%m.%Y, %H:%M:%S") %>
+<% @order.line_items.each_with_index do |line, index| %>
+******* Artikel <%= index +1 %> *************
+Menge= <%= line.quantity %>
+Nummer= <%= line.product.productNr %>
+Artikel= <%= line.product.title %>
+<% if line.quantity > 1 %>
+Betrag= <%= line.product.price %>
+<% else %>
+Betrag= <%= line.product.price * line.quantity %> CHF
+<% end %>
+
+<% end %>
+******* End Artikel ***********
+Lieferung= 16.00
+Total= <%= getShipPrice(@order) %> CHF
+-------------------------------
+Lieferung= <%= @order.shipment.name %>
+Zahlung= <%= @order.payment.name %>
+Anrede=  <%= @order.customer.formOfAddress %> 
+Vorname= <%= @order.customer.firstname %>
+Name= <%= @order.customer.lastname %>
+Adresse= <%= @order.customer.streetname %>
+PLZ= <%= @order.customer.plz %>
+Ort= <%= @order.customer.city %>
+EMail= <%= @order.customer.email %>
+##----- End Form ------------##

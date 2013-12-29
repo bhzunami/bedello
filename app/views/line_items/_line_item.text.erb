@@ -1,0 +1,5 @@
+<% if isSale?(line_item.product) %>
+  <%= sprintf("%2d x %s à %s", line_item.quantity, truncate(line_item.product.title, length: 50), number_to_currency(line_item.product.promotionPrice)) %>
+<% else %>
+  <%= sprintf("%2d x %s à %s", line_item.quantity, truncate(line_item.product.title, length: 50), number_to_currency(line_item.product.price)) %>
+<% end %>
