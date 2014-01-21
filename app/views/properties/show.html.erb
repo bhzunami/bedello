@@ -1,0 +1,8 @@
+<%= @property.name %>
+<%= @property.description %>
+
+<ul>
+<% @property.propertyItems.each do |i| %>
+<li><%= i.name %>: <%= i.description %></li>
+<% end %>
+</ul>

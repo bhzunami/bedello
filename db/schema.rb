@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131228095042) do
+ActiveRecord::Schema.define(version: 20140121095034) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -100,6 +100,24 @@ ActiveRecord::Schema.define(version: 20131228095042) do
   end
 
   add_index "products", ["slug"], name: "index_products_on_slug", unique: true
+
+  create_table "properties", force: true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "property_items", force: true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "order"
+    t.integer  "property_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "property_items", ["property_id"], name: "index_property_items_on_property_id"
 
   create_table "shipments", force: true do |t|
     t.string   "name"

@@ -14,6 +14,7 @@ Bedello::Application.routes.draw do
   end
   resources :payments
   resources :shipments
+  resources :properties
 
   resources :carts, only: [:index]
   resources :sessions, only: [:new, :create, :destroy]

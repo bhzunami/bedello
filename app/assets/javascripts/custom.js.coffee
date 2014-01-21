@@ -21,4 +21,8 @@ class @CUSTOM_LOADER
 $(document).on "ready page:load", ->
 	new CUSTOM_LOADER()
 	$("a.fancybox").fancybox()
+	$('FORM').nestedFields();
+
+
+
 	
