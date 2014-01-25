@@ -33,9 +33,6 @@ gem 'newrelic_rpm'
 # Simpel forms for input fomrs
 gem 'simple_form', '~> 3.0.0.rc'
 
-# Secure Passwords with
-gem 'bcrypt-ruby', '3.0.1'
-
 # For adding example data
 gem 'faker', '1.2.0'
 
