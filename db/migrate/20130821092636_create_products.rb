@@ -8,7 +8,6 @@ class CreateProducts < ActiveRecord::Migration
       t.decimal :promotionPrice, precision: 8, scale: 2
       t.datetime :promotionStartDate
       t.datetime :promotionEndDate
-      t.string :image
       t.boolean :isActivate, default: true
       t.integer :inStock
       t.datetime :sale_start_date

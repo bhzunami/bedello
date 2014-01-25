@@ -10,7 +10,6 @@
 #  promotionPrice     :decimal(8, 2)
 #  promotionStartDate :date
 #  promotionEndDate   :date
-#  image              :string(255)
 #  isActivate         :boolean          default(TRUE)
 #  inStock            :integer
 #  sale_start_date    :date

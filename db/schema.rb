@@ -86,7 +86,6 @@ ActiveRecord::Schema.define(version: 20140122195915) do
     t.decimal  "promotionPrice",     precision: 8, scale: 2
     t.date     "promotionStartDate"
     t.date     "promotionEndDate"
-    t.string   "image"
     t.boolean  "isActivate",                                 default: true
     t.integer  "inStock"
     t.date     "sale_start_date"
