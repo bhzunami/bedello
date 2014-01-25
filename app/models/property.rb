@@ -11,8 +11,10 @@
 
 class Property < ActiveRecord::Base
 	has_many :propertyItems, dependent: :destroy
+	has_many :products
 
 	validates :name, presence: true
 
 	accepts_nested_attributes_for :propertyItems, reject_if: lambda { |a| a[:name].blank? }, allow_destroy: true
+
 end

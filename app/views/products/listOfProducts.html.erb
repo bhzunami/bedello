@@ -18,7 +18,11 @@
           <tr>
             
               <td ><%= getProduct(p).productNr%></td>
-              <td><%= getProduct(p).title %></td>
+              <% if getProduct(p).property_id? %>
+                <td><%= getProduct(p).title %> (<%= getProperty(p).name %>)</td>
+              <% else %>
+                <td><%= getProduct(p).title %></td>
+              <% end %>
               <td>
                 <%= form_tag(class: "form-inline table_form update_cart") do %>
                 <!-- Form for edit quantity -->

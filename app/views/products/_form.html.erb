@@ -35,6 +35,8 @@
         <%= image_tag @product.image.url(:small) %>
       <% end %>
       <%= f.file_field :image %>
+      <%= f.association :property, as: :radio_buttons, include_blank: true  %>
+
     </div>
   </div>
   <%= f.button :submit, class: "btn-success" %>

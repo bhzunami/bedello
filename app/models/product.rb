@@ -23,6 +23,7 @@
 #  image_content_type :string(255)
 #  image_file_size    :integer
 #  image_updated_at   :datetime
+#  property_id        :integer
 #
 
 class Product < ActiveRecord::Base
@@ -32,6 +33,7 @@ class Product < ActiveRecord::Base
 
 	belongs_to :category
 	has_many :line_items
+	belongs_to :property
 
 	has_attached_file :image, styles: { medium: "300x300>", large: "700x700>", small: "100x100>" }, default_url: "/images/:style/default.jpg"
 

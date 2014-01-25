@@ -22,6 +22,7 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
+    @properties = @product.property.propertyItems unless @product.property.nil?
   end
 
   # GET /products/new
@@ -82,7 +83,12 @@ class ProductsController < ApplicationController
     lineItems = params[:data][:lineItems]
     lineItems.each do |key, li|
       product = Product.find( li[:product_id] )
-      cart = {product: product, quantity: li[:quantity]}
+      if li[:property] == nil || li[:property] == 0 || li[:property] == ""
+        cart = {product: product, quantity: li[:quantity]}
+      else
+        propertyItem = PropertyItem.find(li[:property])
+        cart = {product: product, quantity: li[:quantity], property: propertyItem}
+      end
       @cart.push(cart)
     end
     render layout: false
@@ -116,7 +122,7 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:title, :description, :productNr, :price, :promotionPrice, :promotionStartDate, :promotionEndDate, :image, :isActivate, :inStock, :sale_start_date, :sale_end_date, :category_id, :image)
+      params.require(:product).permit(:title, :description, :productNr, :price, :promotionPrice, :promotionStartDate, :promotionEndDate, :image, :isActivate, :inStock, :sale_start_date, :sale_end_date, :category_id, :image, :property_id)
     end
 
     def products_params

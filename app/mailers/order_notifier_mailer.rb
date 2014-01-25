@@ -20,7 +20,7 @@ class OrderNotifierMailer < ActionMailer::Base
 # Send to bedello
   def order_notification(order)
     @order = order
-    mail to: "j.bechtel@vtxmail.ch", subject: "Neue Bestellung"
+    mail to: "nmauchle@gmail.com", subject: "Neue Bestellung"
   end
 end
 

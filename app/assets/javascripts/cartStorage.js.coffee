@@ -13,7 +13,7 @@ class @CartStorage
     console.log("Remoe Local Storage")
     localStorage.clear()
 
-  addLineItem: (productId, quan) ->
+  addLineItem: (productId, quan, property_id) ->
     productId = parseInt(productId)
     quan = parseInt(quan)
     if !@getObject()?
@@ -21,6 +21,7 @@ class @CartStorage
       lineItems[productId] =
         product_id : productId
         quantity : quan
+        property : property_id
       cart = 
         lineItems : lineItems
         length : 1
@@ -32,6 +33,7 @@ class @CartStorage
         cart.lineItems[productId] =
           product_id : productId
           quantity : quan
+          property : property_id
         cart.length += 1
 
     @setObject(cart)

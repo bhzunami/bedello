@@ -36,4 +36,8 @@ module OrdersHelper
     end
   end
 
+  def property(lineItem)
+    lineItem.propertyItem.name unless lineItem.propertyItem.nil?
+  end
+
 end

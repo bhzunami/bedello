@@ -17,7 +17,10 @@
 			$( this ).submit (event) -> # Fange Submit ab
 				event.preventDefault()
 				# Check Quantity
+
 				inputQuantity = parseInt(this.quantity.value)
+				# Get property id
+				property_id = parseInt($(this).find(":selected").val())
 				cartStorage = new CartStorage()
 				cart = cartStorage.getObject()
 
@@ -41,6 +44,7 @@
 				product =
 					id : this.id.value
 					quantity : quant
+					property : property_id
 
 				$.ajax "/products/checkQuantity",
 					type: 'POST'
@@ -48,7 +52,7 @@
 					dataType: 'json'
 					success: (response) ->
 						$(button).parent('.pull-right').find('.inStock').html("Verfügbar: " +response['inStock'])
-						new ProductHandler(product.id, inputQuantity, $(button).parent('.pull-right').parent('.row').find("img").eq(0))
+						new ProductHandler(product.id, inputQuantity, $(button).parent('.pull-right').parent('.row').find("img").eq(0), property_id)
 
 					error: ->
 						inStock = $(button).parent('.pull-right').find('.inStock').text()
@@ -63,8 +67,10 @@
 		$(".addToCart").each (index) ->
 			$( this ).submit (event) -> # Fange Submit ab
 				event.preventDefault()
+				
 				# Check Quantity
 				inputQuantity = parseInt(this.quantity.value)
+				property_id = parseInt($(this).find(":selected").val())
 				cartStorage = new CartStorage()
 				cart = cartStorage.getObject()
 
@@ -88,6 +94,7 @@
 				product =
 					id : this.id.value
 					quantity : quant
+					property : property_id
 
 				$.ajax "/products/checkQuantity",
 					type: 'POST'
@@ -95,7 +102,7 @@
 					dataType: 'json'
 					success: (response) ->
 						$(".span3").find('.inStock').html("Verfügbar: " +response['inStock'])
-						new ProductHandler(product.id, inputQuantity, $(".span3").find("img").eq(0))
+						new ProductHandler(product.id, inputQuantity, $(".span3").find("img").eq(0), property_id)
 
 					error: ->
 						inStock = $(button).parent('.pull-right').find('.inStock').text()
@@ -108,9 +115,9 @@
 					
 
 class @ProductHandler
-	constructor: (product, quantity, imageToDrag) ->
+	constructor: (product, quantity, imageToDrag, property_id) ->
 		cartStorage = new CartStorage()
-		cartStorage.addLineItem(product, quantity)
+		cartStorage.addLineItem(product, quantity, property_id)
 		cart = $("#quantity_of_carts")
 		if imageToDrag
 			imgClone = imageToDrag.clone().offset(

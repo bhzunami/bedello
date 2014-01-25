@@ -11,7 +11,6 @@ before_action :admin_user, only: [:index, :archived_orders]
   def createNewOrder
     lineItems = params[:data][:lineItems]
     if not lineItems
-      console.debug("LineItems: #{lineItems}")
       redirect root_path
     end
     @order = Order.new
@@ -22,6 +21,10 @@ before_action :admin_user, only: [:index, :archived_orders]
       lineItem = LineItem.new
       lineItem.product_id = li[:product_id]
       lineItem.quantity = li[:quantity]
+      if li[:property] != ""
+        lineItem.propertyItem_id = li[:property]
+      end
+
       @order.line_items << lineItem if LineItem
     end
 
@@ -36,7 +39,7 @@ before_action :admin_user, only: [:index, :archived_orders]
         format.html { redirect_to @order, notice: "Order was successfully created." }
         format.json { render action: 'show', status: :created, location: @order }
       else
-        format.html { redirect_to new_order_path, notice: "Missing Fields"}
+        format.html { redirect_to new_order_path, notice: "Bitte füllen Sie alle erfoderlichen Felder aus"}
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end
     end
@@ -62,7 +65,7 @@ before_action :admin_user, only: [:index, :archived_orders]
 
   def show
     if @order.state != 'newOrder' && !admin?
-      # Store url and go back to root_url show login pleas
+      # Store url and go back to root_url show login please
       admin_user
     end
   end
@@ -127,13 +130,13 @@ before_action :admin_user, only: [:index, :archived_orders]
     end
 
   def order_params
-    params.require(:order).permit(:ip, :payment_id, :shipment_id, line_items_attributes: [:product_id, :quantity], customer_attributes: [:formOfAddress, :firstname, :lastname, :streetname, :addressAdditive, :plz, :city, :email, :phone])
+    params.require(:order).permit(:ip, :payment_id, :shipment_id, line_items_attributes: [:product_id, :quantity, :propertyItem_id], customer_attributes: [:formOfAddress, :firstname, :lastname, :streetname, :addressAdditive, :plz, :city, :email, :phone])
   end
 
   def recalcProductInStore(order, option)
     order.line_items.each do |l|
       if option == 'decrease'
-        l.product.inStock -= l.quantity
+        l.product.inStock -= l.quantity unless l.product.inStock == 0
       else 
         l.product.inStock += l.quantity
       end

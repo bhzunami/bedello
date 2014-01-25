@@ -20,11 +20,16 @@
       <%= f.simple_fields_for :line_items do |line| %>
         <%= line.input :product_id, as: :hidden %>
         <%= line.input :quantity, as: :hidden %>
+        <%= line.input :propertyItem_id, as: :hidden %>
        <% end %> 
     <% @order.line_items.each do |l| %>
       <tr>    
         <td ><%= l.product.productNr%></td>
-        <td><%= l.product.title %></td>
+        <% if l.product.property_id? %>
+          <td><%= l.product.title %> (<%= property(l) %>) </td>
+        <% else %>
+          <td><%= l.product.title %></td>
+        <% end %>
         <td><%=  l.quantity %> </td>
         <td class="rightCell"><%= number_to_currency(getPrice(l)) %></td>
       </tr>

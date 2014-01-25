@@ -3,6 +3,7 @@ class PropertiesController < ApplicationController
   before_action :admin_user, only: [:new, :create, :edit, :update, :destroy]
 
   def index
+    @properties = Property.all
   end
 
   def new
@@ -12,7 +13,7 @@ class PropertiesController < ApplicationController
   def create
   	@property = Property.new(property_params)
   	if @property.save
-  		redirect_to property_path(@property)
+  		redirect_to properties_path
   	else
   		render action: 'new'
   	end
@@ -25,7 +26,7 @@ class PropertiesController < ApplicationController
   	@property = Property.find(params[:id])
     if @property.update_attributes(property_params)
       flash[:notice] = "Successfully updated property."
-      redirect_to @property
+      redirect_to properties_path
     else
       render action: 'edit'
     end

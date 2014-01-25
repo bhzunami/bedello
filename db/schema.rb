@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140121095034) do
+ActiveRecord::Schema.define(version: 20140122195915) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -54,10 +54,12 @@ ActiveRecord::Schema.define(version: 20140121095034) do
     t.integer  "quantity"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "propertyItem_id"
   end
 
   add_index "line_items", ["order_id"], name: "index_line_items_on_order_id"
   add_index "line_items", ["product_id"], name: "index_line_items_on_product_id"
+  add_index "line_items", ["propertyItem_id"], name: "index_line_items_on_propertyItem_id"
 
   create_table "orders", force: true do |t|
     t.integer  "customer_id"
@@ -97,8 +99,10 @@ ActiveRecord::Schema.define(version: 20140121095034) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.integer  "property_id"
   end
 
+  add_index "products", ["property_id"], name: "index_products_on_property_id"
   add_index "products", ["slug"], name: "index_products_on_slug", unique: true
 
   create_table "properties", force: true do |t|

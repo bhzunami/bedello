@@ -31,6 +31,10 @@ module ProductsHelper
 		cart_line[:product]
 	end
 
+	def getProperty(cart_line)
+		cart_line[:property]
+	end
+
 	def getQuantity(cart_line)
 		cart_line[:quantity]
 	end
@@ -52,4 +56,16 @@ module ProductsHelper
     end
   end
 
+  def getProductPrice(product)
+  	if isSale?(product)
+  		product.promotionPrice
+  	else
+  		product.price
+  	end
+  end
+
+  def dropDown(product)
+  	product.property.propertyItems.to_a.each_with_object({}){ |n,i| i[n.name] = n.id }
+  	#product.property.propertyItems.each { |item| [item.name, item.id] }
+  end
 end

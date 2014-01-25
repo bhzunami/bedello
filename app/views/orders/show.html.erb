@@ -1,6 +1,6 @@
 <h1>Bestellung abschliessen</h1>
 <div class="row">
-  <div class="span6">
+  <div class="span7">
     <h4> Bestellung </h4>
     <div id="cart_table">
       <table class="table  table-hover table-condensed">
@@ -16,7 +16,11 @@
           <% @order.line_items.each do |l| %>
           <tr>    
             <td ><%= l.product.productNr%></td>
-            <td><%= l.product.title %></td>
+            <% if l.product.property_id? %>
+              <td><%= l.product.title %> (<%= l.propertyItem.name %>) </td>
+            <% else %>
+              <td><%= l.product.title %></td>
+            <% end %>
             <td><%=  l.quantity %> </td>
             <td class="rightCell"><%= number_to_currency(getPrice(l)) %></td>
           </tr>
@@ -48,15 +52,15 @@
     <address>
       <strong><%= @order.customer.firstname %> <%= @order.customer.lastname %> </strong><br />
       <%= @order.customer.streetname %><br />
-      <% if @order.customer.addressAdditive %>
-      <%= @order.customer.addressAdditive %> <br />
+      <% if @order.customer.addressAdditive.present? %>
+        <%= @order.customer.addressAdditive %> <br />
       <% end %>
       <%= @order.customer.plz %> <%= @order.customer.city %><br />
-      <%= @order.customer.email %>
+      <%= @order.customer.email %><br />
       <%= @order.customer.phone %>
     </address>
   </div>
-  <div class="span4">
+  <div class="span3">
     <h4>Bedingungen </h4>
     <strong>Lieferung:</strong> <%= @order.shipment.name %> <br />
     <strong>Bezahlung:</strong> <%= @order.payment.name %>
