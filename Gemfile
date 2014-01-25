@@ -49,6 +49,9 @@ gem "friendly_id", "~> 5.0.0.rc1"
 # Uploading images
 gem "paperclip", "~> 3.0"
 
+# Amazone S3 storage
+gem 'aws-s3'
+
 # Twitter Bootstrap integration
 gem 'bootstrap-sass', '2.3.2.0'
 
