@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140122195915) do
+ActiveRecord::Schema.define(version: 20140125154446) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -144,5 +144,12 @@ ActiveRecord::Schema.define(version: 20140122195915) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["remember_token"], name: "index_users_on_remember_token"
+
+  create_table "website_settings", force: true do |t|
+    t.string   "mailAddress"
+    t.boolean  "webstoreOpen"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

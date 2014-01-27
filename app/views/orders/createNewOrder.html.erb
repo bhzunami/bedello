@@ -1,4 +1,4 @@
-<h1>New Order</h1>
+<h1>Neue Bestellung</h1>
 <br />
 <%= simple_form_for(@order, html: {class: 'form-horizontal' }) do |f| %>
   <% if @order.errors.any? %>
@@ -10,7 +10,7 @@
   <table class="table  table-hover table-condensed">
     <thead>
       <tr>
-        <th>ProductNr</th>
+        <th>Produkt Nr.</th>
         <th>Name</th>
         <th>Menge</th>
         <th class="rightCell">Preis</th>
@@ -75,7 +75,7 @@
       <p>Die Lieferung erfolgt gegen Vorauszahlung oder per Nachnahme (zusätzlich belastete Kosten: Fr. 15.-). Ab der dritten Bestellung können Sie Waren auch auf Rechnung beziehen (Zahlungsfrist: 10 Tage). Gegen Barzahlung können Sie die Ware auch bei uns abholen.</p>
 
       <p>Durch 'drücken' auf den Bestell-Button bestätigen Sie, dass Sie die <%= link_to "AGB", agb_path %> gelesen und mit ihnen einverstanden sind.</p>
-      <%= f.button :submit, class: "btn-success" %>
+      <%= f.button :submit, "Neue Bestellung", class: "btn-success" %>
     </div>
   </div>
 <% end %>

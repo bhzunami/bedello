@@ -9,7 +9,7 @@ class ShipmentsController < ApplicationController
   def create
     @shipment = Shipment.new(shipment_params)
     if @shipment.save
-      flash[:success] = "Shipment #{@shipment.name} saved successfully"
+      flash[:success] = "Lieferart #{@shipment.name} gespeichert."
       redirect_to @shipment
     else
       render action: 'new'
@@ -27,7 +27,7 @@ class ShipmentsController < ApplicationController
 
   def update
     if @shipment.update(shipment_params)
-      flash[:success] = "Shipment #{@shipment.name} updated successfully"
+      flash[:success] = "Lieferart #{@shipment.name} aktualisiert."
       redirect_to shipments_path
     else
       render action: 'edit'
@@ -37,7 +37,7 @@ class ShipmentsController < ApplicationController
 
   def destroy
     @shipment.destroy
-    flash[:success] = "Shipment #{@shipment.name} succesfull deleted"
+    flash[:success] = "Lieferart #{@shipment.name} gelöscht."
     redirect_to shipments_url
   end
 

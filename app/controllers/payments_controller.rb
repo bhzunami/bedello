@@ -9,7 +9,7 @@ class PaymentsController < ApplicationController
   def create
     @payment = Payment.new(payment_params)
     if @payment.save
-      flash[:success] = "Payment #{@payment.name} saved successfully"
+      flash[:success] = "Zahlungsart #{@payment.name} gespeichert."
       redirect_to @payment
     else
       render action: 'new'
@@ -27,7 +27,7 @@ class PaymentsController < ApplicationController
 
   def update
     if @payment.update(payment_params)
-      flash[:success] = "Payment #{@payment.name} updated successfully"
+      flash[:success] = "Zahlungsart #{@payment.name} aktualisiert."
       redirect_to payments_path
     else
       render action: 'edit'
@@ -37,7 +37,7 @@ class PaymentsController < ApplicationController
 
   def destroy
     @payment.destroy
-    flash[:success] = "Payment #{@payment.name} succesfull deleted"
+    flash[:success] = "Zahlungsart #{@payment.name} gelöscht."
     redirect_to payments_url
   end
 

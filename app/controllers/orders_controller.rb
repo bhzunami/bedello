@@ -36,7 +36,7 @@ before_action :admin_user, only: [:index, :archived_orders]
     recalcProductInStore(@order, 'decrease')
     respond_to do |format|
       if @order.save
-        format.html { redirect_to @order, notice: "Order was successfully created." }
+        format.html { redirect_to @order }
         format.json { render action: 'show', status: :created, location: @order }
       else
         format.html { redirect_to new_order_path, notice: "Bitte füllen Sie alle erfoderlichen Felder aus"}
@@ -74,7 +74,7 @@ before_action :admin_user, only: [:index, :archived_orders]
 # State machine
   def pending
     if @order.pending
-      flash[:success] = "Bestellung erfolgreich abgeschlossen."
+      flash[:success] = "Vielen Dank, Deine Bestellung wurde erfolgreich abgeschlossen."
     else
       @order.errors.full_messages.each do |msg|
         flash[:error]= msg

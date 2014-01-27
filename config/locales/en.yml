@@ -20,4 +20,84 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  layouts:
+    footer:
+      contact: "Kontakt"
+      about: "Über"
+      nicolas: "Mit Leidenschaft erstellt von Nicolas Mauchle <%;= )"
+
+    header:
+      orders: "Bestellungen"
+      newOrders: "Neue Bestellungen"
+      archivedOrders: "Archivierte Bestellungen"
+      payments: "Zahlungsarten"
+      transports: "Lieferarten"
+      products: "Produkte"
+      newProduct: "Neues Produkt"
+      allProducts: "Alle Produkte"
+      productProperty: "Produkteigenschaften"
+      cart: "Warenkorb"
+      account: "Konto"
+      profile: "Profil"
+      settings: "Einstellungen"
+      signOut: "Ausloggen"
+      signIn: "Einloggen"
+
+    sidebar:
+      categories: "Kategorien"
+      edit: "Einstellungen"
+
+  static_pages:
+    home:
+      welcomeTitle: "Bedello Pralinen"
+
+  products:
+    product:
+      toCart: "in den Warenkorb"
+      noProduct: "Produkt ist momentan nicht verfügbar"
+    show:
+      toCart: "in den Warenkorb"
+
+  number:
+    currency:
+      format:
+        unit: " CHF"
+        precision: 2
+        seperator: ","
+        delimiter: "."
+        format: "%n%u"
+
+  errors: &errors
+    format: ! '%{attribute} %{message}'
+    messages:
+      default_message: "Bitte überprüfen Sie die markierten Felder:"
+      accepted: muss akzeptiert werden
+      blank: muss ausgefüllt werden
+      confirmation: stimmt nicht mit der Bestätigung überein
+      empty: muss ausgefüllt werden
+      equal_to: muss genau %{count} sein
+      even: muss gerade sein
+      exclusion: ist nicht verfügbar
+      greater_than: muss grösser als %{count} sein
+      greater_than_or_equal_to: muss grösser oder gleich %{count} sein
+      inclusion: ist kein gültiger Wert
+      invalid: ist nicht gültig
+      less_than: muss kleiner als %{count} sein
+      less_than_or_equal_to: muss kleiner oder gleich %{count} sein
+      not_a_number: ist keine Zahl
+      not_an_integer: muss ganzzahlig sein
+      odd: muss ungerade sein
+      record_invalid: ! 'Gültigkeitsprüfung ist fehlgeschlagen: %{errors}'
+      taken: ist bereits vergeben
+      too_long: ist zu lang (nicht mehr als %{count} Zeichen)
+      too_short: ist zu kurz (nicht weniger als %{count} Zeichen)
+      wrong_length: hat die falsche Länge (muss genau %{count} Zeichen haben)
+    template:
+      body: ! 'Bitte überprüfen Sie die folgenden Felder:'
+      header:
+        one: ! 'Konnte %{model} nicht speichern: ein Fehler.'
+        other: ! 'Konnte %{model} nicht speichern: %{count} Fehler.'
+
+
+
+

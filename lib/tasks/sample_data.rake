@@ -8,6 +8,7 @@ namespace :db do
     make_products
     make_shipments
     make_payments
+    make_settings
   end
 end
 
@@ -24,15 +25,15 @@ def make_users
                          password: "bedello1234",
                          password_confirmation: "bedello1234",
                          admin: true)
-  20.times do |n|
-    name = Faker::Name.name
-    email = "example-#{n+1}@test.ch"
-    password = "foobar"
-    User.create!(name: name,
-                 email: email,
-                 password: password,
-                 password_confirmation: password )
-  end
+  #20.times do |n|
+  #  name = Faker::Name.name
+  #  email = "example-#{n+1}@test.ch"
+  #  password = "foobar"
+  #  User.create!(name: name,
+  #               email: email,
+  #               password: password,
+  #               password_confirmation: password )
+  #end
 end
 
 def make_categories
@@ -101,6 +102,13 @@ def make_payments
         Payment.create!(name: n, costs: costs[index] )
     end
 
+
+def make_settings
+    settings = WebsiteSettings.create!(
+        mailAddress: "nmauchle@gmail.com",
+        webstoreOpen: 1)
+
+end
 end
 
 

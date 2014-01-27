@@ -25,7 +25,7 @@ class PropertiesController < ApplicationController
   def update
   	@property = Property.find(params[:id])
     if @property.update_attributes(property_params)
-      flash[:notice] = "Successfully updated property."
+      flash[:notice] = "Eigenschaft aktualisiert."
       redirect_to properties_path
     else
       render action: 'edit'

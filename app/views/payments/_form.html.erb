@@ -1,6 +1,5 @@
-<%= link_to 'Cancel', payments_path, class: "btn btn-danger pull-right" %>
+<%= link_to 'Abbrechen', payments_path, class: "btn btn-danger pull-right" %>
 
-<p>Erstellen eine neue Zahlungsart.</p>
 <%= simple_form_for(@payment, html: {class: 'form-horizontal' }) do |f| %>
   <% if @payment.errors.any? %>
     <%= render 'shared/error_messages', object: f.object %>
@@ -8,6 +7,6 @@
 
   <%= f.input :name %>
   <%= f.input :costs %>
-  <%= f.button :submit %>
+  <%= f.button :submit, "Speichere neue Zahlungsart" %>
 
 <% end %>

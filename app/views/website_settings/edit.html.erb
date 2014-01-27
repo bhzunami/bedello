@@ -1,0 +1,13 @@
+<h1>Einstellungen zur Webseite</h1>
+<%= simple_form_for(@websiteSettings, html: {class: 'form-horizontal' }) do |f| %>
+  <% if @websiteSettings.errors.any? %>
+    <%= render 'shared/error_messages', object: f.object %>
+  <% end %>
+  <div class="row-fluid">
+    <div class="span7">
+      <%= f.input :mailAddress %>
+    </div>
+  </div>
+  <%= f.button :submit, class: "btn-success" %>
+<% end %>
+

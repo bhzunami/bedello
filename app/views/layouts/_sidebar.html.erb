@@ -1,5 +1,5 @@
  <ul class="nav nav-list">
-  <li class="nav-header">Categories </li>
+  <li class="nav-header"><%= t('.categories') %> </li>
   <% categories.each do |c| %>
   <li>
     <%= link_to c.name, products_path(category_id: c.id), id: c.id %>

@@ -17,7 +17,6 @@
 			$( this ).submit (event) -> # Fange Submit ab
 				event.preventDefault()
 				# Check Quantity
-
 				inputQuantity = parseInt(this.quantity.value)
 				# Get property id
 				property_id = parseInt($(this).find(":selected").val())

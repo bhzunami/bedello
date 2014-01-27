@@ -1,8 +1,4 @@
 Bedello::Application.routes.draw do
-  get "customers/new"
-#  get "line_items/new"
-#  get "line_items/create"
-#  get "orders/new"
   resources :products
   resources :categories
   resources :users
@@ -15,33 +11,40 @@ Bedello::Application.routes.draw do
   resources :payments
   resources :shipments
   resources :properties
+  resources :website_settings, only: [:show, :edit, :update]
 
   resources :carts, only: [:index]
   resources :sessions, only: [:new, :create, :destroy]
 
+# Login system
   match '/signup', to: 'users#new', via: 'get'
   match '/signin', to: 'sessions#new', via: 'get'
   match '/signout', to: 'sessions#destroy', via: 'delete'
 
+#Password reset
   get "/password_reset", to: 'users#show_password_reset', as: :password_reset
   post "/password_reset", to:'users#password_reset'
   get "/edit_password_reset/:id", to: 'users#edit_password_reset', as: :edit_password_reset
   post "/update_password_reset/:id", to: 'users#update_password_reset'
 
+# Ajax Cart
   post "/products/listOfProducts", to: 'products#listOfProducts'
   get "/allProducts", to: 'products#allProducts'
 
+# Ajax Order
   post '/orders/createNewOrder', to: 'orders#createNewOrder'
   post '/products/checkQuantity', to: 'products#checkQuantity'
 
   match '/archived_orders', to: 'orders#archived_orders', via: 'get'
 
   #static pages
-  get "/about", to: "static_pages#about"
-  get "/contact", to: "static_pages#contact"
-  get "/agb", to: "static_pages#agb"
 
-  root 'static_pages#home'
+    get "/about", to: "static_pages#about"
+    get "/contact", to: "static_pages#contact"
+    get "/agb", to: "static_pages#agb"
+
+    root 'static_pages#home'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

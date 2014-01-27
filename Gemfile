@@ -58,6 +58,8 @@ gem "fancybox2-rails", "0.2.4"
 
 gem 'state_machine'
 
+gem 'i18n', github: 'svenfuchs/i18n'
+
 
 gem 'awesome_nested_fields'
 # hide configurations file
