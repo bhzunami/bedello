@@ -1,12 +1,12 @@
 @BEDELLO.website_settings = 
 
 	edit: ->
-		new InitalizeDatePicker()
+		new InitalizeDatePickerSettings()
 
 	update: ->
-		new InitalizeDatePicker()
+		new InitalizeDatePickerSettings()
 
-class @InitalizeDatePicker
+class @InitalizeDatePickerSettings
 	constructor: ->
 		@setupDatePicker()
 
