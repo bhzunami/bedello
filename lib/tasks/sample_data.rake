@@ -106,8 +106,8 @@ def make_payments
 def make_settings
     settings = WebsiteSettings.create!(
         mailAddress: "nmauchle@gmail.com",
-        webstoreOpen: Time.now.to_date),
-        webstoreClose: (Time.now + 3.weeks).to_date
+        webstoreOpen: Time.now.to_date,
+        webstoreClose: (Time.now + 3.weeks).to_date )
 
 end
 end
