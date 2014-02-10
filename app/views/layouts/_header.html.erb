@@ -18,43 +18,43 @@
           <% if admin? %>
           <li id="fat-menu" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <%= t('.orders') %> <b class="caret"></b>
+                Bestellungen <b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
-                <li><%= link_to t('.newOrders'), orders_path() %></li>
-                <li><%= link_to t('.archivedOrders'), archived_orders_path() %></li>
-                <li><%= link_to t('.payments'), payments_path() %></li>
-                <li><%= link_to t('.transports'), shipments_path() %></li>
+                <li><%= link_to 'Neue Bestellungen', orders_path() %></li>
+                <li><%= link_to 'Archivierte Bestellungen', archived_orders_path() %></li>
+                <li><%= link_to 'Zahlungsarten', payments_path() %></li>
+                <li><%= link_to 'Lieferarten', shipments_path() %></li>
               </ul> 
             <li id="fat-menu" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <%= t('.products') %> <b class="caret"></b>
+                Produkte <b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
-                <li><%= link_to t('.newProduct'), new_product_path() %></li>
-                <li><%= link_to t('.allProducts'), allProducts_path() %></li>
-                <li><%= link_to t('.productProperty'), properties_path() %></li>
+                <li><%= link_to "Neues Produkt", new_product_path() %></li>
+                <li><%= link_to "Alle Produkte", allProducts_path() %></li>
+                <li><%= link_to "Produkteigenschaften", properties_path() %></li>
               </ul> 
           <% end %>
           <% if not admin? %>
-          <li id="quantity_of_carts"><%= link_to t('.cart'), carts_path %></li>
+          <li id="quantity_of_carts"><%= link_to "Warenkorb", carts_path %></li>
           <% end %>
           <% if signed_in? %>
             <li id="fat-menu" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <%= t('.account') %> <b class="caret"></b>
+                Konto <b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
-                <li><%= link_to t('.profile'), edit_user_path(current_user) %></li>
-                <li><%= link_to t('.settings'), website_setting_path(1) %></li>
+                <li><%= link_to "Profil", edit_user_path(current_user) %></li>
+                <li><%= link_to "Einstellungen", website_setting_path(1) %></li>
                 <li class="divider"></li>
                 <li>
-                  <%= link_to t('.signOut'), signout_path, method: "delete" %>
+                  <%= link_to "Ausloggen", signout_path, method: "delete" %>
                 </li>
               </ul>
             </li>
           <% else %>
-            <li><%= link_to t('.signIn'), signin_path %></li>
+            <li><%= link_to "Einloggen", signin_path %></li>
           <% end %>
         </ul>
       </div>
