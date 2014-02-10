@@ -41,6 +41,9 @@ en:
         promotionEndDate: 'Aktion Enddatum'
         image: 'Bild'
         property: 'Eigenschaft'
+        mailAddress: 'E-Mail Adresse'
+        webstoreOpen: ' öffnen am'
+        webstoreClose: 'schliessen am'
       
     #     password: 'Password'
     #   user:

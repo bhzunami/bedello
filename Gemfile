@@ -60,6 +60,8 @@ gem 'state_machine'
 
 gem 'i18n', github: 'svenfuchs/i18n'
 
+gem 'random_record'
+
 
 gem 'awesome_nested_fields'
 # hide configurations file

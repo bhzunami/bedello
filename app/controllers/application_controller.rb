@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   include SessionsHelper
+  include StaticPagesHelper
 
   protected
   	def set_i18n_locale_from_params

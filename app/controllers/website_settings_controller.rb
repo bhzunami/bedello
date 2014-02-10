@@ -34,7 +34,7 @@ class WebsiteSettingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def settings_params
-      params.require(:website_settings).permit(:mailAddress, :webstoreOpen)
+      params.require(:website_settings).permit(:mailAddress, :webstoreOpen, :webstoreClose)
     end
 
 end

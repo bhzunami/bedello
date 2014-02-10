@@ -5,15 +5,21 @@
 	</div>
 	<div class="span9">
 <h1> Bedello Pralinen </h1>
+
+<% if not isStoreOpen? %>
+<p class="alert alert-error">Der Shop ist momentan nicht <strong>aktiv</strong>. Er öffnet wieder am <%= @webstore.webstoreOpen.strftime("%m.%d.%Y") %>. <br /> Sie können sich trotzdem gerne im Shop umschauen.</p>
+<% end %>
 <%= image_tag "logo/bedello_shop_titelbild.jpg" %>
 
 <div class="row">
-
-<% 3.times do %>
+<br />
+<br />
+<% @products.each do |p| %>
 	<div class="span3">
-		<%= image_tag "logo/pralinen1.png" %>
+		<%= image_tag p.image.url(:small) %>
 		<p>
-			I wrote this post just to show how it’s possible to get a perfectly working form with multiple files upload within a few minutes. If you need to implement multiple file attachments to a given object with only one form quickly, this example could help you.
+			<h4><%= link_to p.title, p %></h4>
+			<%= p.description %>
 		</p>
 	</div>
 <% end %>

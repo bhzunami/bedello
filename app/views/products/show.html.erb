@@ -11,7 +11,9 @@
         <%= image_tag @product.image.url(:medium) %>
       </a>
       <br /><br />
-      <p class="inStock">Verfügbar: <%= @product.inStock %></p>
+      <% if isStoreOpen? %>
+        <p class="inStock">Verfügbar: <%= @product.inStock %></p>
+      <% end %>
 
       <% if isSale?(@product) %>
         <p class="sale">Alter Preis: <%= @product.price %> </p>
@@ -51,7 +53,7 @@
           <%= link_to "Edit", edit_product_path(@product), class: "btn" %>
           <%= link_to "Delete", @product, method: :delete, data: {confirm: "You sure you want to delete #{@product.title}"}, class: "btn btn-danger"  %>
         <% else %>
-          <% if activeProduct?(@product) && @product.inStock > 0%>
+          <% if activeProduct?(@product) && @product.inStock > 0 && isStoreOpen?%>
             <%= form_tag({}, class: "form-inline addToCart") do %>
               <%= hidden_field_tag("id", value = @product.id) %>   
               <% if @product.property_id? %>
@@ -67,6 +69,11 @@
                 <%= submit_tag t('.toCart'), class: "btn btn-success btn_add", name: "add" %>
               </label>
             <% end %> <!-- end form -->
+          <% elsif not isStoreOpen? %>
+            <p class="pull-right storeClose"> Shop ist nicht geöffnet</p>
+            <!-- Form -->
+          <% else %>
+            <p class="pull-right">Produkt ist momentan nicht verfügbar</p>
           <% end %>
         <% end %>
       </p>

@@ -34,7 +34,7 @@ class Product < ActiveRecord::Base
 	has_many :line_items
 	belongs_to :property
 
-	has_attached_file :image, styles: { medium: "300x300>", large: "700x700>", small: "100x100>" }, default_url: "/images/:style/default.jpg"
+	has_attached_file :image, styles: { medium: "300x300>", large: "700x700>", small: "272x204>" }, default_url: "/images/:style/default.jpg"
 
 
 	scope :active, -> { where(isActivate: true) }

@@ -12,6 +12,9 @@
 	edit: ->
 		new InitalizeDatePicker()
 
+	update: ->
+		new InitalizeDatePicker()
+
 	index: ->
 		$(".addToCart").each (index) ->
 			$( this ).submit (event) -> # Fange Submit ab

@@ -3,5 +3,7 @@
 	<b>Email:</b> <%= @websiteSettings.mailAddress %> 
 </p>
 <p>
+	Webshop ist geöffnet am <b><%= @websiteSettings.webstoreOpen.strftime("%m/%d/%Y") %></b> bis am <b><%= @websiteSettings.webstoreClose.strftime("%m/%d/%Y") %></b>.
+<p>
 	<%= link_to "Edit", edit_website_setting_path(1), class: "btn btn-small" %>
 </p>

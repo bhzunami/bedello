@@ -5,7 +5,7 @@ namespace :db do
     require 'faker'
     make_users
     make_categories
-    make_products
+    #make_products
     make_shipments
     make_payments
     make_settings
@@ -106,7 +106,8 @@ def make_payments
 def make_settings
     settings = WebsiteSettings.create!(
         mailAddress: "nmauchle@gmail.com",
-        webstoreOpen: 1)
+        webstoreOpen: Time.now.to_date),
+        webstoreClose: (Time.now + 3.weeks).to_date
 
 end
 end
