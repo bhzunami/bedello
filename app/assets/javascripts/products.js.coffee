@@ -157,8 +157,6 @@ class @InitalizeDatePicker
 		@setupDatePicker()
 
 	setupDatePicker: ->
-		console.log("FUCK YOU")
-		alert("HALLO")
 		$("#product_promotionStartDate").datepicker dateFormat: "dd/mm/yy"
 		$("#product_promotionEndDate").datepicker dateFormat: "dd/mm/yy"
 		$("#product_sale_start_date").datepicker dateFormat: "dd/mm/yy"

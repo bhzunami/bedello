@@ -10,7 +10,7 @@
       <%= f.input :description, input_html: { class: "span12", rows: "5"} %>
       <%= f.input :productNr, as: :string%>
       <%= f.association :category %>
-      <%= f.input :price, label: "Price"%>
+      <%= f.input :price, label: "Preis"%>
       <%= f.input :inStock, input_html: {value: 1}%>
 
       <h4>Anzeigen</h4>
@@ -39,6 +39,6 @@
 
     </div>
   </div>
-  <%= f.button :submit, "Speicher Produkt", class: "btn-success" %>
+  <%= f.button :submit, "Speichere Produkt", class: "btn-success" %>
 <% end %>
 
