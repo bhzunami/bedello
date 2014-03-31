@@ -73,6 +73,14 @@ de-CH:
     - :day
     - :month
     - :year
+  number:
+    currency:
+      format:
+        unit: " CHF"
+        precision: 2
+        seperator: ","
+        delimiter: "."
+        format: "%n%u"
   datetime:
     distance_in_words:
       about_x_hours:
