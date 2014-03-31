@@ -58,7 +58,8 @@ gem "fancybox2-rails", "0.2.4"
 
 gem 'state_machine'
 
-gem 'i18n', github: 'svenfuchs/i18n'
+#gem 'i18n', github: 'svenfuchs/i18n'
+gem 'rails-i18n', '~> 4.0.0'
 
 gem 'random_record'
 
