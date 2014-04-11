@@ -5,11 +5,11 @@
   <% end %>
   <div class="row-fluid">
     <div class="span7">
-      <%= f.input :mailAddress %>
-      <%= f.input :webstoreOpen, as: :date_picker %>
-      <%= f.input :webstoreClose, as: :date_picker %>
+      <%= f.input :mailAddress, label: "E-Mail" %>
+      <%= f.input :webstoreOpen, as: :date_picker, label: "Shop is offen ab" %>
+      <%= f.input :webstoreClose, as: :date_picker, label: "Shop is geschlossen ab" %>
     </div>
   </div>
-  <%= f.button :submit, class: "btn-success" %>
+  <%= f.button :submit, "Speichern", class: "btn-success" %>
 <% end %>
 

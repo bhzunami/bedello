@@ -5,8 +5,8 @@
     <%= render 'shared/error_messages', object: f.object %>
   <% end %>
 
-  <%= f.input :name, error: false %>
-  <%= f.input :costs, error: false %>
+  <%= f.input :name, label: "Name", error: false %>
+  <%= f.input :costs, label: "Kosten", error: false %>
   <%= f.button :submit, "Speichere Lieferart" %>
 
 <% end %>
