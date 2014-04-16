@@ -19,7 +19,7 @@
 		<%= image_tag p.image.url(:small) %>
 		<p>
 			<h4><%= link_to p.title, p %></h4>
-			<%= p.description %>
+			<%= truncate(strip_tags(sanitize(p.description)) %>
 		</p>
 	</div>
 <% end %>
