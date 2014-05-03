@@ -4,7 +4,12 @@
   </div>
   <div class="span10">
     <% if @products.any? %>
-      <h1>All products of <category.name></h1>
+    <% if @category %>
+      <h2><%= @category.name %></h2>
+    <% else %>
+      <h2>Alle Produkte</h2>
+    <% end %>
+      <br />
       <% @products.each do |product| %>       
           <%= render product %>
       <% end %>

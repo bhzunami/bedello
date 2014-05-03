@@ -10,8 +10,11 @@ class ProductsController < ApplicationController
       @products = Product.where(category_id: params[:category_id] )
     else
       @products = Product.active.where(category_id: params[:category_id] ) #Product.activeDate.where(category_id: params[:category_id])
+
       #@products = Product.activeDate
     end
+    @category = Category.find(params[:category_id])
+    
   end
 
   def allProducts
