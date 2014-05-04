@@ -156,15 +156,27 @@ class @InitalizeDatePicker
 	constructor: ->
 		@setupDatePicker()
 
+	formateDate:(date) ->
+		date = new Date(date)
+		return $.datepicker.formatDate("dd/mm/yy", date)
+
 	setupDatePicker: ->
-		$("#product_promotionStartDate").datepicker dateFormat: "dd/mm/yy"
-		$("#product_promotionEndDate").datepicker dateFormat: "dd/mm/yy"
 		$("#product_sale_start_date").datepicker dateFormat: "dd/mm/yy"
 		$("#product_sale_end_date").datepicker dateFormat: "dd/mm/yy"
+		unless $("#product_sale_start_date").val() is ''
+			$("#product_sale_start_date").val @formateDate($("#product_sale_start_date").val())
+		unless $("#product_sale_end_date").val() is ''
+			$("#product_sale_end_date").val @formateDate($("#product_sale_end_date").val())
+
+
+		$("#product_promotionStartDate").datepicker dateFormat: "dd/mm/yy"
+		$("#product_promotionEndDate").datepicker dateFormat: "dd/mm/yy"
+		unless $("#product_promotionStartDate").val() is ''
+			$("#product_promotionStartDate").val @formateDate($("#product_promotionStartDate").val())
+
+		unless $("#product_promotionEndDate").val() is ''
+			$("#product_promotionEndDate").val @formateDate($("#product_promotionEndDate").val())
 	
-		$(".datepicker").each (i) ->
-			unless $(this).val() is ''
-				#console.log("Date" + $(this).val())
-				date = new Date( $(this).val() )
-				$(this).val $.datepicker.formatDate("dd/mm/yy", date)
+	
+		
 

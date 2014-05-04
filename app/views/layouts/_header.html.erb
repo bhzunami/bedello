@@ -39,6 +39,7 @@
           <% if not admin? %>
           <li id="quantity_of_carts"><%= link_to "Warenkorb", carts_path %></li>
           <% end %>
+          <li><%= link_to "AGB", agb_path() %></li>
           <% if signed_in? %>
             <li id="fat-menu" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -53,8 +54,6 @@
                 </li>
               </ul>
             </li>
-          <% else %>
-            <li><%= link_to "Einloggen", signin_path %></li>
           <% end %>
         </ul>
       </div>

@@ -16,7 +16,7 @@
 
     <!-- Check if we have to show sale price -->
     <% if isSale?(product) %>
-      <p class="text-error"> <strong><%= number_with_precision promotionPercent(product), precision: 0%> % Reduktion</strong></p>
+      <p class="text-error"> <strong><%= number_with_precision promotionPercent(product), precision: 0%> % Rabatt</strong></p>
     <% end %>
 
     <small><%= product.productNr %></small>
@@ -33,7 +33,7 @@
     <% if isSale?(product) %>
       <p class="pull-left sale"><%= number_to_currency(product.price) %> CHF</p><p class="text-right"><strong><%= product.promotionPrice %> CHF </strong></p>
     <% else %>
-      <p class="text-right"><%= product.price %> CHF </p>
+      <p class="text-right"><%= number_to_currency(product.price) %> CHF </p>
     <% end %>
 
     <!-- Check if admin (show edit and delete buttons) -->

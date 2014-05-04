@@ -35,7 +35,7 @@ module SessionsHelper
   def signed_in_user
     unless signed_in?
       store_location
-      redirect_to signin_url, notice: "Please sign in."
+      redirect_to signin_url, notice: "Bitte zuerst einloggen."
     end
    end
 
@@ -64,7 +64,7 @@ module SessionsHelper
   def admin_user
     store_location
     if !admin?
-      redirect_to root_url, notice: "Please sign in"
+      redirect_to root_url, notice: "Bitte zuerst einloggen"
     end
   end
 

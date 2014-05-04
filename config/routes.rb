@@ -20,6 +20,7 @@ Bedello::Application.routes.draw do
   match '/signup', to: 'users#new', via: 'get'
   match '/signin', to: 'sessions#new', via: 'get'
   match '/signout', to: 'sessions#destroy', via: 'delete'
+  match '/login', to: 'sessions#new', via: 'get'
 
 #Password reset
   get "/password_reset", to: 'users#show_password_reset', as: :password_reset

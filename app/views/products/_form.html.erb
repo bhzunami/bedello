@@ -15,15 +15,15 @@
 
       <h4>Anzeigen</h4>
       <hr class="featurette-divider">
-      <%= f.input :sale_start_date, as: :date_picker, label: "Start Verkauf" %>
-      <%= f.input :sale_end_date, as: :date_picker, label: "Ende Verkauf" %>
+      <%= f.input :sale_start_date, as: :string, label: "Start Verkauf" %>
+      <%= f.input :sale_end_date, as: :string, label: "Ende Verkauf" %>
       <%= f.input :isActivate, label: "Aktiv" %>
 
       <h4>Aktionen</h4>
       <hr class="featurette-divider">
       <%= f.input :promotionPrice, as: :decimal, label: "Aktionspreis" %>
-      <%= f.input :promotionStartDate, as: :date_picker, label: "Aktionsstart" %>
-      <%= f.input :promotionEndDate, as: :date_picker, label: "Aktionsende"%>
+      <%= f.input :promotionStartDate, as: :string, label: "Aktionsstart" %>
+      <%= f.input :promotionEndDate, as: :string, label: "Aktionsende"%>
     </div>
     <div class="span5">
       <h4>Bild</h4>
@@ -35,7 +35,7 @@
       <%= f.file_field :image, label: "Bild" %>
       <h4>Eigenschaften</h4>
       <hr class="featurette-divider">
-      <%= f.association :property, as: :radio_buttons, include_blank: true, label: "Eigenschaft" %>
+      <%= f.association :property, as: :select, include_blank: true, label: "Eigenschaft" %>
 
     </div>
   </div>

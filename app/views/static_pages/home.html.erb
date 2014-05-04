@@ -11,18 +11,22 @@
 <% end %>
 <%= image_tag "logo/bedello_shop_titelbild.jpg" %>
 
-<div class="row">
-<br />
-<br />
-<% @products.each do |p| %>
-	<div class="span3">
-		<%= image_tag p.image.url(:small) %>
-		<p>
-			<h4><%= link_to p.title, p %></h4>
-			<%= truncate(strip_tags(sanitize(p.description)),length: 200) %>
-		</p>
+<% if not isStoreOpen? %>
+	<center><%= image_tag "logo/shopClose.png" %></center>
+<% else %>
+
+	<div class="row">
+	<br /><br />
+	<% @products.each do |p| %>
+		<div class="span3">
+			<%= image_tag p.image.url(:small) %>
+			<p>
+				<h4><%= link_to p.title, p %></h4>
+				<%= truncate(strip_tags(sanitize(p.description)),length: 200) %>
+			</p>
+		</div>
+	<% end %>
 	</div>
 <% end %>
-</div>
 </div>
 </div>

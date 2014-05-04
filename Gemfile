@@ -33,6 +33,8 @@ gem 'newrelic_rpm'
 # Simpel forms for input fomrs
 gem 'simple_form', '~> 3.0.0.rc'
 
+#gem 'simple-form-datepicker', '~> 0.1.3'
+
 # For adding example data
 gem 'faker', '1.2.0'
 
