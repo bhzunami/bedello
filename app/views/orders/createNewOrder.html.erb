@@ -36,7 +36,7 @@
     <% end %>
      <% if isFlatrate?(@order) %>
       <tr>
-        <td colspan="3">Pauschale</td>
+        <td colspan="3">Lieferkosten</td>
         <td class="rightCell"><%= number_to_currency(16) %></td> 
       </tr>
       <% end %>
@@ -68,8 +68,8 @@
     <div class="span5">
       <h4>Bezahlung</h4>
       <hr class="featurette-divider">
-      <%= f.association :payment, label: "Zahlungsart"%>
-      <%= f.association :shipment, label: "Lieferart" %>
+      <%= f.association :payment, label: "Zahlungsart", input_html: { onchange: "paymentChange()", id: "drop_pay" }%>
+      <%= f.association :shipment, label: "Lieferart", input_html: { id: "drop_ship"}%>
       <h4>Bedingung</h4>
       <hr class="featurette-divider">
       <p>Die Lieferung erfolgt gegen Vorauszahlung oder per Nachnahme (zusätzlich belastete Kosten: Fr. 15.-). Ab der dritten Bestellung können Sie Waren auch auf Rechnung beziehen (Zahlungsfrist: 10 Tage). Gegen Barzahlung können Sie die Ware auch bei uns abholen.</p>

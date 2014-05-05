@@ -6,8 +6,8 @@
   <div class="row-fluid">
     <div class="span7">
       <%= f.input :mailAddress, label: "E-Mail" %>
-      <%= f.input :webstoreOpen, as: :date_picker, label: "Shop is offen ab" %>
-      <%= f.input :webstoreClose, as: :date_picker, label: "Shop is geschlossen ab" %>
+      <%= f.input :webstoreOpen, as: :string, label: "Shop is offen ab" %>
+      <%= f.input :webstoreClose, as: :string, label: "Shop is geschlossen ab" %>
     </div>
   </div>
   <%= f.button :submit, "Speichern", class: "btn-success" %>

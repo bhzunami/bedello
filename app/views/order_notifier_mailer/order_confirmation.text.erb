@@ -1,4 +1,11 @@
-<%= "Sehr geehrte/r #{@order.customer.firstname} #{@order.customer.lastname}" %>
+<% if @order.customer.formOfAddress == "Herr" %>
+<%= "Sehr geehrter Herr #{@order.customer.firstname} #{@order.customer.lastname}" %>
+<% elsif @order.customer.formOfAddress == "Frau" %>
+<%= "Sehr geehrte Frau #{@order.customer.firstname} #{@order.customer.lastname}" %>
+<% else %>
+<%= "Sehr geehrte/r #{@order.customer.formOfAddress} #{@order.customer.firstname} #{@order.customer.lastname}" %>
+<% end %>
+
 
 Besten Dank für Ihre Bestellung am <%= l @order.created_at %> bei bedello.ch
 
@@ -8,9 +15,9 @@ Ihre Bestellung:
 <%= render @order.line_items -%>
 
 <% if isFlatrate?(@order) %>
-Pauschale: 16 CHF
+Lieferkosten: 16 CHF
 <% end %>
-Lieferkosten: <%= number_to_currency(@order.shipment.costs) %>
+Zusätzliche Lieferkosten: <%= number_to_currency(@order.shipment.costs) %>
 Zahlungskosten: <%= number_to_currency(@order.payment.costs) %>
 
 Total: <%= number_to_currency(getShipPrice(@order) ) %>

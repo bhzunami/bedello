@@ -8,6 +8,9 @@ module ProductsHelper
 	end
 
 	def isSale?(product)
+		if( !product.promotionPrice.presence)
+			return false
+		end
 		range = (product.promotionStartDate..product.promotionEndDate)
 		range.cover?(Time.now)
 	end

@@ -15,7 +15,7 @@ class WebsiteSettingsController < ApplicationController
       if @websiteSettings.update(settings_params)
         format.html { 
           redirect_to website_setting_path
-          flash[:success] = "Settings saved" }
+          flash[:success] = "Einstellungen gespeichert" }
         	format.json { head :no_content }
       else
         format.html { render action: 'edit' }
