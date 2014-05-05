@@ -31,7 +31,7 @@
     <% end %>
 
     <% if isSale?(product) %>
-      <p class="pull-left sale"><%= number_to_currency(product.price) %> CHF</p><p class="text-right"><strong><%= product.promotionPrice %> CHF </strong></p>
+      <p class="pull-left sale"><%= number_to_currency(product.price) %> CHF</p><p class="text-right"><strong><%= number_to_currency(product.promotionPrice) %> CHF </strong></p>
     <% else %>
       <p class="text-right"><%= number_to_currency(product.price) %> CHF </p>
     <% end %>
