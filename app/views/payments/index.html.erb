@@ -10,6 +10,7 @@
       <thead>
         <tr>
           <th>Name</th>
+          <th>Kurzname</th>
           <th>Kosten</th>
           <th>Angelegt am</th>
 
@@ -19,6 +20,7 @@
       <% @payments.each do |p| %>
       <tr>
         <td><%= link_to p.name, p %> </td>
+        <td><%= p.short_name %> </td>
         <td><%= p.costs %></td>
         <td><%= p.created_at.to_formatted_s(:long)  %></td>
         <td> <%= link_to "Edit", edit_payment_path(p), class: "btn btn-mini" %></td>

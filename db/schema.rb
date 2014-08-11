@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140210144557) do
+ActiveRecord::Schema.define(version: 20140808080310) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -69,6 +69,12 @@ ActiveRecord::Schema.define(version: 20140210144557) do
     t.integer  "payment_id"
     t.integer  "shipment_id"
     t.string   "state"
+    t.datetime "pay_day"
+    t.datetime "delivery_date"
+    t.string   "distribution_number"
+    t.datetime "warning"
+    t.text     "notes"
+    t.string   "status"
   end
 
   create_table "payments", force: true do |t|
@@ -76,6 +82,7 @@ ActiveRecord::Schema.define(version: 20140210144557) do
     t.decimal  "costs",      precision: 8, scale: 2
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "short_name"
   end
 
   create_table "products", force: true do |t|
@@ -148,9 +155,9 @@ ActiveRecord::Schema.define(version: 20140210144557) do
   create_table "website_settings", force: true do |t|
     t.string   "mailAddress"
     t.date     "webstoreOpen"
+    t.date     "webstoreClose"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.date     "webstoreClose"
   end
 
 end

@@ -3,10 +3,11 @@ Bedello::Application.routes.draw do
   resources :categories
   resources :users
   resources :orders do
-    post "accept"
-    post "reject"
+    post "order"
+    post "pay"
+    post "deliver"
+    post "complete"
     post "archive"
-    post "pending"
   end
   resources :payments
   resources :shipments

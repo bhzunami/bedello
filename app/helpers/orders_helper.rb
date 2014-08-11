@@ -40,4 +40,71 @@ module OrdersHelper
     lineItem.propertyItem.name unless lineItem.propertyItem.nil?
   end
 
+
+  def get_status(order)
+    #---------------------------
+    # Bar
+    #---------------------------
+    if order.payment.short_name == "Bar"
+      if order.delivery_date? && order.pay_day?
+        order.status = "ok"
+        return "Abgeschlossen"
+      else
+        order.status = "warn"
+        return "bereitstellen"
+      end
+    #---------------------------
+    # Rechnung Nachname
+    #---------------------------
+    elsif order.payment.short_name == 'Rechnung' or order.payment.short_name == 'Nachname'
+      # Rechnung bei neuer bestellung orange, solange nicht mehr als 23 Tage alt
+      # Rot: wenn mehr als 23 Tage alt
+      # Grün: wenn es ein versanddatum mit nummer hat
+      # Check if order is complete
+      if order.delivery_date? && order.pay_day?
+        order.status = "ok"
+        return "Abgeschlossen"
+      end
+      # Überprüfen wenn ware versendet wurde ob Rechnung gezahlt wurde
+      if order.delivery_date? && order.pay_day.nil?
+        if order.delivery_date > (Time.now-30.days)
+          order.status = "warn"
+          return "Warten auf Zahlung"
+        else
+          order.status = "error"
+          return "Mahnung senden!"
+        end
+      end
+      # Überprüfen ob ware schon versendet wurde
+      if order.created_at > (Time.now-23.days)
+        order.status = "warn"
+        return "Ware versenden"
+      else
+        order.status = "error"
+        return "Ware sofort versenden"
+      end
+    #---------------------------
+    # Vorauszahlung
+    #---------------------------
+    elsif order.payment.short_name == 'Vorauszahlung'
+      if order.delivery_date? && order.pay_day?
+        order.status = "ok"
+        return "Abgeschlossen"
+      end
+      if order.pay_day.nil?
+        order.status = "warn"
+        return "Warten auf Zahlung"
+      end
+      if order.pay_day > (Time.now-23.days)
+        order.status = "warn"
+        return "Ware versenden"
+      else
+        order.status = "error"
+        return "Ware sofort versenden"
+      end
+
+    end
+  end
+
+
 end

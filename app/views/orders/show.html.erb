@@ -1,4 +1,8 @@
+<% if not admin? %>
 <h1>Bestellung abschliessen</h1>
+<% else %>
+<h1>Bestellung</h1>
+<% end %>
 <div class="row">
   <div class="span7">
     <h4> Bestellung </h4>
@@ -65,18 +69,15 @@
     <strong>Lieferung:</strong> <%= @order.shipment.name %> <br />
     <strong>Bezahlung:</strong> <%= @order.payment.name %>
   </div>
+  <% if not admin? %>
   <div class="span4 offset8">
-    <% if not admin? %>
-      <%= link_to "Bestellung abschliessen", order_pending_path(@order, id: @order.id), { method: :post, class: "btn btn-success" } %>
+      <%= link_to "Bestellung abschliessen", order_order_path(@order, id: @order.id), { method: :post, class: "btn btn-success" } %>
       <%= link_to "Abbrechen", @order, confirm: 'Sind Sie sicher?', method: :delete, class: "btn btn-danger" %>
-    <% else %>
-      <% if @order.state == 'pending' %>
-        <%= link_to "Bestellung akzeptieren", order_accept_path(@order, id: @order.id), { method: :post, class: "btn btn-success" } %>
-        <%= link_to "Bestellung ablehnen", order_reject_path(@order, id: @order.id), { method: :post, class: "btn btn-danger" } %>
-      <% else %>
-        <%= link_to "Bestellung archivieren", order_archive_path(@order, id: @order.id), { method: :post, class: "btn btn-info" } %>
-      <% end %>
-    <% end %>
   </div>
+  <% else %>
+  <div class="span2 offset10">
+    <%= link_to "Zurück zur Übersicht", orders_path(), { class: "btn" } %>
+  </div>
+<% end %>
 </div>
 

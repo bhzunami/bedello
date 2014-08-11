@@ -1,4 +1,67 @@
-<h1>New Order</h1>
-<p>This is a order </p>
+<% status_text = get_status(@order) %>
+<h2> Bestellung von <%= @order.customer.firstname %> <%= @order.customer.lastname %>
+<% if @order.status == 'ok' %>
+  <span class="label label-success"><%= status_text %></span> 
+<% elsif @order.status == 'warn' %>
+  <span class="label label-warning"><%= status_text %></span>
+<% elsif @order.status == 'error' %>
+  <span class="label label-important"><%= status_text %></span>
+<% else %>
+  <span class="label">None</span>
+  <% end %>
+  </h2>
+<div class="row">
+  <div class="pull-right"><%= link_to 'Cancel', orders_path, class: "btn btn-danger pull-right" %></div>
+  <div class="span6">
+  <h4> Rechnungsstatus </h4>
+<%= simple_form_for(@order, html: {class: 'form-horizontal' }) do |f| %>
+  <div class="row-fluid">
+    <div class="span7">
+      <%= f.input :pay_day, as: :string, label: "Zahlungsdatum" %>
+      <hr>
+      <h4> Lieferstatus </h4>
+      <%= f.input :delivery_date, as: :string, label: "Lieferdatum" %>
+      <% if @order.distribution_number? %>
+      <%= f.input :distribution_number, label: "Versandnummer" %>
+      <% else %>
+      <%= f.input :distribution_number, label: "Versandnummer", :input_html => { :value => '99.60.030204.00000' } %>
+      <% end %>
+      <hr>
+      <%= f.input :warning, as: :string, label: "Mahnung versendet am" %>
+      <%= f.input :notes, label: "Notizen" %>
+    </div>
+  </div>
+  <%= f.button :submit, "Speichern", class: "btn-success" %>
+<% end %>
+</div>
+ <div class="span6">
+  <h4> Bestellung </h4>
+    <div id="cart_table">
+      <table class="table  table-hover">
+        <thead>
+          <tr>
+            <th>Produkt Nr.</th>
+            <th>Name</th>
+            <th>Menge</th>
+            <th class="rightCell">Preis</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @order.line_items.each do |l| %>
+          <tr>    
+            <td ><%= l.product.productNr%></td>
+            <% if l.product.property_id? %>
+              <td><%= l.product.title %> (<%= l.propertyItem.name %>) </td>
+            <% else %>
+              <td><%= l.product.title %></td>
+            <% end %>
+            <td><%=  l.quantity %> </td>
+            <td class="rightCell"><%= number_to_currency(getPrice(l)) %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+ </div>
 
-<%= @order.id %>

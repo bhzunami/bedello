@@ -7,6 +7,7 @@
 #  costs      :decimal(8, 2)
 #  created_at :datetime
 #  updated_at :datetime
+#  short_name :string(255)
 #
 
 class Payment < ActiveRecord::Base

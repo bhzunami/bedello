@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-before_action :set_order, only: [:show, :edit, :update, :destroy, :pending, :accept, :reject, :archive]
+before_action :set_order, only: [:show, :edit, :update, :destroy, :order, :pay, :deliver, :complete, :archive]
 before_action :admin_user, only: [:index, :archived_orders]
 
 
@@ -53,9 +53,11 @@ before_action :admin_user, only: [:index, :archived_orders]
   end
 
   def index
-    @pending_orders = Order.with_state(:pending)
-    @accepted_orders = Order.with_state(:accepted)
-    @rejected_orders = Order.with_state(:rejected)
+    #@orders = Order.find(:all, conditions: ["state != archived"])
+    @orders = Order.where("state != ? and state !=?", 'archived', 'completed')
+    @completed_orders = Order.where("state = ?", 'completed')
+
+    #@orders = Order.with_state(:ordered)
   end
 
 
@@ -70,10 +72,19 @@ before_action :admin_user, only: [:index, :archived_orders]
     end
   end
 
+  def update
+    if @order.update(order_params)
+      flash[:success] = "Bestellung erfolgreich aktualisiert"
+      redirect_to orders_path
+    else
+      render action: 'edit'
+    end
+  end
 
 # State machine
-  def pending
-    if @order.pending
+# ordered payed delivered completed archive
+  def order
+    if @order.ordered
       flash[:success] = "Vielen Dank, Deine Bestellung wurde erfolgreich abgeschlossen."
     else
       @order.errors.full_messages.each do |msg|
@@ -84,34 +95,25 @@ before_action :admin_user, only: [:index, :archived_orders]
     redirect_to root_path
   end
 
-   def accept
-    if @order.pending?
-      if @order.accept
-        flash[:success] = "Bestellung akzeptiert."
-      else
-        @order.errors.full_messages.each do |msg|
-          flash[:error]= msg
-        end
-      end
-    end
-    redirect_to orders_path
+  def pay
   end
 
-  def reject
-    if @order.pending?
-      if @order.reject
-        flash[:success] = "Bestellung abgelehnt."
-      else
-        @order.errors.full_messages.each do |msg|
-          flash[:error]= msg
-        end
+  def delivere
+  end
+
+  def complete
+    if @order.update_attribute(:state, "completed")
+      flash[:success] = "Bestellung Abgeschlossen."
+    else
+      @order.errors.full_messages.each do |msg|
+        flash[:error]= msg
       end
     end
     redirect_to orders_path
   end
 
   def archive
-    if @order.accepted? || @order.rejected?
+    if @order.can_archive?
       if @order.update_attribute(:state, "archived")
         flash[:success] = "Bestellung archiviert."
       else
@@ -130,7 +132,7 @@ before_action :admin_user, only: [:index, :archived_orders]
     end
 
   def order_params
-    params.require(:order).permit(:ip, :payment_id, :shipment_id, line_items_attributes: [:product_id, :quantity, :propertyItem_id], customer_attributes: [:formOfAddress, :firstname, :lastname, :streetname, :addressAdditive, :plz, :city, :email, :phone])
+    params.require(:order).permit(:ip, :payment_id, :shipment_id, :pay_day, :delivery_date, :distribution_number, :warning, :notes, :created_at, line_items_attributes: [:product_id, :quantity, :propertyItem_id], customer_attributes: [:formOfAddress, :firstname, :lastname, :streetname, :addressAdditive, :plz, :city, :email, :phone])
   end
 
   def recalcProductInStore(order, option)

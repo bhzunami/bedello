@@ -2,14 +2,20 @@
 #
 # Table name: orders
 #
-#  id          :integer          not null, primary key
-#  customer_id :integer
-#  ip          :string(255)
-#  created_at  :datetime
-#  updated_at  :datetime
-#  payment_id  :integer
-#  shipment_id :integer
-#  state       :string(255)
+#  id                  :integer          not null, primary key
+#  customer_id         :integer
+#  ip                  :string(255)
+#  created_at          :datetime
+#  updated_at          :datetime
+#  payment_id          :integer
+#  shipment_id         :integer
+#  state               :string(255)
+#  pay_day             :date
+#  delivery_date       :date
+#  distribution_number :string(255)
+#  warning             :date
+#  notes               :text
+#  status              :string(255)
 #
 
 class Order < ActiveRecord::Base
@@ -24,41 +30,49 @@ class Order < ActiveRecord::Base
 
   validates :payment_id, :shipment_id, :line_items, presence: true
 
+  default_scope order: 'created_at DESC'
+
   #State Machine
   state_machine :state, initial: :newOrder do
     
-    event :accept do
-      transition pending: :accepted
+    event :deliver do
+      transition ordered: :delivered
+      transition payed: :delivered
     end
 
-    event :reject do
-      transition pending: :rejected
+    event :pay do
+      transition ordered: :payed
+      transition delivered: :payed
+    end
+
+    event :complete do
+      transition delivered: :completed
+      transition payed: :completed
+      transition ordered: :completed
     end
 
     event :archive do
-      transition accepted: :archived
-      transition rejected: :archived
+      transition completed: :archived
     end
 
-    event :pending do
-      transition newOrder: :pending
+    event :ordered do
+      transition newOrder: :ordered
     end
 
     state :archived do
     end
 
-    state :accepted do
+    state :ordered do
     end
 
-    state :rejected do
-    end
-
-    state :pending do
+    state :delivered do
     end
 
     state :newOrder do
     end
       
+    state :completed do
+    end
   end
  
   def sendNotifierMail

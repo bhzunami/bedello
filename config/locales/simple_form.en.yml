@@ -26,6 +26,8 @@ en:
         payment: 'Zahlungsart'
         shipment: 'Lieferart'
         costs: 'Kosten'
+        distribution_number: 'Versandnummer'
+
         # Produkt
         title: 'Name'
         description: 'Beschreibung'
@@ -44,7 +46,7 @@ en:
         mailAddress: 'E-Mail Adresse'
         webstoreOpen: ' öffnen am'
         webstoreClose: 'schliessen am'
-      
+
     #     password: 'Password'
     #   user:
     #     new:

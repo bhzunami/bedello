@@ -98,8 +98,12 @@ def make_payments
              15.00,
              0.00,
              0.00 ]
+    short_name = ["Vorauszahlung",
+            "Nachnahme",
+            "Rechnung",
+            "Bar"]
     name.each_with_index do |n, index|
-        Payment.create!(name: n, costs: costs[index] )
+        Payment.create!(name: n, costs: costs[index], short_name: short_name[index] )
     end
 
 

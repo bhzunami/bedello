@@ -11,7 +11,7 @@
 
     <!-- Show if product is not seasonally -->
     <% if !activeProduct?(product) %>
-      <p class="alert">Nur während der Vorweihnachtszeit erhältlich</p>
+      <p class="alert"><%= product.title %> ist nur von <%= product.sale_start_date.strftime("%d.%m.%Y") %> bis <%= product.sale_end_date.strftime("%d.%m.%Y") %> Verfügbar </p>
     <% end %>
 
     <!-- Check if we have to show sale price -->
@@ -72,8 +72,7 @@
         <% elsif not isStoreOpen? %>
           <p class="pull-right storeClose"> Shop ist nicht geöffnet</p>
         <!-- Form -->
-        <% else %>
-          <p class="pull-right">Produkt ist momentan nicht verfügbar</p>
+        
       <% end %>
       <!-- Check if seasonally -->
     <% end %>

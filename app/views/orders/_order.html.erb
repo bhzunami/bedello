@@ -1,0 +1,60 @@
+<!-- Get the status_text -->
+<% status_text = get_status(order) %>
+<!-- Set the color for the line -->
+<% if order.status == 'ok' %>
+  <tr class="success">
+<% elsif order.status == 'warn' %>
+  <tr class="warning">
+<% elsif order.status == 'error' %>
+  <tr class="error">
+<% else %>
+  <tr>
+<% end %>
+<td>
+<%= link_to order_path(order) do %>
+  <i class="icon-eye-open"></i>
+<% end %>
+ </td>
+ <!-- Set correct status in label -->
+<td>
+<% if order.status == 'ok' %>
+  <span class="label label-success"><%= status_text %></span> 
+<% elsif order.status == 'warn' %>
+  <span class="label label-warning"><%= status_text %></span>
+<% elsif order.status == 'error' %>
+  <span class="label label-important"><%= status_text %></span>
+<% else %>
+  <span class="label">None</span>
+<% end %>
+</td>
+<!-- order information for table -->
+<td><%= order.id %> 
+<td><%= order.customer.firstname %> <%= order.customer.lastname %></td>
+<td><%= order.created_at.to_date.strftime("%d.%m.%Y") %></td>
+<td><%= order.payment.short_name %>
+<!-- Only show pay_day when there is an entry -->
+<% if order.pay_day? %>
+<td><%= order.pay_day.to_date.strftime("%d.%m.%Y") %></td>
+<% else %>
+<td> </td>
+<% end %>
+<!-- Only show delivery_date when there is an entry -->
+<% if order.delivery_date? %>
+<td><%= order.delivery_date.to_date.strftime("%d.%m.%Y") %></td>
+<% else %>
+<td> </td>
+<% end %>
+ <td><%= order.distribution_number%></td>
+ <% if !order.archived? %>
+<td>
+<!-- Links for edit -->
+<%= link_to "Edit", edit_order_path(order), { class: "btn btn-mini btn-primary" }%>
+<% if status_text == 'Abgeschlossen' && order.state != 'completed'%>
+<%= link_to "Abschliessen", order_complete_path(order, id: order.id), {method: :post, class: "btn btn-mini btn-success" }%>
+<% end %>
+<% if order.completed? %>
+<%= link_to "Archivieren", order_archive_path(order, id: order.id), {method: :post, class: "btn btn-mini btn-success" }%>
+<% end %>
+</td>
+<% end %>
+</tr>
