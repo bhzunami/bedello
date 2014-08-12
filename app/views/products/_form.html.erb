@@ -11,7 +11,11 @@
       <%= f.input :productNr, as: :string, label: "Produkt Nr." %>
       <%= f.association :category, label: "Kategorie"%>
       <%= f.input :price, label: "Preis"%>
+      <% if @product.inStock? %>
+      <%= f.input :inStock, label: "auf Lager" %>
+      <% else %>
       <%= f.input :inStock, label: "auf Lager", input_html: {value: 1}%>
+      <% end %>
 
       <h4>Anzeigen</h4>
       <hr class="featurette-divider">
