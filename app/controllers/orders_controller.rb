@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
-before_action :set_order, only: [:show, :edit, :update, :destroy, :order, :pay, :deliver, :complete, :archive]
-before_action :admin_user, only: [:index, :archived_orders]
+before_action :set_order, only: [:show, :edit, :update, :destroy, :delete_order, :order, :pay, :deliver, :complete, :archive]
+before_action :admin_user, only: [:index, :archived_orders, :delete_order]
 
 
   def new
@@ -50,6 +50,13 @@ before_action :admin_user, only: [:index, :archived_orders]
     @order.destroy
     redirect_to root_path
     flash[:success] = "Bestellung abgebrochen"
+  end
+
+  def delete_order
+    if @order.destroy
+      redirect_to orders_path
+      flash[:success] = "Bestellung gelöscht"
+    end
   end
 
   def index

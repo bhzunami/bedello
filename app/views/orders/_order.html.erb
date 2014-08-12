@@ -55,6 +55,8 @@
 <% if order.completed? %>
 <%= link_to "Archivieren", order_archive_path(order, id: order.id), {method: :post, class: "btn btn-mini btn-success" }%>
 <% end %>
+<%= link_to "Löschen", order_delete_order_path(order, id: order.id), {method: :post, class: "btn btn-mini btn-danger" }%>
+
 </td>
 <% end %>
 </tr>
