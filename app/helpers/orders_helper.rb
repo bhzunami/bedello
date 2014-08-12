@@ -56,7 +56,7 @@ module OrdersHelper
     #---------------------------
     # Rechnung Nachname
     #---------------------------
-    elsif order.payment.short_name == 'Rechnung' or order.payment.short_name == 'Nachname'
+    elsif order.payment.short_name == 'Rechnung' or order.payment.short_name == 'Nachnahme'
       # Rechnung bei neuer bestellung orange, solange nicht mehr als 23 Tage alt
       # Rot: wenn mehr als 23 Tage alt
       # Grün: wenn es ein versanddatum mit nummer hat

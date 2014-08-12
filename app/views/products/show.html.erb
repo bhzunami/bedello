@@ -33,7 +33,7 @@
       <% end %>
 
       <% if !activeProduct?(@product) %>
-        <p class="alert"><%= @product.title %> ist nur von <%= @product.sale_start_date.strftime("%d.%m.%Y") %> bis <%= @product.sale_end_date.strftime("%d.%m.%Y")%></p>
+        <p class="alert"><%= @product.title %> ist nur vom <%= @product.sale_start_date.strftime("%d.%m.%Y") %> bis <%= @product.sale_end_date.strftime("%d.%m.%Y")%></p>
       <% end %>
 
       <% if isSale?(@product) %>
