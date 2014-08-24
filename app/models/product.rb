@@ -39,7 +39,7 @@ class Product < ActiveRecord::Base
 
 	scope :active, -> { where(isActivate: true) }
 	scope :activeDate, -> { active.where("? BETWEEN sale_start_date AND sale_end_date", Date.today)}
-	default_scope order: "product_nr"
+	#default_scope order: "product_nr"
 
 	validates :title, :product_nr, uniqueness: true
 	validates :inStock, numericality: { greater_than_or_equal_to: 0 }
