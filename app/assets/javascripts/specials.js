@@ -5,8 +5,12 @@
 function paymentChange() {
 	var selected = $('#drop_pay :selected').text();
 	if(selected == 'Bar (Ware wird abgeholt)') {
+		$('#drop_ship').val(1);
+		$('#drop_ship option:selected').attr('disabled', 'disabled');
 		$('#drop_ship').val(2);
 	} else {
+		$('#drop_ship').val(2);
+		$('#drop_ship option:selected').attr('disabled', 'disabled');
 		$('#drop_ship').val(1);
 	}
 	//$("#drop_ship").prop("disabled", true);

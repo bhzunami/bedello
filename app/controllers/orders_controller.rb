@@ -91,7 +91,7 @@ before_action :admin_user, only: [:index, :archived_orders, :delete_order]
 # State machine
 # ordered payed delivered completed archive
   def order
-    if @order.ordered
+    if @order.update_attribute(:state, "ordered")
       flash[:success] = "Vielen Dank, Deine Bestellung wurde erfolgreich abgeschlossen."
     else
       @order.errors.full_messages.each do |msg|

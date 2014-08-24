@@ -76,9 +76,15 @@ module OrdersHelper
         end
       end
       # Überprüfen ob ware schon versendet wurde
-      if order.created_at > (Time.now-23.days)
+      # Ersten zwei Tage ist es noch grün. Ab dem Dritten Tag wird es orange
+      if order.created_at > 3.day.ago#(Time.now-3.days)
+        order.status = "ok"
+        return "Ware versenden"
+      # Ab dem 3 bis zum 5 Tag ist es Orange
+      elsif order.created_at > 6.day.ago
         order.status = "warn"
         return "Ware versenden"
+      # Ab dem 6 Tag ist es rot
       else
         order.status = "error"
         return "Ware sofort versenden"
@@ -91,8 +97,13 @@ module OrdersHelper
         order.status = "ok"
         return "Abgeschlossen"
       end
-      if order.pay_day.nil?
+      # Wenn Bestellung über ein Monat alt ist und keine Zahlung eingegangen ist
+      if order.pay_day.nil? and order.created_at < 1.month.ago
         order.status = "warn"
+        return "Bestellung aktuell"
+      # Ansonsten ist die Bestellung ok. wir warten auf Zahlungseingang
+      else
+        order.status = "ok"
         return "Warten auf Zahlung"
       end
       if order.pay_day > (Time.now-23.days)

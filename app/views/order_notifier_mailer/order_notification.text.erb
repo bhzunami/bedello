@@ -13,7 +13,11 @@ Trnr= <%= Time.now.strftime("%d.%m.%Y, %H:%M:%S") %>
 ******* Artikel <%= index +1 %> *************
 Menge= <%= line.quantity %>
 Nummer= <%= line.product.productNr %>
-Artikel= <%= line.product.title %>
+<% if line.product.property_id? %>
+Artikel= <%= line.product.title %> (<%= line.propertyItem.name %>)
+<% else %>
+Artikel= <%= line.product.title %> 
+<% end %>
 <% if line.quantity > 1 %>
 Betrag= <%= line.product.price %>
 <% else %>

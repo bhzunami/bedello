@@ -7,7 +7,7 @@
 <h1> Bedello Pralinen </h1>
 
 <% if not isStoreOpen? %>
-<p class="alert alert-error">Der Shop ist momentan nicht <strong>aktiv</strong>. Er öffnet wieder am <%= @webstore.webstoreOpen.strftime("%m.%d.%Y") %>. <br /> Sie können sich trotzdem gerne im Shop umschauen.</p>
+<p class="alert alert-error">Der Shop ist momentan nicht <strong>aktiv</strong>. Er öffnet wieder am <%= @webstore.webstoreOpen.strftime("%d.%m.%Y") %>. <br /> Sie können sich trotzdem gerne im Shop umschauen.</p>
 <% end %>
 <%= image_tag "logo/bedello_shop_titelbild.jpg" %>
 

@@ -15,10 +15,10 @@ Ihre Bestellung:
 <%= render @order.line_items -%>
 
 <% if isFlatrate?(@order) %>
-Lieferkosten: 16 CHF
+Lieferkosten: CHF 16
 <% end %>
 Zusätzliche Lieferkosten: <%= number_to_currency(@order.shipment.costs) %>
-Zahlungskosten: <%= number_to_currency(@order.payment.costs) %>
+Nachnahmezuschlag: <%= number_to_currency(@order.payment.costs) %>
 
 Total: <%= number_to_currency(getShipPrice(@order) ) %>
 

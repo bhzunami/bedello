@@ -29,6 +29,10 @@
       <hr>
       <%= f.input :warning, as: :string, label: "Mahnung versendet am" %>
       <%= f.input :notes, label: "Notizen" %>
+      <h2> DEBUG </h2>
+
+      <%= f.input :created_at, as: :date, label: "Erstellt" %>
+      <%= f.association :payment, label: "Zahlungsart"%>
     </div>
   </div>
   <%= f.button :submit, "Speichern", class: "btn-success" %>
