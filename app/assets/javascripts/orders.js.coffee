@@ -20,26 +20,20 @@
   edit: ->
     new InitalizeDatePickerOrders()
 
-  update: ->
-    new InitalizeDatePickerOrders()
-
 
 class @InitalizeDatePickerOrders
   constructor: ->
-    @setupDatePicker()
+    @setupDatePickerOrders()
 
   formateDate:(date) ->
-    date = new Date(date)
+    date = new Date(date.split(" ")[0])
     return $.datepicker.formatDate("dd/mm/yy", date)
 
-  setupDatePicker: ->
+  setupDatePickerOrders: ->
     $("#order_pay_day").datepicker dateFormat: "dd/mm/yy"
     $("#order_delivery_date").datepicker dateFormat: "dd/mm/yy"
-    $("#order_warning").datepicker dateFormat: "dd/mm/yy"
 
     unless $("#order_pay_day").val() is ''
       $("#order_pay_day").val @formateDate($("#order_pay_day").val())
     unless $("#order_delivery_date").val() is ''
       $("#order_delivery_date").val @formateDate($("#order_delivery_date").val())
-    unless $("#order_warning").val() is ''
-      $("#order_warning").val @formateDate($("#order_warning").val())
