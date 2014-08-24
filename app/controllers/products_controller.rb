@@ -9,7 +9,7 @@ class ProductsController < ApplicationController
     if admin?
       @products = Product.where(category_id: params[:category_id] )
     else
-      @products = Product.active.where(category_id: params[:category_id] ) #Product.activeDate.where(category_id: params[:category_id])
+      @products = Product.active.where(category_id: params[:category_id], order: "product_nr" ) #Product.activeDate.where(category_id: params[:category_id])
 
       #@products = Product.activeDate
     end
