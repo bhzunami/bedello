@@ -93,23 +93,33 @@ module OrdersHelper
     # Vorauszahlung
     #---------------------------
     elsif order.payment.short_name == 'Vorauszahlung'
+      # *** Bezahlt und gelifert
       if order.delivery_date? && order.pay_day?
         order.status = "ok"
         return "Abgeschlossen"
       end
+      # *** Wenn noch nicht bezahlt
       # Wenn Bestellung über ein Monat alt ist und keine Zahlung eingegangen ist
       if order.pay_day.nil? and order.created_at < 1.month.ago
         order.status = "warn"
         return "Bestellung aktuell"
-      # Ansonsten ist die Bestellung ok. wir warten auf Zahlungseingang
-      else
+      end
+       # Ansonsten ist die Bestellung ok. wir warten auf Zahlungseingang
+      if order.pay_day.nil?
         order.status = "ok"
         return "Warten auf Zahlung"
       end
-      if order.pay_day > (Time.now-23.days)
+      # *** Wenn Bezahlt wurde aber noch keine Ware versendet wurde
+      # 2 Tage nach Zahlungseingang ist noch ok
+      if order.pay_day > 3.day.ago
+        order.status = "ok"
+        return "Ware versenden"
+      # Ab dem 3. Tag ist es orange
+      elsif order.pay_day > 6.day.ago
         order.status = "warn"
         return "Ware versenden"
       else
+        # Über 6 Tage ist Rot
         order.status = "error"
         return "Ware sofort versenden"
       end
