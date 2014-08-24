@@ -17,7 +17,7 @@
           <% @cart.each do |p| %>
           <tr>
             
-              <td ><%= getProduct(p).productNr%></td>
+              <td ><%= getProduct(p).product_nr%></td>
               <% if getProduct(p).property_id? %>
                 <td><%= getProduct(p).title %> (<%= getProperty(p).name %>)</td>
               <% else %>

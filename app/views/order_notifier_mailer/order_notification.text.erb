@@ -12,7 +12,7 @@ Trnr= <%= Time.now.strftime("%d.%m.%Y, %H:%M:%S") %>
 <% @order.line_items.each_with_index do |line, index| %>
 ******* Artikel <%= index +1 %> *************
 Menge= <%= line.quantity %>
-Nummer= <%= line.product.productNr %>
+Nummer= <%= line.product.product_nr %>
 <% if line.product.property_id? %>
 Artikel= <%= line.product.title %> (<%= line.propertyItem.name %>)
 <% else %>

@@ -5,7 +5,7 @@
 #  id                 :integer          not null, primary key
 #  title              :string(255)
 #  description        :text
-#  productNr          :string(255)
+#  product_nr         :string(255)
 #  price              :decimal(8, 2)
 #  promotionPrice     :decimal(8, 2)
 #  promotionStartDate :date
@@ -39,11 +39,11 @@ class Product < ActiveRecord::Base
 
 	scope :active, -> { where(isActivate: true) }
 	scope :activeDate, -> { active.where("? BETWEEN sale_start_date AND sale_end_date", Date.today)}
-	default_scope order: "productNr"
+	default_scope order: "product_nr"
 
-	validates :title, :productNr, uniqueness: true
+	validates :title, :product_nr, uniqueness: true
 	validates :inStock, numericality: { greater_than_or_equal_to: 0 }
-	validates :title, :description, :productNr, :price, :inStock, :sale_start_date, :sale_end_date, :category_id, presence: true
+	validates :title, :description, :product_nr, :price, :inStock, :sale_start_date, :sale_end_date, :category_id, presence: true
 
 	validates :price, numericality: { greater_than_or_equal_to: 0.01 }
 	validates :promotionPrice, numericality: { greater_than_or_equal_to: 0.00 }, allow_nil: true

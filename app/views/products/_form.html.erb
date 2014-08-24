@@ -8,7 +8,7 @@
       <hr class="featurette-divider">
       <%= f.input :title, label: "Name" %>
       <%= f.input :description, label: "Beschreibung", input_html: { class: "span12", rows: "5"} %>
-      <%= f.input :productNr, as: :string, label: "Produkt Nr." %>
+      <%= f.input :product_nr, as: :string, label: "Produkt Nr." %>
       <%= f.association :category, label: "Kategorie"%>
       <%= f.input :price, label: "Preis"%>
       <% if @product.inStock? %>

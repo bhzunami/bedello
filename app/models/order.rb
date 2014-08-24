@@ -10,10 +10,10 @@
 #  payment_id          :integer
 #  shipment_id         :integer
 #  state               :string(255)
-#  pay_day             :date
-#  delivery_date       :date
+#  pay_day             :datetime
+#  delivery_date       :datetime
 #  distribution_number :string(255)
-#  warning             :date
+#  warning             :datetime
 #  notes               :text
 #  status              :string(255)
 #

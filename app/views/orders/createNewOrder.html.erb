@@ -24,7 +24,7 @@
        <% end %> 
     <% @order.line_items.each do |l| %>
       <tr>    
-        <td ><%= l.product.productNr%></td>
+        <td ><%= l.product.product_nr%></td>
         <% if l.product.property_id? %>
           <td><%= l.product.title %> (<%= property(l) %>) </td>
         <% else %>

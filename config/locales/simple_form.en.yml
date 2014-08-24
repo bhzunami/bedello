@@ -31,7 +31,7 @@ en:
         # Produkt
         title: 'Name'
         description: 'Beschreibung'
-        productNr: 'Produkt Nr.'
+        product_nr: 'Produkt Nr.'
         category: 'Kategorie'
         price: 'Preis'
         inStock: 'Verfügbar'

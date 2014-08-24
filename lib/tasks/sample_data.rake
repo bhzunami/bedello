@@ -60,7 +60,7 @@ def make_products
   10.times do |n|
     title = Faker::Commerce.product_name
     description = Faker::Lorem.paragraph(sentence_count = 5)
-    productNr = Faker::Number.number(3)
+    product_nr = Faker::Number.number(3)
     isActivate = true
     inStock = Faker::Number.digit
     sale_start_date = Time.now.to_date
@@ -69,7 +69,7 @@ def make_products
     price = Faker::Number.number(2)
     Product.create!(title: title,
                     description: description,
-                    productNr: productNr,
+                    product_nr: product_nr,
                     isActivate: isActivate,
                     inStock: inStock,
                     sale_start_date: sale_start_date,

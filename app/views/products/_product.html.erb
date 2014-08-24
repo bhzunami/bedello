@@ -19,7 +19,7 @@
       <p class="text-error"> <strong><%= number_with_precision promotionPercent(product), precision: 0%> % Rabatt</strong></p>
     <% end %>
 
-    <small><%= product.productNr %></small>
+    <small><%= product.product_nr %></small>
     <h4><%= link_to product.title, product %></h4>
     <%= truncate(strip_tags(sanitize(product.description)),length: 500 ) %>
   </div>

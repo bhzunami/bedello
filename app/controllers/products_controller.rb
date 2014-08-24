@@ -18,7 +18,7 @@ class ProductsController < ApplicationController
   end
 
   def allProducts
-    @products = Product.all( order: "title")
+    @products = Product.all( order: "product_nr")
     render action: 'index'
   end
 
@@ -125,7 +125,7 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:title, :description, :productNr, :price, :promotionPrice, :promotionStartDate, :promotionEndDate, :image, :isActivate, :inStock, :sale_start_date, :sale_end_date, :category_id, :image, :property_id)
+      params.require(:product).permit(:title, :description, :product_nr, :price, :promotionPrice, :promotionStartDate, :promotionEndDate, :image, :isActivate, :inStock, :sale_start_date, :sale_end_date, :category_id, :image, :property_id)
     end
 
     def products_params
