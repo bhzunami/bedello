@@ -3,6 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 @BEDELLO.carts = 
 	init: ->
+		
 
 	index: ->
 		new CartMessage()
@@ -13,6 +14,7 @@ class @CartMessage
 		cart = cartStorage.getObject()
 		if cartStorage.isEmpty()
 			return
+		$("#empty_cart").html("Loading cart...")
 		# Add spinner
 		opts = {
 			lines: 13
@@ -35,10 +37,18 @@ class @CartMessage
 		target = document.getElementById("spinner")
 		spinner = new Spinner(opts).spin(target)
 
-		$.post "/products/listOfProducts",
+		$.ajax "/cart/products",
+			type: 'POST'
 			data: cart
+			encoding:"UTF-8"
 			dataType: 'json'
-			@processData
+			converters:
+				"text json": true
+			success: @processData
+			error: (error) ->
+				$("#empty_cart").html("Es ist ein unerwarteter Fehler aufgetretten "+error.responseText) 
+				spinner.stop()
+				return
 
 	processData: (data, textStatus, jqXHR) ->
 		$("#cart").html(data)
@@ -50,6 +60,7 @@ class @CartMessage
 				event.preventDefault()
 				if this.form.quantity.value > 10
 					alert "Mehr als 10 Artikel sind nicht erlaubt!"
+					location.reload()
 					return
 
 				product =

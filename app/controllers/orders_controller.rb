@@ -34,18 +34,17 @@ before_action :admin_user, only: [:index, :archived_orders, :delete_order]
   def create
     @order = Order.new(order_params)
     recalcProductInStore(@order, 'decrease')
-    respond_to do |format|
-      if @order.save
-        format.html { redirect_to @order }
-        format.json { render action: 'show', status: :created, location: @order }
-      else
-        format.html { redirect_to new_order_path, notice: "Bitte füllen Sie alle erfoderlichen Felder aus"}
-        format.json { render json: @order.errors, status: :unprocessable_entity }
-      end
+    if @order.save
+      redirect_to @order
+    else
+      render 'createNewOrder' #new_order_path, notice: "Bitte füllen Sie alle erfoderlichen Felder aus"
     end
   end
 
   def destroy
+    if @order.state != 'newOrder' && !admin?
+      admin_user
+    end
     recalcProductInStore(@order, 'increase')
     @order.destroy
     redirect_to root_path

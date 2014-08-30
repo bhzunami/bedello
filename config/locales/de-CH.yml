@@ -19,7 +19,7 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
-de-CH:
+en:
   date:
     abbr_day_names:
     - So
@@ -231,11 +231,7 @@ de-CH:
   activerecord:
     errors:
       models:
-        booking:
-          attributes:
-            zeitspanne: 
-              overlap: Das Haus ist in dieser Zeit schon vermietet.
-              not_a_range: Kein korrektes Start- und Enddatum.
+             
       <<: *errors
 
 

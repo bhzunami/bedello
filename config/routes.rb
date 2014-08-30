@@ -31,7 +31,7 @@ Bedello::Application.routes.draw do
   post "/update_password_reset/:id", to: 'users#update_password_reset'
 
 # Ajax Cart
-  post "/products/listOfProducts", to: 'products#listOfProducts'
+  post "/cart/products", to: 'carts#products'
 
   #Admin 
   get "/allProducts", to: 'products#indexAllProducts'

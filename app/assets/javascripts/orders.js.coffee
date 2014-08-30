@@ -12,6 +12,14 @@
       (data) -> 
         $("#order").html(data)
 
+  create: ->
+    cartStorage = new CartStorage()
+    $.post "/orders/createNewOrder",
+      data: cartStorage.getObject()
+      dataType: 'json'
+      (data) -> 
+        $("#order").html(data)
+
   show: ->
     cartStorage = new CartStorage()
     cartStorage.deleteOpbject()

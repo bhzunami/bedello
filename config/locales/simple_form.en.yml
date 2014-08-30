@@ -2,6 +2,10 @@ en:
   simple_form:
     "yes": 'Ja'
     "no": 'Nein'
+    errors:
+      models:
+        customer:
+          required: 'afasdf'
     required:
       text: 'Pflichtfeld'
       mark: '*'
@@ -46,7 +50,7 @@ en:
         mailAddress: 'E-Mail Adresse'
         webstoreOpen: ' öffnen am'
         webstoreClose: 'schliessen am'
-
+    
     #     password: 'Password'
     #   user:
     #     new:

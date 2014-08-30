@@ -62,22 +62,6 @@ class ProductsController < ApplicationController
     end
   end
 
-  def listOfProducts
-    @cart = Array.new 
-    lineItems = params[:data][:lineItems]
-    lineItems.each do |key, li|
-      product = Product.find( li[:product_id] )
-      if li[:property] == nil || li[:property] == 0 || li[:property] == ""
-        cart = {product: product, quantity: li[:quantity]}
-      else
-        propertyItem = PropertyItem.find(li[:property])
-        cart = {product: product, quantity: li[:quantity], property: propertyItem}
-      end
-      @cart.push(cart)
-    end
-    render layout: false
-  end
-
   def checkQuantity
     quantity = params[:quantity]
     @product = Product.find(params[:id])
