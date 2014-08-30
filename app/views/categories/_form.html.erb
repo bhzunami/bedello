@@ -1,6 +1,6 @@
 <%= link_to 'Cancel', categories_path, class: "btn btn-danger pull-right" %>
 
-<p>Erstellen eine neue Kategorie.</p>
+<p>Erstellen einer neuen Kategorie.</p>
 <%= simple_form_for(@category, html: {class: 'form-horizontal' }) do |f| %>
   <% if @category.errors.any? %>
     <%= render 'shared/error_messages', object: f.object %>
@@ -11,7 +11,7 @@
   <% if @category.id %>
     <%= f.input :category_order, label: "Reihenfolge" %>
   <% else %>
-    <%= f.input :category_order, label: "Reihenfolge", input_html: {value: "#{lastOrder}"}%>
+    <%= f.input :category_order, label: "Reihenfolge", input_html: {value: "#{get_highest_index_of_category}"}%>
   <% end %>
 
    <%= f.button :submit %>

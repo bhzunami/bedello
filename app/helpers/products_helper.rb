@@ -16,10 +16,11 @@ module ProductsHelper
 	end
 
 	def promotionPercent(product)
-		100 -  product.promotionPrice / product.price  * 100.0
+		100 - product.promotionPrice / product.price  * 100.0
 
 	end
 
+	# Get the prize of one product with quantity
 	def getPrizeOfOneProduct(cart_line)
 		product = cart_line[:product]
 		quantity = cart_line[:quantity].to_d()
@@ -42,6 +43,7 @@ module ProductsHelper
 		cart_line[:quantity]
 	end
 
+	# Get the price over all products in cart
 	def getTotalPrice(cart)
 		total_price = cart.to_a.sum { |c| getPrizeOfOneProduct(c) }
 		if total_price < 200

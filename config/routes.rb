@@ -32,7 +32,9 @@ Bedello::Application.routes.draw do
 
 # Ajax Cart
   post "/products/listOfProducts", to: 'products#listOfProducts'
-  get "/allProducts", to: 'products#allProducts'
+
+  #Admin 
+  get "/allProducts", to: 'products#indexAllProducts'
 
 # Ajax Order
   post '/orders/createNewOrder', to: 'orders#createNewOrder'
