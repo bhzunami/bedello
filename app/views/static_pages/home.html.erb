@@ -19,7 +19,7 @@
 	<br /><br />
 	<% @products.each do |p| %>
 		<div class="span3">
-			<%= image_tag p.image.url(:small) %>
+			<%= link_to (image_tag p.image.url(:small)), p %>
 			<p>
 				<h4><%= link_to p.title, p %></h4>
 				<%= truncate(strip_tags(sanitize(p.description)),length: 200) %>
