@@ -60,7 +60,7 @@ before_action :admin_user, only: [:index, :archived_orders, :delete_order]
 
   def index
     #@orders = Order.find(:all, conditions: ["state != archived"])
-    @orders = Order.where("state != ? and state !=?", 'archived', 'completed')
+    @orders = Order.where("state != ? and state !=? and state !=?" , 'archived', 'completed', 'newOrder')
     @completed_orders = Order.where("state = ?", 'completed')
 
     #@orders = Order.with_state(:ordered)
