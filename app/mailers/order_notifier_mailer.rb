@@ -24,5 +24,10 @@ class OrderNotifierMailer < ActionMailer::Base
     mailaddress = websiteSettings.mailAddress
     mail to: mailaddress, subject: "Neue Bestellung"
   end
+
+  def order_deliver_notification(order)
+    @order = order
+    mail to: order.customer.email, subject: "Bestellung von bedello.ch ist auf dem Weg"
+  end
 end
 

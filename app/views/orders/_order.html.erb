@@ -51,11 +51,17 @@
 <%= link_to "Edit", edit_order_path(order), { class: "btn btn-mini btn-primary" }%>
 <% if status_text == 'Abgeschlossen' && order.state != 'completed'%>
 <%= link_to "Abschliessen", order_complete_path(order, id: order.id), {method: :post, class: "btn btn-mini btn-success" }%>
+<% if order.delivered? %>
+	<%= link_to "Bestätigungsmail", orders_path(), {class: "btn btn-mini btn-info", disabled: "disabled" }%>
+	<% else %>
+		<%= link_to "Bestätigungsmail", order_deliver_path(order, id: order.id), {method: :post, confirm: "Bestätigungsmail wirklich versenden.", class: "btn btn-mini btn-info" }%>
 <% end %>
+<% end %>
+
 <% if order.completed? %>
 <%= link_to "Archivieren", order_archive_path(order, id: order.id), {method: :post, class: "btn btn-mini btn-success" }%>
 <% end %>
-<%= link_to "Löschen", order_delete_order_path(order, id: order.id), {method: :post, class: "btn btn-mini btn-danger" }%>
+<%= link_to "Löschen", order_delete_order_path(order, id: order.id), {method: :post, confirm: "Bestellung wirklich löchsen?", class: "btn btn-mini btn-danger" }%>
 
 </td>
 <% end %>

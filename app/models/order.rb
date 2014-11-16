@@ -78,5 +78,10 @@ class Order < ActiveRecord::Base
   def sendNotifierMail
     OrderNotifierMailer.order_confirmation(self).deliver
     OrderNotifierMailer.order_notification(self).deliver
+
+  end
+
+  def sendDeliverNotifierMail
+    OrderNotifierMailer.order_deliver_notification(self).deliver
   end
 end

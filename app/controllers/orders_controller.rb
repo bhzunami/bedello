@@ -104,7 +104,14 @@ before_action :admin_user, only: [:index, :archived_orders, :delete_order]
   def pay
   end
 
-  def delivere
+  def deliver
+    if @order.can_deliver?
+      if @order.update_attribute(:state, "delivered")
+        @order.sendDeliverNotifierMail()
+        flash[:success] = "Bestätigungsmail wurde erfolgreich an #{@order.customer.email} versendet"
+      end
+    end
+    redirect_to orders_path
   end
 
   def complete

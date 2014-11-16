@@ -1,0 +1,23 @@
+<% if @order.customer.formOfAddress == "Herr" %>
+<%= "Sehr geehrter Herr #{@order.customer.firstname} #{@order.customer.lastname}" %>
+<% elsif @order.customer.formOfAddress == "Frau" %>
+<%= "Sehr geehrte Frau #{@order.customer.firstname} #{@order.customer.lastname}" %>
+<% else %>
+<%= "Sehr geehrte/r #{@order.customer.formOfAddress} #{@order.customer.firstname} #{@order.customer.lastname}" %>
+<% end %>
+ 
+Ihre bestellte Ware ist auf dem Weg zu Ihnen. Sie können Ihre Sendung unter folgendem Link verfolgen:
+
+www.post.ch   
+
+geben Sie unter “Sendungsverfolgung” die Nummer  
+
+<%= @order.distribution_number %>
+
+ein und Sie sehen, wo sich Ihr Paket gerade befindet.
+ 
+Für Ihre Bestellung danke ich Ihnen und wünsche Ihnen bei der Herstellung Ihrer Produkte viel Erfolg.
+ 
+Mit freundlichen Grüssen
+
+Jürg Bechtel
