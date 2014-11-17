@@ -45,23 +45,38 @@
 <td> </td>
 <% end %>
  <td><%= order.distribution_number%></td>
+ <!-- NEW or Abgeschlossen -->
  <% if !order.archived? %>
 <td>
 <!-- Links for edit -->
-<%= link_to "Edit", edit_order_path(order), { class: "btn btn-mini btn-primary" }%>
-<% if status_text == 'Abgeschlossen' && order.state != 'completed'%>
-<%= link_to "Abschliessen", order_complete_path(order, id: order.id), {method: :post, class: "btn btn-mini btn-success" }%>
-<% if order.delivered? %>
-	<%= link_to "Bestätigungsmail", orders_path(), {class: "btn btn-mini btn-info", disabled: "disabled" }%>
-	<% else %>
-		<%= link_to "Bestätigungsmail", order_deliver_path(order, id: order.id), {method: :post, confirm: "Bestätigungsmail wirklich versenden.", class: "btn btn-mini btn-info" }%>
+<%= link_to "<i class='icon-pencil'></i>".html_safe, edit_order_path(order), { class: "btn btn-mini btn-primary" }%>
+
+<!-- Delivered Notification-->
+<% if order.delivered?  %>
+  <%= link_to "<i class='icon-ok-sign'></i>".html_safe, orders_path(), {class: "btn btn-mini btn-info", disabled: "disabled"}%>
+<% elsif order.distribution_number? && !order.completed? %>
+  <%= link_to "<i class='icon-envelope'></i>".html_safe, order_deliver_path(order, id: order.id), {method: :post, confirm: "Bestätigungsmail wirklich versenden.", class: "btn btn-mini btn-info" }%>
+<% elsif !order.completed? %>
+  <%= link_to "<i class='icon-envelope'></i>".html_safe, orders_path(), {class: "btn btn-mini btn-info", disabled: "disabled" }%>
 <% end %>
+
+
+<!-- Abschliessen -->
+<% if status_text == 'Abgeschlossen' && order.state != 'completed' %>
+  <%= link_to "<i class='icon-ok'></i>".html_safe, order_complete_path(order, id: order.id), {method: :post, class: "btn btn-mini btn-success" }%>
+<% elsif !order.completed?  %>
+  <%= link_to "<i class='icon-ok'></i>".html_safe, orders_path(), {class: "btn btn-mini btn-success", disabled: "disabled" }%>
 <% end %>
+
+<!-- Completed -->
+<!-- Archivieren -->
 
 <% if order.completed? %>
 <%= link_to "Archivieren", order_archive_path(order, id: order.id), {method: :post, class: "btn btn-mini btn-success" }%>
 <% end %>
-<%= link_to "Löschen", order_delete_order_path(order, id: order.id), {method: :post, confirm: "Bestellung wirklich löchsen?", class: "btn btn-mini btn-danger" }%>
+
+<!-- DELETE -->
+<%= link_to "<i class='icon-trash'></i>".html_safe, order_delete_order_path(order, id: order.id), {method: :post, confirm: "Bestellung wirklich löchsen?", class: "btn btn-mini btn-danger" }%>
 
 </td>
 <% end %>

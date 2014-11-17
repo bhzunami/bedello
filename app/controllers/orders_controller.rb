@@ -109,7 +109,11 @@ before_action :admin_user, only: [:index, :archived_orders, :delete_order]
       if @order.update_attribute(:state, "delivered")
         @order.sendDeliverNotifierMail()
         flash[:success] = "Bestätigungsmail wurde erfolgreich an #{@order.customer.email} versendet"
+      else
+        flash[:error] = "Bestätigungsmail wurde schon versendet"
       end
+    else
+      flash[:error] = "Bestätigungsmail wurde schon versendet"
     end
     redirect_to orders_path
   end
