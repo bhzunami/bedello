@@ -1,9 +1,9 @@
 <% if @order.customer.formOfAddress == "Herr" %>
-	<%= "Sehr geehrter Herr #{@order.customer.firstname} #{@order.customer.lastname}" %>
+<%= "Sehr geehrter Herr #{@order.customer.firstname} #{@order.customer.lastname}" %>
 <% elsif @order.customer.formOfAddress == "Frau" %>
-	<%= "Sehr geehrte Frau #{@order.customer.firstname} #{@order.customer.lastname}" %>
+<%= "Sehr geehrte Frau #{@order.customer.firstname} #{@order.customer.lastname}" %>
 <% else %>
-	<%= "Sehr geehrte/r #{@order.customer.formOfAddress} #{@order.customer.firstname} #{@order.customer.lastname}" %>
+<%= "Sehr geehrte/r #{@order.customer.formOfAddress} #{@order.customer.firstname} #{@order.customer.lastname}" %>
 <% end %>
  
 Ihre bestellte Ware ist auf dem Weg zu Ihnen. Sie können Ihre Sendung unter folgendem Link verfolgen:
