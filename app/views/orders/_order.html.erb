@@ -55,7 +55,7 @@
 <% if order.delivered?  %>
   <%= link_to "<i class='icon-ok-sign'></i>".html_safe, orders_path(), {class: "btn btn-mini btn-info", disabled: "disabled"}%>
 <% elsif order.distribution_number? && !order.completed? %>
-  <%= link_to "<i class='icon-envelope'></i>".html_safe, order_deliver_path(order, id: order.id), {method: :post, confirm: "Bestätigungsmail wirklich versenden.", class: "btn btn-mini btn-info" }%>
+  <%= link_to "<i class='icon-envelope'></i>".html_safe, order_deliver_path(order, id: order.id), {method: :post, confirm: "Bestätigungsmail an #{order.customer.email} wirklich versenden?", class: "btn btn-mini btn-info" }%>
 <% elsif !order.completed? %>
   <%= link_to "<i class='icon-envelope'></i>".html_safe, orders_path(), {class: "btn btn-mini btn-info", disabled: "disabled" }%>
 <% end %>
@@ -76,7 +76,7 @@
 <% end %>
 
 <!-- DELETE -->
-<%= link_to "<i class='icon-trash'></i>".html_safe, order_delete_order_path(order, id: order.id), {method: :post, confirm: "Bestellung wirklich löchsen?", class: "btn btn-mini btn-danger" }%>
+<%= link_to "<i class='icon-trash'></i>".html_safe, order_delete_order_path(order, id: order.id), {method: :post, confirm: "Bestellung von #{order.customer.firstname} #{order.customer.lastname} wirklich löchsen?", class: "btn btn-mini btn-danger" }%>
 
 </td>
 <% end %>
