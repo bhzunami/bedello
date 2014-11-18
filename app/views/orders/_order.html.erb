@@ -76,7 +76,7 @@
 <% end %>
 
 <!-- DELETE -->
-<%= link_to "<i class='icon-trash'></i>".html_safe, order_delete_order_path(order, id: order.id), {method: :post, confirm: "Bestellung von #{order.customer.firstname} #{order.customer.lastname} wirklich löchsen?", class: "btn btn-mini btn-danger" }%>
+<%= link_to "<i class='icon-trash'></i>".html_safe, order_delete_order_path(order, id: order.id), {method: :post, confirm: "Bestellung von #{order.customer.firstname} #{order.customer.lastname} wirklich löschen?", class: "btn btn-mini btn-danger" }%>
 
 </td>
 <% end %>
