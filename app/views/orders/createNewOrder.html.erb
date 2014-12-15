@@ -32,14 +32,14 @@
       </tr>
     <% end %>
      <% if isFlatrate?(@order) %>
-      <tr>
-        <td colspan="3">Lieferkosten</td>
-        <td class="rightCell"><%= number_to_currency(16) %></td> 
+      <tr id="shipment">
+        <td id="shipment_name" colspan="3">Lieferkosten</td>
+        <td id="shipment_cost" class="rightCell"><%= number_to_currency(16) %></td> 
       </tr>
       <% end %>
-      <tr>
+      <tr id="total">
         <td colspan="3"><strong>Total</strong></td>
-        <td class="rightCell"><strong><%= number_to_currency(getTotPrice(@order.line_items)) %></strong></td> 
+        <td id="total_price" class="rightCell"><strong><%= number_to_currency(getTotPrice(@order.line_items)) %></strong></td> 
       </tr>
     </tbody>
   </table>

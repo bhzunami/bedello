@@ -17,6 +17,7 @@
 //= require fancybox
 //= require bootstrap
 //= require spinWheel
+//= require number
 //= require jquery.nested-fields
 //= require BEDELLO
 //= require custom
