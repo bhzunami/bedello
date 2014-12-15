@@ -11,6 +11,7 @@ module OrdersHelper
     end
   end
 
+  # When a new order in createNewOrder
   def getTotPrice(lineItems)
     total_price = lineItems.to_a.sum { |l| getPrice(l) }
     if total_price < 200
@@ -21,14 +22,20 @@ module OrdersHelper
 
   def getShipPrice(order)
     total_price = order.line_items.to_a.sum { |l| getPrice(l) }
-    if total_price < 200
+    if total_price < 200 && order.payment.short_name != "Bar"
       total_price += 16
     end
     total_price + order.shipment.costs + order.payment.costs
   end
 
   def isFlatrate?(order)
+    # isFlatrate gives false back when true! What the fuck did I done here ?!?
+    # If order.payment is bar, we have a flatrate so return false
+    if order.payment != nil && order.payment.short_name == "Bar"
+      return false
+    end
     total_price = order.line_items.to_a.sum { |l| getPrice(l) }
+    # If we are under 200 we do not have a flatrate -> return ture!
     if total_price < 200
       return true
     else

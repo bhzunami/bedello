@@ -54,7 +54,7 @@
 <!-- Delivered Notification-->
 <% if order.delivered?  %>
   <%= link_to "<i class='icon-ok-sign'></i>".html_safe, orders_path(), {class: "btn btn-mini btn-info", disabled: "disabled"}%>
-<% elsif order.distribution_number? && !order.completed? %>
+<% elsif order.distribution_number? && !order.completed? && order.delivery_date? %>
   <%= link_to "<i class='icon-envelope'></i>".html_safe, order_deliver_path(order, id: order.id), {method: :post, confirm: "Bestätigungsmail an #{order.customer.email} wirklich versenden?", class: "btn btn-mini btn-info" }%>
 <% elsif !order.completed? %>
   <%= link_to "<i class='icon-envelope'></i>".html_safe, orders_path(), {class: "btn btn-mini btn-info", disabled: "disabled" }%>
