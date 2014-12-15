@@ -37,7 +37,7 @@
       <% end %>
 
       <% if isSale?(@product) %>
-        <p class="text-error"> <strong><%= number_with_precision promotionPercent(@product), precision: 0%> % Rabatt</strong></p>
+        <p class="text-error"> <strong>Aktion: <%= number_with_precision promotionPercent(@product), precision: 0%> % Rabatt</strong></p>
       <% end %>
   <!-- Right site -->
       <% if admin? %>
