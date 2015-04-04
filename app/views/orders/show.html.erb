@@ -26,10 +26,10 @@
               <td><%= l.product.title %></td>
             <% end %>
             <td><%=  l.quantity %> </td>
-            <td class="rightCell"><%= number_to_currency(getPrice(l)) %></td>
+            <td class="rightCell"><%= number_to_currency(@order.getPrice(l)) %></td>
           </tr>
           <% end %>
-          <% if isFlatrate?(@order) %>
+          <% unless @order.isFlatrate?() %>
             <tr>
               <td colspan="3">Lieferkosten:</td>
               <td class="rightCell"><%= number_to_currency(16) %></td> 
@@ -45,7 +45,7 @@
           </tr>
           <tr>
             <td colspan="3"><strong>Total</strong></td>
-            <td class="rightCell"><strong><%= number_to_currency(getShipPrice(@order)) %></strong></td> 
+            <td class="rightCell"><strong><%= number_to_currency(@order.getShipPrice()) %></strong></td> 
           </tr>
         </tbody>
       </table>

@@ -14,13 +14,13 @@ Ihre Bestellung:
 
 <%= render @order.line_items -%>
 
-<% if isFlatrate?(@order) %>
+<% unless @order.isFlatrate?() %>
 Lieferkosten: CHF 16
 <% end %>
 Zusätzliche Lieferkosten: <%= number_to_currency(@order.shipment.costs) %>
 Nachnahmezuschlag: <%= number_to_currency(@order.payment.costs) %>
 
-Total: <%= number_to_currency(getShipPrice(@order) ) %>
+Total: <%= number_to_currency(@order.getShipPrice() ) %>
 
 Bitte beachten Sie folgendes zu Ihrer Bestellung:
 
@@ -28,7 +28,7 @@ Bitte beachten Sie folgendes zu Ihrer Bestellung:
 Sie erhalten Ihre Ware innerhalb der nächsten Tage per Post zugestellt.
 
 <% else %>
-Wir bitten Sie, den Betrag von Fr. <%= number_to_currency(getShipPrice(@order) )%> auf folgendes Postkonto einzuzahlen:
+Wir bitten Sie, den Betrag von Fr. <%= number_to_currency(@order.getShipPrice() )%> auf folgendes Postkonto einzuzahlen:
 
 bedello.ch
 Jürg Bechtel

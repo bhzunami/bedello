@@ -84,4 +84,47 @@ class Order < ActiveRecord::Base
   def sendDeliverNotifierMail
     OrderNotifierMailer.order_deliver_notification(self).deliver
   end
+
+  def getShipPrice
+    total_price = self.line_items.to_a.sum { |l| getPrice(l) }
+    if total_price < 200 && self.payment.short_name != "Bar"
+      total_price += 16
+    end
+    return total_price + self.shipment.costs + self.payment.costs
+  end
+
+  def isFlatrate?
+    # isFlatrate gives false back when true! What the fuck did I done here ?!?
+    # If order.payment is bar, we have a flatrate so return false
+    if self.payment != nil && self.payment.short_name == "Bar"
+      return true
+    end
+    total_price = self.line_items.to_a.sum { |l| getPrice(l) }
+    # If we are under 200 we do not have a flatrate -> return ture!
+    if total_price < 200
+      return false
+    end
+    return true
+  end
+
+ def getPrice(lineItem)
+    if not lineItem
+      return
+    end
+    if (lineItem.product.promotionStartDate..lineItem.product.promotionEndDate).cover?(Time.now)
+      lineItem.quantity * lineItem.product.promotionPrice
+    else 
+      lineItem.quantity * lineItem.product.price
+    end
+  end
+
+  # When a new order in createNewOrder
+  def getTotPrice()
+    total_price = self.line_items.to_a.sum { |l| getPrice(l) }
+    if total_price < 200
+      total_price += 16
+    end
+    return total_price
+  end
+
 end

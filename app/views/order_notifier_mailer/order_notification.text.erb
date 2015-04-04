@@ -7,7 +7,7 @@ Eine gibt eine neue Bestellung.
 #------ Order From <%= Time.now.strftime("%d.%m.%Y, %H:%M:%S") %> -------#
 To= j.bechtel@vtxmail.ch
 Date= <%= Time.now.strftime("%d.%m.%Y, %H:%M:%S") %>
-Remote_Addr= ????
+Remote_Addr=
 Trnr= <%= Time.now.strftime("%d.%m.%Y, %H:%M:%S") %>
 <% @order.line_items.each_with_index do |line, index| %>
 ******* Artikel <%= index +1 %> *************
@@ -26,10 +26,10 @@ Betrag= <%= line.product.price * line.quantity %> CHF
 
 <% end %>
 ******* End Artikel ***********
-<% if isFlatrate?(@order) %>
+<% unless @order.isFlatrate?() %>
 Lieferkosten: CHF 16
 <% end %>
-Total= <%= getShipPrice(@order) %> CHF
+Total= <%= @order.getShipPrice() %> CHF
 -------------------------------
 Lieferung= <%= @order.shipment.name %>
 Zahlung= <%= @order.payment.name %>

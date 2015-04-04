@@ -54,7 +54,7 @@ class @CartMessage
 		$("#cart").html(data)
 		
 		cartStorage = new CartStorage()
-		# This class 'update_cart' exist avert html replace
+		# This class 'update_cart' exist after html replace
 		$(".btn_update").each (index) ->
 			$( this ).click (event) ->
 				event.preventDefault()

@@ -60,7 +60,7 @@
               <td><%= l.product.title %></td>
             <% end %>
             <td><%=  l.quantity %> </td>
-            <td class="rightCell"><%= number_to_currency(getPrice(l)) %></td>
+            <td class="rightCell"><%= number_to_currency(@order.getPrice(l)) %></td>
           </tr>
           <% end %>
         </tbody>
