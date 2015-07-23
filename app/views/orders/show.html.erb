@@ -18,7 +18,7 @@
         </thead>
         <tbody>
           <% @order.line_items.each do |l| %>
-          <tr>    
+          <tr>
             <td ><%= l.product.product_nr%></td>
             <% if l.product.property_id? %>
               <td><%= l.product.title %> (<%= l.propertyItem.name %>) </td>
@@ -32,20 +32,20 @@
           <% unless @order.isFlatrate?() %>
             <tr>
               <td colspan="3">Lieferkosten:</td>
-              <td class="rightCell"><%= number_to_currency(16) %></td> 
+              <td class="rightCell"><%= number_to_currency(16) %></td>
             </tr>
           <% end %>
           <tr>
             <td colspan="3">Lieferung: <%= (@order.shipment.name) %></td>
-            <td class="rightCell"><%= number_to_currency(@order.shipment.costs) %></td> 
+            <td class="rightCell"><%= number_to_currency(@order.shipment.costs) %></td>
           </tr>
           <tr>
             <td colspan="3">Bezahlung: <%= (@order.payment.name) %></td>
-            <td class="rightCell"><%= number_to_currency(@order.payment.costs) %></td> 
+            <td class="rightCell"><%= number_to_currency(@order.payment.costs) %></td>
           </tr>
           <tr>
             <td colspan="3"><strong>Total</strong></td>
-            <td class="rightCell"><strong><%= number_to_currency(@order.getShipPrice()) %></strong></td> 
+            <td class="rightCell"><strong><%= number_to_currency(@order.getShipPrice()) %></strong></td>
           </tr>
         </tbody>
       </table>
@@ -71,13 +71,73 @@
   </div>
   <% if not admin? %>
   <div class="span4 offset8">
+    <% if @order.payment.short_name == "Postfinance" %>
+    <%= form_tag(ENV['base_url'] ) %>
+    <%= hidden_field_tag 'ACCEPTURL', order_postfinance_url(@order) %>
+    <%= hidden_field_tag 'AMOUNT', (@order.getShipPrice() * 100).round %>
+    <%= hidden_field_tag 'BACKURL', order_postfinance_url(@order) %>
+    <%= hidden_field_tag 'BGCOLOR', ENV['bgcolor']%>
+    <%= hidden_field_tag 'CANCELURL', order_postfinance_url(@order) %>
+    <%= hidden_field_tag 'CN', @order.customer.lastname %>
+    <%= hidden_field_tag 'COM', ENV['com'] %>
+    <%= hidden_field_tag 'CURRENCY', ENV['currency'] %>
+    <%= hidden_field_tag 'DECLINEURL', order_postfinance_url(@order) %>
+    <%= hidden_field_tag 'EMAIL', @order.customer.email %>
+    <%= hidden_field_tag 'EXCEPTIONURL', order_postfinance_url(@order) %>
+    <%= hidden_field_tag 'LANGUAGE', ENV['language'] %>
+    <%= hidden_field_tag 'ORDERID', @order.id %>
+    <%= hidden_field_tag 'OWNERADDRESS', @order.customer.streetname %>
+    <%= hidden_field_tag 'OWNERCTY', ENV['ownercity'] %>
+    <%= hidden_field_tag 'OWNERTOWN', @order.customer.city %>
+    <%= hidden_field_tag 'PSPID', ENV['POSTFINANCE_PSPID'] %>
+    <%= hidden_field_tag 'TITLE', ENV['title']%>
+
+    <%= hidden_field_tag 'SHASIGN', generateHash() %>
+    <%= submit_tag "Bestellung abschliessen", class: "btn btn-success", confirm: 'Sie werden zur Postfinance weitergeleitet.' %>
+    <% else %>
       <%= link_to "Bestellung abschliessen", order_order_path(@order, id: @order.id), { method: :post, class: "btn btn-success" } %>
+    <% end %>
       <%= link_to "Abbrechen", @order, confirm: 'Sind Sie sicher?', method: :delete, class: "btn btn-danger" %>
   </div>
-  <% else %>
-  <div class="span2 offset10">
-    <%= link_to "Zurück zur Übersicht", orders_path(), { class: "btn" } %>
-  </div>
+  <% end %>
+</div>
+<% if admin? and @order.p_acceptance? %>
+<div class="row">
+<div class="span5">
+<h4>Postfinance</h4>
+<table class="table table-hover table-condensed">
+  <tr>
+    <td>Bezahlungs ID:</td>
+    <td> <%= @order.p_payid %> </td>
+  </tr>
+  <tr>
+    <td>Zahlungsmethode</td>
+    <td><%= @order.p_paymentMethod %> </td>
+  </tr>
+  <tr>
+    <td>Genehmigungscode</td>
+    <td><%= @order.p_acceptance %></td>
+  </tr>
+  <tr>
+    <td>Status</td>
+    <td><%= @order.p_status %></td>
+  </tr>
+  <tr>
+    <td>Kreditkartenmarke</td>
+    <td><%= @order.p_brand %></td>
+  </tr>
+  <tr>
+    <td>IP</td>
+    <td><%= @order.ip %></td>
+  </tr>
+</table>
+</div>
+</div>
+<% end %>
+<% if admin? %>
+<div class="span2 offset10">
+  <%= link_to "Zurück zur Übersicht", orders_path(), { class: "btn" } %>
+</div>
 <% end %>
 </div>
-
+</div>

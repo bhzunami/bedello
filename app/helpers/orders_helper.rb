@@ -1,3 +1,4 @@
+require 'digest/sha1'
 module OrdersHelper
 
   # A property of a color for a product.
@@ -58,7 +59,7 @@ module OrdersHelper
     #---------------------------
     # Vorauszahlung
     #---------------------------
-    elsif order.payment.short_name == 'Vorauszahlung'
+  elsif order.payment.short_name == 'Vorauszahlung'
       # *** Bezahlt und gelifert
       if order.delivery_date? && order.pay_day?
         order.status = "ok"
@@ -89,9 +90,52 @@ module OrdersHelper
         order.status = "error"
         return "Ware sofort versenden"
       end
-
+    elsif order.payment.short_name == 'Postfinance'
+      if order.delivery_date?
+        order.status = "ok"
+        return "Abgeschlossen"
+      end
+      if order.pay_day.nil?
+        order.status = "error"
+        return "No"
+      end
+      if order.pay_day > 3.day.ago
+        order.status = "ok"
+        return "Ware versenden"
+      # Ab dem 3. Tag ist es orange
+      elsif order.pay_day > 6.day.ago
+        order.status = "warn"
+        return "Ware versenden"
+      else
+        # Über 6 Tage ist Rot
+        order.status = "error"
+        return "Ware sofort versenden"
+      end
     end
   end
 
 
+  def generateHash()
+    secret = ENV['POSTFINANCE_SHA1INSIG']
+    hash = ""
+    hash += "ACCEPTURL="+order_postfinance_url(@order)+secret
+    hash += "AMOUNT="+(@order.getShipPrice * 100).round.to_s+secret
+    hash += "BACKURL="+order_postfinance_url(@order)+secret
+    hash += "BGCOLOR="+ENV['bgcolor']+secret
+    hash += "CANCELURL="+order_postfinance_url(@order)+secret
+    hash += "CN="+@order.customer.lastname+secret
+    hash += "COM="+ENV['com']+secret
+    hash += "CURRENCY="+ENV['currency']+secret
+    hash += "DECLINEURL="+order_postfinance_url(@order)+secret
+    hash += "EMAIL="+@order.customer.email+secret
+    hash += "EXCEPTIONURL="+order_postfinance_url(@order)+secret
+    hash += "LANGUAGE="+ENV['language']+secret
+    hash += "ORDERID="+@order.id.to_s+secret
+    hash += "OWNERADDRESS="+@order.customer.streetname+secret
+    hash += "OWNERCTY="+ENV['ownercity']+secret
+    hash += "OWNERTOWN="+@order.customer.city+secret
+    hash += "PSPID="+ENV['POSTFINANCE_PSPID']+secret
+    hash += "TITLE="+ENV['title']+secret
+    return (Digest::SHA1.hexdigest(hash) ).upcase
+  end
 end

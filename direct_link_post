@@ -1,0 +1,54 @@
+http://www.post.ch/swisspost-tracking?formattedParcelCodes=99.60.020753.21798620&p_language=de
+
+
+SHA-IN
+yH5tfPqHUiygv__u7E85
+
+
+SHA-OUT
+7E_odCAo3tqG3bHtSKDB
+
+
+
+CORRECT
+Param orderID: 47
+Param currency: CHF
+Param amount: 46
+Param PM: PostFinance e-finance
+Param ACCEPTANCE: 123456
+Param STATUS: 5
+Param CARDNO:
+Param ED:
+Param CN: Mauchle
+Param TRXDATE: 07/22/15
+Param PAYID: 44509762
+Param NCERROR: 0
+Param BRAND: PostFinance e-finance
+Param IP: 178.196.119.225
+Param SHASIGN: 944251DB05B158F498C3C63ED9DC97EEAEF78CD7
+Param action: postfinance
+Param controller: orders
+Param order_id: 47
+
+
+CANCEL
+**********
+Back from psotfinance
+Param orderID: 47
+Param currency: CHF
+Param amount: 46
+Param PM: PostFinance Card
+Param ACCEPTANCE: TEST
+Param STATUS: 2
+Param CARDNO:
+Param ED:
+Param CN: Mauchle
+Param TRXDATE: 07/22/15
+Param PAYID: 44509762
+Param NCERROR: 30001001
+Param BRAND: PostFinance Card
+Param IP: 178.196.119.225
+Param SHASIGN: 662F6B678CA2763D2B3B69CA4477294EC026E376
+Param action: show
+Param controller: orders
+Param id: 47

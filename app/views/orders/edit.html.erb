@@ -1,7 +1,7 @@
 <% status_text = get_status(@order) %>
 <h2> Bestellung von <%= @order.customer.firstname %> <%= @order.customer.lastname %>
 <% if @order.status == 'ok' %>
-  <span class="label label-success"><%= status_text %></span> 
+  <span class="label label-success"><%= status_text %></span>
 <% elsif @order.status == 'warn' %>
   <span class="label label-warning"><%= status_text %></span>
 <% elsif @order.status == 'error' %>
@@ -29,10 +29,6 @@
       <hr>
       <%= f.input :warning, as: :string, label: "Mahnung versendet am" %>
       <%= f.input :notes, label: "Notizen" %>
-      <h2> DEBUG </h2>
-
-      <%= f.input :created_at, as: :date, label: "Erstellt" %>
-      <%= f.association :payment, label: "Zahlungsart"%>
     </div>
   </div>
   <%= f.button :submit, "Speichern", class: "btn-success" %>
@@ -52,7 +48,7 @@
         </thead>
         <tbody>
           <% @order.line_items.each do |l| %>
-          <tr>    
+          <tr>
             <td ><%= l.product.product_nr%></td>
             <% if l.product.property_id? %>
               <td><%= l.product.title %> (<%= l.propertyItem.name %>) </td>
@@ -68,4 +64,3 @@
     </div>
   </div>
  </div>
-

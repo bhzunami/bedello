@@ -18,7 +18,7 @@
  <!-- Set correct status in label -->
 <td>
 <% if order.status == 'ok' %>
-  <span class="label label-success"><%= status_text %></span> 
+  <span class="label label-success"><%= status_text %></span>
 <% elsif order.status == 'warn' %>
   <span class="label label-warning"><%= status_text %></span>
 <% elsif order.status == 'error' %>
@@ -28,7 +28,7 @@
 <% end %>
 </td>
 <!-- order information for table -->
-<td><%= order.id %> 
+<td><%= order.id %>
 <td><%= order.customer.firstname %> <%= order.customer.lastname %></td>
 <td><%= order.created_at.to_date.strftime("%d.%m.%Y") %></td>
 <td><%= order.payment.short_name %>
@@ -76,7 +76,7 @@
 <% end %>
 
 <!-- DELETE -->
-<%= link_to "<i class='icon-trash'></i>".html_safe, order_delete_order_path(order, id: order.id), {method: :post, confirm: "Bestellung von #{order.customer.firstname} #{order.customer.lastname} wirklich löschen?", class: "btn btn-mini btn-danger" }%>
+<%= link_to "<i class='icon-trash'></i>".html_safe, order_path(order), {method: :delete, confirm: "Bestellung von #{order.customer.firstname} #{order.customer.lastname} wirklich löschen?", class: "btn btn-mini btn-danger" }%>
 
 </td>
 <% end %>

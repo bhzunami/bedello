@@ -16,6 +16,11 @@
 #  warning             :datetime
 #  notes               :text
 #  status              :string(255)
+#  p_paymentMethod     :string(255)
+#  p_acceptance        :string(255)
+#  p_status            :integer
+#  p_payid             :integer
+#  p_brand             :string(255)
 #
 
 class Order < ActiveRecord::Base
@@ -23,7 +28,7 @@ class Order < ActiveRecord::Base
   has_many :line_items, dependent: :destroy
   belongs_to :customer
   belongs_to :shipment
-  belongs_to :payment 
+  belongs_to :payment
 
   accepts_nested_attributes_for :customer
   accepts_nested_attributes_for :line_items
@@ -34,7 +39,7 @@ class Order < ActiveRecord::Base
 
   #State Machine
   state_machine :state, initial: :newOrder do
-    
+
     event :deliver do
       transition ordered: :delivered
       transition payed: :delivered
@@ -70,11 +75,11 @@ class Order < ActiveRecord::Base
 
     state :newOrder do
     end
-      
+
     state :completed do
     end
   end
- 
+
   def sendNotifierMail
     OrderNotifierMailer.order_confirmation(self).deliver
     OrderNotifierMailer.order_notification(self).deliver
@@ -113,7 +118,7 @@ class Order < ActiveRecord::Base
     end
     if (lineItem.product.promotionStartDate..lineItem.product.promotionEndDate).cover?(Time.now)
       lineItem.quantity * lineItem.product.promotionPrice
-    else 
+    else
       lineItem.quantity * lineItem.product.price
     end
   end
@@ -126,5 +131,5 @@ class Order < ActiveRecord::Base
     end
     return total_price
   end
-
+  
 end

@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.1.2'
+ruby '2.1.5'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.8'
@@ -65,14 +65,13 @@ gem 'rails-i18n', '~> 4.0.0'
 
 gem 'random_record'
 
-
 gem 'awesome_nested_fields'
 # hide configurations file
 gem 'figaro'
 # gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
 #                           :github => 'anjlab/bootstrap-rails',
 #                           :branch => '3.0.0'
-                          
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
@@ -80,7 +79,7 @@ end
 
 # Use sqlite3 as the database for Active Record
 group :development, :test do
-	gem 'sqlite3', '1.3.8'
+	gem 'sqlite3', '1.3.9'
 	gem 'rspec-rails', '2.13.1'
   gem 'annotate', '2.5.0'
 end

@@ -8,7 +8,7 @@ Bedello::Application.routes.draw do
     post "deliver"
     post "complete"
     post "archive"
-    post "delete_order"
+    get "postfinance", to: 'orders#postfinance'
   end
   resources :payments
   resources :shipments
@@ -33,7 +33,7 @@ Bedello::Application.routes.draw do
 # Ajax Cart
   post "/cart/products", to: 'carts#products'
 
-  #Admin 
+  #Admin
   get "/allProducts", to: 'products#indexAllProducts'
 
 # Ajax Order

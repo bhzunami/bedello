@@ -1,0 +1,17 @@
+defaults: &defaults
+  base_url: https://e-payment.postfinance.ch/ncol/test/orderstandard.asp
+  currency: CHF
+  ownercity: CH
+  language: de_CH
+  com: Bestellung von Pralinenzutaten bei bedello.ch
+  title: Webshop Bedello
+  bgcolor: '#FFFFFF'
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

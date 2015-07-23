@@ -23,8 +23,8 @@
       <% end %>
 
       <% if admin? %>
-        <p>Im Shop vom: <%= @product.sale_start_date.strftime("%d.%m.%Y") %> - <%= @product.sale_end_date.strftime("%d.%m.%Y") %> </p>
-      <% end %>    
+        <p>Im Shop vom: <%= t(@product.sale_start_date.strftime("%d.%m.%Y")) %> - <%= @product.sale_end_date.strftime("%d.%m.%Y") %> </p>
+      <% end %>
     </div>
 
     <div class="span7">
@@ -55,7 +55,7 @@
         <% else %>
           <% if activeProduct?(@product) && @product.inStock > 0 && isStoreOpen?%>
             <%= form_tag({}, class: "form-inline addToCart") do %>
-              <%= hidden_field_tag("id", value = @product.id) %>   
+              <%= hidden_field_tag("id", value = @product.id) %>
               <% if @product.property_id? %>
                 <select class="property pull-right">
                 <% @product.property.propertyItems.each do |i| %>
