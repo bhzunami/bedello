@@ -134,7 +134,7 @@ before_action :admin_user, only: [:index, :archived_orders, :delete_order]
   def order
     recalcProductInStore(@order, 'decrease')
     if @order.update_attribute(:state, "ordered")
-      flash[:success] = "Vielen Dank, Deine Bestellung wurde erfolgreich abgeschlossen."
+      flash[:success] = "Vielen Dank, Ihre Bestellung wurde erfolgreich abgeschlossen."
     else
       @order.errors.full_messages.each do |msg|
         flash[:error]= msg
