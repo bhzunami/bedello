@@ -28,7 +28,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 
 # New Relic addon for Heroku ping
-gem 'newrelic_rpm'
+#gem 'newrelic_rpm'
 
 # Simpel forms for input fomrs
 gem 'simple_form', '~> 3.0.0.rc'
