@@ -67,7 +67,7 @@
     <div class="span5">
       <h4>Bezahlung</h4>
       <hr class="featurette-divider">
-      <%= f.association :payment, label: "Zahlungsart", input_html: { onchange: "paymentChange()", id: "drop_pay" }%>
+      <%= f.association :payment, label: "Zahlungsart", collection: Payment.where.not(short_name: 'Nachnahme'), input_html: { onchange: "paymentChange()", id: "drop_pay" }%>
       <%= f.association :shipment, label: "Lieferart", input_html: { id: "drop_ship"}%>
       <h4>Bedingung</h4>
       <hr class="featurette-divider">

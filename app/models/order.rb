@@ -37,6 +37,9 @@ class Order < ActiveRecord::Base
 
   default_scope order: 'created_at DESC'
 
+  self.per_page = 20
+
+
   #State Machine
   state_machine :state, initial: :newOrder do
 

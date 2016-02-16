@@ -109,7 +109,8 @@ before_action :admin_user, only: [:index, :archived_orders, :delete_order]
 
 
   def archived_orders
-    @archived_orders = Order.with_state(:archived)
+    @archived_orders = Order.page(params[:page]).order('updated_at ASC').with_state(:archived)#Order.with_state(:archived)
+
   end
 
   def show

@@ -39,8 +39,8 @@ gem 'simple_form', '~> 3.0.0.rc'
 gem 'faker', '1.2.0'
 
 # For pagination
-gem 'will_paginate', '3.0.4'
-gem 'bootstrap-will_paginate', '0.0.9'
+gem 'will_paginate', '~> 3.0.6'
+gem 'bootstrap-will_paginate', '0.0.10'
 
 # How about to use friendly url
 gem "friendly_id", "~> 5.0.0.rc1"
