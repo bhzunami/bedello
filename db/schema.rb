@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150722192315) do
+ActiveRecord::Schema.define(version: 20161024112542) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -78,7 +78,7 @@ ActiveRecord::Schema.define(version: 20150722192315) do
     t.string   "p_paymentMethod"
     t.string   "p_acceptance"
     t.integer  "p_status"
-    t.integer  "p_payid"
+    t.text     "p_payid"
     t.string   "p_brand"
   end
 

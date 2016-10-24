@@ -29,13 +29,14 @@ before_action :admin_user, only: [:index, :archived_orders, :delete_order]
       @order.p_status = params[:status].to_i
       @order.p_paymentMethod = params[:PM]
       @order.p_acceptance = params[:ACCEPTANCE]
-      @order.p_payid = params[:PAYID].to_i
+      @order.p_payid = params[:PAYID]
       @order.p_brand = params[:BRAND]
       @order.pay_day = Time.now
       order()
     else
-      flash[:error] = "UUPS da ist etwas schief gegangen bitte versuchen Sie es nocheinmal."
-      render 'show'
+      flash[:error] = "UUPS da ist etwas schief gegangen. Bitte versuchen Sie es nocheinmal."
+      @order.delete()
+      redirect_to root_path
     end
   end
 

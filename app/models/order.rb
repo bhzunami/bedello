@@ -19,7 +19,7 @@
 #  p_paymentMethod     :string(255)
 #  p_acceptance        :string(255)
 #  p_status            :integer
-#  p_payid             :integer
+#  p_payid             :text
 #  p_brand             :string(255)
 #
 
