@@ -19,9 +19,9 @@ Artikel= <%= line.product.title %> (<%= line.propertyItem.name %>)
 Artikel= <%= line.product.title %> 
 <% end %>
 <% if line.quantity > 1 %>
-Betrag= <%= line.product.price %>
+Betrag= <%= number_to_currency(getProductPrice(line.product))  %>
 <% else %>
-Betrag= <%= line.product.price * line.quantity %> CHF
+Betrag= <%= number_to_currency(getProductPrice(line.product) * line.quantity) %> CHF
 <% end %>
 
 <% end %>
