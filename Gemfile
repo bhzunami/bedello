@@ -15,14 +15,14 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 
 # Use ActiveModel has_secure_password
-gem 'bcrypt'
+gem 'bcrypt', '3.1.10'
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails'
-gem "jquery-ui-rails"
+gem 'jquery-rails', '3.1.4'
+gem "jquery-ui-rails", '5.0.5'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+gem 'turbolinks', '2.5.3'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
@@ -49,8 +49,8 @@ gem "friendly_id", "~> 5.0.0.rc1"
 gem "paperclip", "~> 3.0"
 
 # Amazone S3 storage
-gem 'aws-sdk'
-gem 'aws-s3'
+gem 'aws-sdk', '2.2.3'
+gem 'aws-s3', '0.6.3'
 
 # Twitter Bootstrap integration
 gem 'bootstrap-sass', '2.3.2.0'
@@ -58,7 +58,7 @@ gem 'bootstrap-sass', '2.3.2.0'
 # Image popUp
 gem "fancybox2-rails", "0.2.4"
 
-gem 'state_machine'
+gem 'state_machine', '1.2.0'
 
 #gem 'i18n', github: 'svenfuchs/i18n'
 gem 'rails-i18n', '~> 4.0.0'
@@ -67,7 +67,7 @@ gem 'random_record'
 
 gem 'awesome_nested_fields'
 # hide configurations file
-gem 'figaro'
+gem 'figaro', '1.1.1'
 # gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
 #                           :github => 'anjlab/bootstrap-rails',
 #                           :branch => '3.0.0'
