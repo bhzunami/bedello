@@ -49,7 +49,8 @@ gem "friendly_id", "~> 5.0.0.rc1"
 gem "paperclip", "~> 3.0"
 
 # Amazone S3 storage
-gem 'aws-sdk', '2.2.3'
+#gem 'aws-sdk', '2.2.3'
+gem 'aws-sdk', '< 2.0'
 gem 'aws-s3', '0.6.3'
 
 # Twitter Bootstrap integration
