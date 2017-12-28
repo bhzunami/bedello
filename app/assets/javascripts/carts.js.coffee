@@ -58,8 +58,8 @@ class @CartMessage
 		$(".btn_update").each (index) ->
 			$( this ).click (event) ->
 				event.preventDefault()
-				if this.form.quantity.value > 10
-					alert "Mehr als 10 Artikel sind nicht erlaubt!"
+				if this.form.quantity.value > 25
+					alert "Mehr als 25 Artikel sind nicht erlaubt!"
 					location.reload()
 					return
 

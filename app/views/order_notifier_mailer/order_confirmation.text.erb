@@ -17,8 +17,6 @@ Ihre Bestellung:
 <% unless @order.isFlatrate?() %>
 Lieferkosten: CHF 16
 <% end %>
-Zusätzliche Lieferkosten: <%= number_to_currency(@order.shipment.costs) %>
-Nachnahmezuschlag: <%= number_to_currency(@order.payment.costs) %>
 
 Total: <%= number_to_currency(@order.getShipPrice() ) %>
 
@@ -38,6 +36,8 @@ Postkonto 60-771554-0
 
 Nach erfolgtem Zahlungseingang erhalten Sie Ihre bestellte Ware innerhalb der nächsten Tage per Post zugestellt.
 <% end %>
+
+Dies ist ein automatisch generiertes Mail, bitte nicht auf diese Adresse zurückschreiben.
 
 Mit freundlichen Grüssen
 Jürg Bechtel
