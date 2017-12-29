@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161024112542) do
+ActiveRecord::Schema.define(version: 20171229082905) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(version: 20161024112542) do
     t.integer  "p_status"
     t.text     "p_payid"
     t.string   "p_brand"
+    t.decimal  "total_amount"
   end
 
   create_table "payments", force: true do |t|

@@ -45,7 +45,11 @@
           </tr>
           <tr>
             <td colspan="3"><strong>Total</strong></td>
+            <% if @order.total_amount? %>
+            <td class="rightCell"><strong><%= number_to_currency(@order.total_amount) %></strong></td>
+          <% else %>
             <td class="rightCell"><strong><%= number_to_currency(@order.getShipPrice()) %></strong></td>
+          <% end %>
           </tr>
         </tbody>
       </table>

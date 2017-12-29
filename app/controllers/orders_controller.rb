@@ -69,6 +69,7 @@ before_action :admin_user, only: [:index, :archived_orders, :delete_order]
 
   def create
     @order = Order.new(order_params)
+    @order.total_amount = @order.getTotPrice()
     if @order.save
       redirect_to @order
     else
