@@ -17,9 +17,10 @@ class @CUSTOM_LOADER
 
 
 # Turbo Links need this!!!!
-$(document).on "ready page:load", ->
-	new CUSTOM_LOADER()
-	$("a.fancybox").fancybox()
+#$(document).on "ready page:load", ->
+$(document).on "turbolinks:load", ->
+	new CUSTOM_LOADER();
+	$("a.fancybox").fancybox();
 	$('FORM').nestedFields();
 
 

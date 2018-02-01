@@ -1,14 +1,10 @@
- <ul class="nav nav-list">
-  <li class="nav-header"> Kategorien </li>
-  <% categories.each do |c| %>
-  <li>
-    <%= link_to c.name, products_path(category_id: c.id), id: c.id %>
-  </li>
-  <% end %>
-  <% if admin? %>
+<div class="nav flex-column nav-pills" aria-orientation="vertical">
+<div class="navbar-brand"> Kategorien </div>
+<% categories.each do |c| %>
+  <%= link_to c.name, products_path(category_id: c.id), id: c.id, class: "nav-link" %>
+<% end %>
+<% if admin? %>
     <br />
     <%= link_to "#{image_tag('settings.png', size: '20')} Edit".html_safe, categories_path, class: "btn"%>
   <% end %>
-</ul>
-
-  
+</div>

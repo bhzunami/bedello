@@ -1,7 +1,7 @@
 module StaticPagesHelper
 
 	def categories
-		Category.all( order: "category_order")
+		Category.order(:category_order)
 	end
 
 	def isStoreOpen?

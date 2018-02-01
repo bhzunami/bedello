@@ -1,4 +1,4 @@
-class CreatePropertyItems < ActiveRecord::Migration
+class CreatePropertyItems < ActiveRecord::Migration[4.2]
   def change
     create_table :property_items do |t|
       t.string :name

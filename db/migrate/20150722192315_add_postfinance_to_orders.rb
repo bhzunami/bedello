@@ -1,4 +1,4 @@
-class AddPostfinanceToOrders < ActiveRecord::Migration
+class AddPostfinanceToOrders < ActiveRecord::Migration[4.2]
   def change
     add_column :orders, :p_paymentMethod, :string
     add_column :orders, :p_acceptance, :string

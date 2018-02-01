@@ -1,62 +1,65 @@
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+<!-- Pack into container to move the text inside -->
+<div class="container">
+  <!-- Brand name -->
+  <%= link_to "bedello.ch", root_path, class: "navbar-brand", id: "logo"%>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+    
+    <!-- Ordery -->
+    <% if admin? %>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Bestellungen
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+      <%= link_to 'Neue Bestellungen', orders_path(), class: "dropdown-item" %>
+      <%= link_to 'Archivierte Bestellungen', archived_orders_path(), class: "dropdown-item" %>
+      <%= link_to 'Zahlungsarten', payments_path(), class: "dropdown-item" %>
+      <%= link_to 'Lieferarten', shipments_path(), class: "dropdown-item" %>
+    </li>
 
-<header class="navbar navbar-default navbar-fixed-top navbar-inverse">
-  <div class="navbar-inner">
-    <div class="container">
+    <!-- Products -->
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Produkte
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+      <%= link_to "Neues Produkt", new_product_path(), class: "dropdown-item" %>
+      <%= link_to "Alle Produkte", allProducts_path(), class: "dropdown-item" %>
+      <%= link_to "Produkteigenschaften", properties_path(), class: "dropdown-item" %>
+    </li>
+    <% end %>
 
-      <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
-      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-       </a>
+    <!-- Normal user -->
+    <% if not admin? %>
+      <li class="nav-item" id="quantity_of_carts">
+          <%= link_to "Warenkorb", carts_path , class: "nav-link"%>
+      </li>
+    <% end %>
 
-      <%= link_to "bedello.ch", root_path, class: "brand", id: "logo"%>
-      <!-- Everything you want hidden at 940px or less, place within here -->
-      <div class="nav-collapse collapse">
-        <ul class="nav navbar-nav navbar-right pull-right">
-          <% if admin? %>
-          <li id="fat-menu" class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                Bestellungen <b class="caret"></b>
-              </a>
-              <ul class="dropdown-menu">
-                <li><%= link_to 'Neue Bestellungen', orders_path() %></li>
-                <li><%= link_to 'Archivierte Bestellungen', archived_orders_path() %></li>
-                <li><%= link_to 'Zahlungsarten', payments_path() %></li>
-                <li><%= link_to 'Lieferarten', shipments_path() %></li>
-              </ul>
-            <li id="fat-menu" class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                Produkte <b class="caret"></b>
-              </a>
-              <ul class="dropdown-menu">
-                <li><%= link_to "Neues Produkt", new_product_path() %></li>
-                <li><%= link_to "Alle Produkte", allProducts_path() %></li>
-                <li><%= link_to "Produkteigenschaften", properties_path() %></li>
-              </ul>
-          <% end %>
-          <% if not admin? %>
-          <li id="quantity_of_carts"><%= link_to "Warenkorb", carts_path %></li>
-          <% end %>
-          <li><%= link_to "AGB", agb_path() %></li>
-          <% if signed_in? %>
-            <li id="fat-menu" class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                Konto <b class="caret"></b>
-              </a>
-              <ul class="dropdown-menu">
-                <li><%= link_to "Profil", edit_user_path(current_user) %></li>
-                <li><%= link_to "Einstellungen", website_setting_path(1) %></li>
-                <li class="divider"></li>
-                <li>
-                  <%= link_to "Ausloggen", signout_path, method: "delete" %>
-                </li>
-              </ul>
-            </li>
-          <% end %>
-        </ul>
-      </div>
+    <li class="nav-item">
+        <%= link_to "AGB", agb_path(), class: "nav-link" %>
+    </li>
+
+    <!-- Profile -->
+    <% if signed_in? %>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Konto
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+      <%= link_to "Profil", edit_user_path(current_user), class: "dropdown-item" %>
+      <%= link_to "Einstellungen", website_setting_path(1), class: "dropdown-item" %>
+      <div class="dropdown-divider"></div>
+      <%= link_to "Ausloggen", signout_path, method: "delete", class: "dropdown-item" %>
+    </li>
+    <% end %>
+    </ul>
     </div>
   </div>
-</header>
+</nav>

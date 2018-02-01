@@ -1,4 +1,4 @@
-class AddTotalAmountToOrder < ActiveRecord::Migration
+class AddTotalAmountToOrder < ActiveRecord::Migration[4.2]
   def change
     add_column :orders, :total_amount, :decimal
   end

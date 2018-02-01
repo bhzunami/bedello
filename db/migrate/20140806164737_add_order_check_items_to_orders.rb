@@ -1,4 +1,4 @@
-class AddOrderCheckItemsToOrders < ActiveRecord::Migration
+class AddOrderCheckItemsToOrders < ActiveRecord::Migration[4.2]
   def change
     add_column :orders, :pay_day, :datetime
     add_column :orders, :delivery_date, :datetime

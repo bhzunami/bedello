@@ -1,4 +1,4 @@
-class CreateWebsiteSettings < ActiveRecord::Migration
+class CreateWebsiteSettings < ActiveRecord::Migration[4.2]
   def change
     create_table :website_settings do |t|
       t.string :mailAddress
