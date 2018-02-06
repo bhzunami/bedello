@@ -21,7 +21,7 @@ doc/Castage_Docu.log
 original_files
 .secret
 *.dump
-
+data
 # Ignore application configuration
 /config/application.yml
 /config/newrelic.yml
