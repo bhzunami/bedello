@@ -1,27 +1,28 @@
 <% provide(:title, "Sign in") %>
-<h1>Einloggen</h1>
-<div class="row">
-	<div class="span5 offset4">
-		<%= form_tag(sessions_path, method: "post") do %>
+<div class="row justify-content-center">
+	<div class="col-6">
+		<h1 class="h3 mb-3 font-weight-normal text-center">Einloggen</h1>
+		<%= form_for(:session, url: sessions_path, method: "post") do |f| %>
+			<div class="form-group">
+			<%= f.label :email, class: "sr-only" %>
+			<%= f.text_field "email", class: "form-control", placeholder: "Email address", type: "email" %>
+			</div>
 
-			<%= label_tag :email %>
-			<%= text_field_tag "email" %>
+			<div class="form-group">
+			<%= f.label :password, class: "sr-only" %>
+			<%= f.password_field "password", class: "form-control", placeholder: "Password" %>
+			</div>
 
-			<%= label_tag :password %>
-			<%= password_field_tag "password" %>
-
-			<label class="checkbox">
-				<%= check_box_tag :remember_me, 1, params[:remember_me] %>
-				<%= label_tag :remember_me %>
-    	</label>
-    	
-    	<label>
-				<%= link_to "Passwort vergessen", password_reset_path %>
-			</label>
-
-			<label>
-				<%= submit_tag "Einloggen", class: "btn btn-large btn-primary" %>
-			</label>
+			<div class="form-check remember_me">
+				<%= f.check_box :remember_me, class: "form-check-input" %>	
+				<%= f.label :remember_me, class: "form-check-label" %>
+			</div>
+			<%= f.submit "Einloggen", class: "btn btn-lg btn-primary btn-block" %>
+			<p>
+				<label>
+					<%= link_to "Passwort vergessen", password_reset_path %>
+				</label>
+			</p>
 		<% end %>
 	</div>
 </div>

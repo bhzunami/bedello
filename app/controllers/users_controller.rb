@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   end
 
   def show
-  	@user = User.find(params[:id])
+    @user = User.find(params[:id])
   end
 
   def new
@@ -59,12 +59,10 @@ class UsersController < ApplicationController
     user = User.find_by_email(params[:email])
     if user
       user.send_password_reset 
-      flash[:success] = "Ein Mail wurde an ihre Adresse gesendet."
-      redirect_to root_url
-    else
-      flash[:error] = "Zu dieser E-Mail Adresse ist kein Benutzer registriert."
-      render 'password_reset'
-    end  
+    end
+    # Always send notification to not show if an email address exists in the database or not
+    flash[:success] = "Ein Mail wurde an ihre Adresse gesendet."
+    redirect_to root_url
   end
 
   def edit_password_reset
@@ -74,11 +72,12 @@ class UsersController < ApplicationController
   def update_password_reset
     @user = User.find_by_password_reset_token!(params[:id])
     if @user.password_reset_sent_at < 2.hours.ago
-      flash[:error] = "Dieser Link ist abgelaufen, bitte lassen Sie sich einen neuen zukommen"
+      flash[:error] = "Dieser Link ist abgelaufen"
       render 'password_reset'
     elsif @user.update_attributes(user_params)
       sign_in @user
-      redirect_to root_url, :notice => "Das Passwort wurde geändert"
+      flash[:success] = "Dein Passwort wurde erfolgreich aktualisiert"
+      redirect_to root_url
     else
       render 'edit_password_reset'
     end    
@@ -88,8 +87,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password,
-                                   :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
 
    def correct_user
@@ -100,6 +98,8 @@ class UsersController < ApplicationController
     def only_admin
       if signed_in?
         redirect_to(root_url) unless current_user.admin?
+      else
+        redirect_to(root_url)
       end
     end
 end

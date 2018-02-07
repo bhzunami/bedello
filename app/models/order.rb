@@ -35,7 +35,7 @@ class Order < ActiveRecord::Base
 
   validates :payment_id, :shipment_id, :line_items, presence: true
 
-  default_scope order: 'created_at DESC'
+  default_scope { order(created_at: :desc)}
 
   self.per_page = 20
 

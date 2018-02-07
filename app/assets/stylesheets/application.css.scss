@@ -8,6 +8,10 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
+ *= require_self
+ *= require jquery-ui
+ *= require fancybox
+ *= require_tree .
  */
 
  // import original bootstrap
@@ -15,6 +19,8 @@
 //@import "bootstrap-responsive";
 
 /* universal */
+
+$state-danger-text: rgb(196, 56, 56);
 
 @mixin box_sizing {
   -moz-box-sizing: border-box;
@@ -91,12 +97,38 @@ footer ul {
   list-style: none;
 }
 
+/* FORMS */
+
 input, textarea, select, .uneditable-input {
   border: 1px solid #bbb;
-  padding: 10px;
-  margin-bottom: 15px;
+  width: 100%;
   height: auto !important;
   @include box_sizing;
+}
+
+.remember_me {
+  margin-bottom: 15px;
+}
+
+#session_remember_me {
+  width: auto;
+}
+
+
+#error_explanation {
+  color: $state-danger-text;
+  ul {
+    color: $state-danger-text;
+    margin: 0 0 30px 0;
+  }
+}
+
+.field_with_errors {
+  @extend .is-invalid;
+  .form-control {
+    color: $state-danger-text;
+    border-color: $state-danger-text;
+  }
 }
 
 .debug_dump {
@@ -104,6 +136,7 @@ input, textarea, select, .uneditable-input {
   float: left;
   width: 100%;
   margin-top: 45px;
+  background-color: rgb(212, 211, 211);
   @include box_sizing;
 }
 
@@ -129,9 +162,7 @@ input, textarea, select, .uneditable-input {
   }
 }
 
-.field_with_errors {
-  @extend .is-invalid;
-}
+
 
 .sale {
   text-decoration:line-through;
@@ -139,14 +170,6 @@ input, textarea, select, .uneditable-input {
 .users {
   list-style: none;
   margin: 0;
-  li {
-    overflow: auto;
-    padding: 10px 0;
-    border-top: 1px solid $light;
-    &:last-child {
-      border-bottom: 1px solid $light;
-    }
-  }
 }
 
 .quantity_input {

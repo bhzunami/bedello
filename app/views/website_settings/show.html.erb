@@ -1,9 +1,16 @@
-<h1>Settings</h1>
-<p>
-	<b>Email:</b> <%= @websiteSettings.mailAddress %> 
-</p>
+<div class="row justify-content-between">
+<div class=col-4>
+<h3 class="h3 mb-3 font-weight-normal">Einstellungen</h3>
+</div>
+<div class=col-1>
+<%= link_to "Edit", edit_website_setting_path(1), class: "btn btn-primary btn-small" %>
+</div>
+</div>
 <p>
 	Webshop ist geöffnet vom <b><%= @websiteSettings.webstoreOpen.strftime("%d.%m.%Y") %></b> bis am <b><%= @websiteSettings.webstoreClose.strftime("%d.%m.%Y") %></b>.
 <p>
-	<%= link_to "Edit", edit_website_setting_path(1), class: "btn btn-small" %>
+<p>
+E-Mail: <i><%= @websiteSettings.mailAddress %></i>
+</p>
+	
 </p>

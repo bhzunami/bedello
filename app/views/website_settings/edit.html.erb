@@ -1,13 +1,28 @@
-<h1>Einstellungen zur Webseite</h1>
-<%= simple_form_for(@websiteSettings, html: {class: 'form-horizontal' }) do |f| %>
-  <%= render 'shared/error_messages', object: f.object %>
-  <div class="row-fluid">
-    <div class="span7">
-      <%= f.input :mailAddress, label: "E-Mail", error: "test" %>
-      <%= f.input :webstoreOpen, as: :string, label: "Shop is offen ab" %>
-      <%= f.input :webstoreClose, as: :string, label: "Shop is geschlossen ab" %>
-    </div>
-  </div>
-  <%= f.button :submit, "Speichern", class: "btn-success" %>
-<% end %>
+<h3 class="h3 mb-3 font-weight-normal">Einstellungen zur Webseite</h3>
+<div class="row">
+  <div class="col-5">
+  <%= form_for (@websiteSettings) do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+    <%= f.label :mailAddress %>
+    <%= f.email_field :mailAddress, required: true, class: "form-control" %>
+    <small id="passwordHelpBlock" class="form-text text-muted">
+    Auf diese E-Mail Adresse werden alle Benachrichtigungen gesendet.
+    </small>
 
+    <br />
+
+    <p class="lead">Öffnungszeiten:</p>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <%= f.label :webstoreOpen %>
+        <%= f.date_field :webstoreOpen, required: true, class: "form-control" %>
+      </div>
+      <div class="form-group col-md-6">
+        <%= f.label :webstoreClose %>
+        <%= f.date_field :webstoreClose, required: true, class: "form-control" %>
+      </div>
+    </div>
+    <%= f.submit "Speichern", class: "btn btn-block btn-success col-4" %>
+  <% end %>
+  </div>
+</div>
