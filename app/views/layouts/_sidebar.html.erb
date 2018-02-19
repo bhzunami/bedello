@@ -1,10 +1,10 @@
 <div class="nav flex-column nav-pills" aria-orientation="vertical">
 <div class="navbar-brand"> Kategorien </div>
 <% categories.each do |c| %>
-  <%= link_to c.name, products_path(category_id: c.id), id: c.id, class: "nav-link" %>
+  <%= link_to c.name, products_path(category_id: c.id), id: c.id, class: "nav-item nav-link" %>
 <% end %>
 <% if admin? %>
     <br />
-    <%= link_to "#{image_tag('settings.png', size: '20')} Edit".html_safe, categories_path, class: "btn"%>
+    <%= link_to "Edit", categories_path, class: "btn btn-primary btn-mini"%>
   <% end %>
 </div>

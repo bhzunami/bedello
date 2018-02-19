@@ -1,16 +1,16 @@
 class PaymentsController < ApplicationController
   before_action :set_payment, only: [:show, :edit, :update, :destroy]
-  before_action :admin_user, only: [:index, :new, :create, :edit, :update, :destroy]
+  before_action :admin_user
 
   def index
-    @payments = Payment.all   
+    @payments = Payment.order(:name)  
   end
 
   def create
     @payment = Payment.new(payment_params)
     if @payment.save
       flash[:success] = "Zahlungsart #{@payment.name} gespeichert."
-      redirect_to @payment
+      redirect_to payments_path
     else
       render action: 'new'
     end

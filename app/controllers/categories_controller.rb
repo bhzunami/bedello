@@ -4,7 +4,7 @@ class CategoriesController < ApplicationController
 
   
   def index
-  	@categories = Category.all( order: "category_order")
+  	@categories = Category.order(:category_order)
   end
 
   def new

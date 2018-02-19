@@ -1,19 +1,40 @@
-<%= link_to 'Cancel', categories_path, class: "btn btn-danger pull-right" %>
 
-<p>Erstellen einer neuen Kategorie.</p>
-<%= simple_form_for(@category, html: {class: 'form-horizontal' }) do |f| %>
-  <% if @category.errors.any? %>
-    <%= render 'shared/error_messages', object: f.object %>
-  <% end %>
+<%= form_for(@category) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+    
+    <div class="form-row">
+      <div class="form-group col-md-6">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control', placeholder: :name %>
+    </div>
+    </div>
 
-  <%= f.input :name, label: "Name" %>
-  <%= f.input :description, label: "Beschreibung", input_html: { class: "span6", rows: "5"}  %>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+      <%= f.label :description %>
+      <%= f.text_field :description, class: 'form-control', placeholder: :description %>
+    </div>
+    </div>
+
   <% if @category.id %>
-    <%= f.input :category_order, label: "Reihenfolge" %>
+    <div class="form-row">
+      <div class="form-group col-md-1">
+      <%= f.label :category_order %>
+      <%= f.number_field :category_order, class: 'form-control', placeholder: :category_order %>
+    </div>
+    </div>
   <% else %>
-    <%= f.input :category_order, label: "Reihenfolge", input_html: {value: "#{get_highest_index_of_category}"}%>
+      <div class="form-row">
+      <div class="form-group col-md-1">
+      <%= f.label :category_order %>
+      <%= f.number_field :category_order, class: 'form-control', value: "#{get_highest_index_of_category}" %>
+    </div>
+    </div>
   <% end %>
-
-   <%= f.button :submit %>
-
+  <div class="form-row">
+  <div class="form-group col-md-6">
+    <%= f.submit "Speichern", class: "btn col-md-4 float-right btn-success"%>
+    <%= link_to 'Cancel', categories_path, class: "btn btn-outline-danger" %>
+    </div>
+    </div>
 <% end %>

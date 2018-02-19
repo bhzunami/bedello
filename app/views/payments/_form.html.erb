@@ -1,13 +1,31 @@
-<%= link_to 'Abbrechen', payments_path, class: "btn btn-danger pull-right" %>
+<%= form_for(@payment) do |f| %>
+<%= render 'shared/error_messages', object: f.object %>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control', placeholder: :name %>
+    </div>
+  </div>
 
-<%= simple_form_for(@payment, html: {class: 'form-horizontal' }) do |f| %>
-  <% if @payment.errors.any? %>
-    <%= render 'shared/error_messages', object: f.object %>
-  <% end %>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <%= f.label :short_name %>
+      <%= f.text_field :short_name, class: 'form-control', placeholder: :short_name %>
+    </div>
+  </div>
 
-  <%= f.input :name, label: "Name" %>
-  <%= f.input :short_name, label: "Kurzname" %>
-  <%= f.input :costs, label: "Kosten" %>
-  <%= f.button :submit, "Speichere neue Zahlungsart" %>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <%= f.label :costs %>
+      <%= f.number_field :costs, class: 'form-control', placeholder: :costs %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <%= f.submit "Speichern", class: "btn col-md-4 float-right btn-success"%>
+      <%= link_to 'Cancel', payments_path, class: "btn btn-outline-danger" %>
+    </div>
+  </div>
 
 <% end %>

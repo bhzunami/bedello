@@ -1,21 +1,20 @@
 class ShipmentsController < ApplicationController
   before_action :set_shipment, only: [:show, :edit, :update, :destroy]
-  before_action :admin_user, only: [:index, :new, :create, :edit, :update, :destroy]
+  before_action :admin_user
 
   def index
-    @shipments = Shipment.all   
+    @shipments = Shipment.order(:name)   
   end
 
   def create
     @shipment = Shipment.new(shipment_params)
     if @shipment.save
       flash[:success] = "Lieferart #{@shipment.name} gespeichert."
-      redirect_to @shipment
+      redirect_to shipments_path
     else
       render action: 'new'
     end
   end
-
 
   def new
     @shipment = Shipment.new

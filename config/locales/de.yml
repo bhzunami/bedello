@@ -35,6 +35,11 @@ de:
       user:
         name: "Benutzername"
 
+      category:
+        name: "Kategoriename"
+        description: "Beschreibung"
+        category_order: "Reihenfolge"
+
     errors:
       models:
         website_settings:
@@ -42,60 +47,19 @@ de:
             mailAddress:
               blank: "Bitte eine gültige E-Mail Addresse angeben"
               invalid: "Bitte eine gültige E-Mail Addresse angeben"
-
   date:
-    abbr_day_names:
-    - So
-    - Mo
-    - Di
-    - Mi
-    - Do
-    - Fr
-    - Sa
-    abbr_month_names:
-    -
-    - Jan
-    - Feb
-    - Mär
-    - Apr
-    - Mai
-    - Jun
-    - Jul
-    - Aug
-    - Sep
-    - Okt
-    - Nov
-    - Dez
-    day_names:
-    - Sonntag
-    - Montag
-    - Dienstag
-    - Mittwoch
-    - Donnerstag
-    - Freitag
-    - Samstag
-    formats:
-      default: ! '%e %b %Y'
-      long: ! '%e. %B %Y'
-      short: ! '%e. %b'
-    month_names:
-    -
-    - Januar
-    - Februar
-    - März
-    - April
-    - Mai
-    - Juni
-    - Juli
-    - August
-    - September
-    - Oktober
-    - November
-    - Dezember
+    abbr_day_names: [So, Mo, Di, Mi, Do, Fr, Sa]
+    abbr_month_names: [~, Jan, Feb, Mär, Apr, Mai, Jun, Jul, Aug, Sep, Okt, Nov, Dez]
+    day_names: [Sonntag, Montag, Dienstag, Mittwoch, Donnerstag, Freitag, Samstag]
+    month_names: [~, Januar, Februar, März, April, Mai, Juni, Juli, August, September, Oktober, November, Dezember]
     order:
     - :day
     - :month
     - :year
+    formats:
+      default: ! '%e %b %Y'
+      long: ! '%e. %B %Y'
+      short: ! '%e. %b'
   number:
     currency:
       format:
@@ -104,6 +68,9 @@ de:
         seperator: ","
         delimiter: "."
         format: "%n%u"
+  time:
+    formats:
+      swiss: ! '%d. %b %Y'
   datetime:
     distance_in_words:
       about_x_hours:

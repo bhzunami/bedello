@@ -10,8 +10,8 @@ Bedello::Application.routes.draw do
     post "archive"
     get "postfinance", to: 'orders#postfinance'
   end
-  resources :payments
-  resources :shipments
+  resources :payments, only: [:index, :new, :create, :edit, :update, :destroy]
+  resources :shipments, only: [:index, :new, :create, :edit, :update, :destroy]
   resources :properties
   resources :website_settings, only: [:show, :edit, :update]
 
@@ -19,7 +19,7 @@ Bedello::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
 
 # Login system
-  match '/signup', to: 'users#new', via: 'get'
+  #match '/signup', to: 'users#new', via: 'get'
   match '/signin', to: 'sessions#new', via: 'get'
   match '/signout', to: 'sessions#destroy', via: 'delete'
   match '/login', to: 'sessions#new', via: 'get'
