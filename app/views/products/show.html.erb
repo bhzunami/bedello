@@ -1,85 +1,96 @@
 <div class="row">
-  <div class="span2">
+  <div class="col-2">
     <%= render 'layouts/sidebar' %>
   </div>
-  <div class="span10">
-    <h1> <%= @product.title %></h1>
-
+  <div class="col-10">
     <div class="row">
-      <div class="span3">
-       <a class="fancybox" href="<%= image_path(@product.image.url(:large)) %>" rel="<%= @product.title %>" title="<%= @product.title %>">
-        <%= image_tag @product.image.url(:medium) %>
-      </a>
-      <br /><br />
-      <% if isStoreOpen? %>
-        <p class="inStock">Verfügbar: <%= @product.inStock %></p>
-      <% end %>
-
-      <% if isSale?(@product) %>
-        <p class="sale">Alter Preis: <%= number_to_currency(@product.price) %> </p>
-        <b>Aktions Preis: <%= number_to_currency(@product.promotionPrice) %></b>
-      <% else %>
-        <p>Preis: <%= number_to_currency(@product.price) %></p>
-      <% end %>
-
-      <% if admin? %>
-        <p>Im Shop vom: <%= t(@product.sale_start_date.strftime("%d.%m.%Y")) %> - <%= @product.sale_end_date.strftime("%d.%m.%Y") %> </p>
-      <% end %>
-    </div>
-
-    <div class="span7">
-      <% if admin? && !@product.isActivate %>
-        <p class="alert alert-error">Produkt ist nicht <strong>aktiv</strong></p>
-      <% end %>
-
-      <% if !activeProduct?(@product) %>
-        <p class="alert"><%= @product.title %> ist ab <%= @product.sale_start_date.strftime("%B") %> wieder verfügbar </p>
-      <% end %>
-
-      <% if isSale?(@product) %>
-        <p class="text-error"> <strong>Aktion: <%= number_with_precision promotionPercent(@product), precision: 0%> % Rabatt</strong></p>
-      <% end %>
-  <!-- Right site -->
-      <% if admin? %>
-        <% if @product.property_id? %>
-          <select class="property pull-right">
-          <% @product.property.propertyItems.each do |i| %>
-            <option value=<%= i.id %>><%= i.name %></option>
-          <% end %>
-          </select>
-          <br /><br />
-        <% end %>
-        <p class="pull-right">
-          <%= link_to "Edit", edit_product_path(@product), class: "btn" %>
-          <%= link_to "Delete", @product, method: :delete, data: {confirm: "You sure you want to delete #{@product.title}"}, class: "btn btn-danger"  %>
+      <div class="col-4">
+        <!-- Image -->
+        <p><a class="fancybox" href="<%= image_path(@product.image.url(:large)) %>" rel="<%= @product.title %>" title="<%= @product.title %>">
+          <%= image_tag @product.image.url(:medium), class: "img-fluid" %>
+        </a></p>
+        
+        <!-- Price -->
+        <% if isSale?(@product) %>
+          <p><b>Preis: <%= number_to_currency(@product.promotionPrice) %></b> <del><%= number_to_currency(@product.price)%></del> </p>
         <% else %>
+          <p><b>Preis: <%= number_to_currency(@product.price) %></b></p>
+        <% end %>
+
+        <!-- In stock -->
+        <% if isStoreOpen? %>
+          <p>Im Lager: <%= @product.inStock %></p>
+        <% end %>
+
+        <!-- Prodct nr -->
+        Producktnummer: <%= @product.product_nr %>
+
+        <!-- Admin informations -->
+        <% if admin? %>
+          <p class="font-weight-light">Im Shop ab: <%= l @product.sale_start_date, format: :swiss %><br />
+          Im Shop bis: <%= l @product.sale_end_date, format: :swiss %> </p>
+        <% end %>
+      </div> <!-- end col-4 -->
+
+      <!-- Middle Part: The product -->
+      <div class="col-6">
+        <!-- Product available -->
+        <% if admin? && !@product.isActivate %>
+          <p class="alert alert-danger">Produkt ist nicht <strong>aktiv</strong></p>
+        <% end %>
+
+        <!-- Product active -->
+        <% if !activeProduct?(@product) %>
+          <p class="alert">Ist ab <%= @product.sale_start_date.strftime("%B") %> wieder verfügbar.</p>
+        <% end %>
+
+        <!-- Product on sale -->
+        <% if isSale?(@product) %>
+          <p class="text-warning"> <strong>Aktion: <%= number_with_precision promotionPercent(@product), precision: 0%> % Rabatt</strong></p>
+        <% end %>
+
+        <!-- Product information -->
+        <h4> <%= @product.title %></h4>
+        <%= sanitize(@product.description) %>
+      </div> <!-- end col-6 -->
+
+      <!-- Right site -->
+      <div class="col-1">
+        <% if admin? %>
+          <% if @product.property_id? %>
+            <select class="property float-right">
+            <% @product.property.propertyItems.each do |i| %>
+              <option value=<%= i.id %>><%= i.name %></option>
+            <% end %>
+            </select>
+            <br /><br />
+          <% end %> <!-- end if property -->
+          <p class="float-right">
+            <%= link_to "Edit", edit_product_path(@product), class: "btn" %>
+            <%= link_to "Delete", @product, method: :delete, data: {confirm: "You sure you want to delete #{@product.title}"}, class: "btn btn-danger"  %>
+          </p>
+        <% else %> <!-- end admin -->
+          <!-- Buy form -->
           <% if activeProduct?(@product) && @product.inStock > 0 && isStoreOpen?%>
-            <%= form_tag({}, class: "form-inline addToCart") do %>
+            <%= form_tag({}, class: "float-right form-inline addToCart") do %>
               <%= hidden_field_tag("id", value = @product.id) %>
               <% if @product.property_id? %>
-                <select class="property pull-right">
+                <select class="form-control form-control-sm property float-right">
                 <% @product.property.propertyItems.each do |i| %>
                   <option value=<%= i.id %>><%= i.name %></option>
                 <% end %>
                 </select>
-                <br /><br />
               <% end %>
-              <label class="pull-right">
-                <%= number_field_tag "quantity", value = 1, in: 1...11, class: "quantity_input"%>
-                <%= submit_tag "in den Warenkorb", class: "btn btn-success btn_add", name: "add" %>
+              <label class="float-right">
+                <%= number_field_tag "quantity", value = 1, in: 1...11, class: "form-control form-control-sm quantity_input"%>
+                <%= submit_tag "in den Warenkorb", class: "form-control btn btn-success btn_add", name: "add" %>
               </label>
             <% end %> <!-- end form -->
           <% elsif not isStoreOpen? %>
             <p class="pull-right storeClose"> Shop ist nicht geöffnet</p>
-            <!-- Form -->
           <% end %>
-        <% end %>
-      </p>
-      <small><%= @product.product_nr %></small>
-      <h3>Beschreibung</h3>
-      <%= sanitize(@product.description) %>
-    </div>
-  </div><!-- row -->
-
-</div>
-</div>
+        <% end %> <!-- end not admin -->
+      </div> <!-- end right div -->
+    </div><!-- row -->
+  </div><!-- end div 10 -->
+</div><!-- end row -->

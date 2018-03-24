@@ -1,43 +1,43 @@
 <%= form_for(@property, html: {class: 'form-horizontal' }) do |f| %>
-<% if @property.errors.any? %>
-    <%= render 'shared/error_messages', object: f.object %>
-  <% end %>
-  <div class="row">
-    <div class="span12">
-      <h4>Eigenschaft</h4>
-      <hr class="featurette-divider">
-      <div class="control-group">
-      	<%= f.label :name, class: "control-label" %>
-      	<div class="controls">
-      		<%= f.text_field :name %>
-      	</div>
-      </div>
-      <div class="control-group">
-      	<%= f.label :description, "Beschreibung", class: "control-label" %>
-      	<div class="controls">
-      		<%= f.text_field :description %>
-      	</div>
+  <%= render 'shared/error_messages', object: f.object %>
+    <h5>Eigenschaft</h5>
+    <hr class="featurette-divider">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: 'form-control', placeholder: :name %>
       </div>
     </div>
-  </div>
-    <div class="row-fluid">
-		<div class="span12">
-		<a href="" class="add pull-right btn btn-small btn-success">+ Neue Option</a>
-      <h4>Optionen</h4>
-      <hr class="featurette-divider">
-      <div class="items">
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <%= f.label :description %>
+        <%= f.text_field :description, class: 'form-control', placeholder: :description %>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <a href="" class="add float-right btn btn-small btn-success">+ Neue Option</a>
+      </div>
+    </div>
+    <h5>Optionen</h5>
+    <hr class="featurette-divider">
+    <div class="items">
     <%= f.nested_fields_for :propertyItems do |f| %>
       <fieldset class="item">
-      	<div class="control-group">
-        	<%= f.label :name, class: "control-label" %>
-        	<div class="controls">
-        		<%= f.text_field :name %>
+      	<div class="form-row">
+          <div class="form-group col-md-6">
+        	  <%= f.label :name %>
+        		<%= f.text_field :name, class: 'form-control', placeholder: :name %>
         	</div>
-        	<%= f.label :description, "Beschreibung", class: "control-label" %>
-        	<div class="controls">
-        		<%= f.text_field :description %>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+        	  <%= f.label :description%>
+        		<%= f.text_field :description, class: 'form-control', placeholder: :description %>
         	</div>
- </div>
+        </div>
         <a href="#" class="remove btn btn-small btn-danger">Lösche Option</a>
        
         <%= f.hidden_field :id %>
@@ -46,7 +46,12 @@
       <hr class="featurette-divider">
     <% end %>
   </div>
-  
-<%= f.submit "Speichern", class: "btn-success btn"%>
+
+<div class="form-row">
+  <div class="form-group col-md-6">
+    <%= f.submit "Speichern", class: "btn col-md-4 float-right btn-success"%>
+    <%= link_to 'Cancel', properties_path, class: "btn btn-outline-danger" %>
+  </div>
+</div>
 <% end %>
 

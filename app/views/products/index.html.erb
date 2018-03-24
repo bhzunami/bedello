@@ -12,10 +12,13 @@
       <br />
       <% @products.each do |product| %>       
           <%= render product %>
+          <% if product != @products.last %>
+            <hr>
+          <% end %>
       <% end %>
     <% else %>
       <div class="lead">
-        <br />
+        <h2><%= @category.name %></h2>
         Leider keine Produkte für diese Kategorie gefunden.<br />
         Gehen sie zurück zum <%= link_to "Shop", root_path %>
       </div>

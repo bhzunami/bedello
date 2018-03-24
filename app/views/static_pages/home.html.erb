@@ -4,31 +4,29 @@
 		<%= render 'layouts/sidebar' %>
 	</div>
 	<div class="col-9">
-	<h1> Bedello Pralinen </h1>
+		<h1> Bedello Pralinen </h1>
+		<% if not isStoreOpen? %>
+			<p class="alert alert-danger">Der Shop ist momentan nicht <strong>aktiv</strong>. Er öffnet wieder am <%= @webstore.webstoreOpen.strftime("%d.%m.%Y") %>.
+			<br />
+			Sie können sich trotzdem gerne im Shop umschauen.</p>
+		<% end %>
 
-	<% if not isStoreOpen? %>
-	<p class="alert alert-error">Der Shop ist momentan nicht <strong>aktiv</strong>. Er öffnet wieder am <%= @webstore.webstoreOpen.strftime("%d.%m.%Y") %>.
-	<br />
-	Sie können sich trotzdem gerne im Shop umschauen.</p>
-	<% end %>
+		<%= image_tag "logo/bedello_shop_titelbild.jpg", class: "img-fluid mx-auto d-block" %>
 
-	<%= image_tag "logo/bedello_shop_titelbild.jpg" %>
-
-	<% if not isStoreOpen? %>
-		<center><%= image_tag "logo/shopClose.png" %></center>
-	<% else %>
-	<div class="row">
-	<br /><br />
-	<% @products.each do |p| %>
-		<div class="col-3">
-			<%= link_to (image_tag p.image.url(:small)), p %>
-			<p>
-			<h4><%= link_to p.title, p %></h4>
-			<%= truncate(strip_tags(sanitize(p.description)),length: 200) %>
-			</p>
+		<% if not isStoreOpen? %>
+			<center><%= image_tag "logo/shopClose.png" %></center>
+		<% else %>
+		<div class="row no-gutters justify-content-md-center">
+		<% @products.each do |p| %>
+			<div class="col-4">
+				<%= link_to (image_tag p.image.url(:small), class: "img-fluid"), p %>
+				<p>
+				<h4><%= link_to p.title, p %></h4>
+				<%= truncate(strip_tags(sanitize(p.description)),length: 200) %>
+				</p>
+			</div>
+		<% end %>
 		</div>
-	<% end %>
-	</div>
-	<% end %>
+		<% end %>
 	</div>
 </div>

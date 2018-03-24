@@ -60,6 +60,7 @@ de:
       default: ! '%e %b %Y'
       long: ! '%e. %B %Y'
       short: ! '%e. %b'
+      swiss: ! '%d. %b %Y'
   number:
     currency:
       format:

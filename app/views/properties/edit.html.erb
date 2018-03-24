@@ -1,4 +1,4 @@
-<h1>Bearbeite Eigenschaft</h1>
-<%= link_to 'Cancel', properties_path, class: "btn btn-danger pull-right" %>
+<% provide(:title, 'Produkteigenschaften') %>
+<h3 class="h3 mb-3 font-weight-normal">Produkteigenschaft ändern</h3>
 
 <%= render 'form' %>

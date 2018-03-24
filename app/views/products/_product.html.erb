@@ -1,17 +1,17 @@
 <div class="row">
-  <div class="span3">
-    <%= link_to image_tag(product.image.url(:medium)), product %></h4>
+  <div class="col-3">
+    <%= link_to image_tag(product.image.url(:medium), class: "img-fluid"), product %></h4>
   </div>
 
-  <div class="span4">
+  <div class="col-6">
     <!-- Show the admin user all Products include inActive -->
     <% if admin? && !product.isActivate %>
-      <p class="alert alert-error">Produkt ist nicht <strong>aktiv</strong></p>
+      <p class="alert alert-danger">Produkt ist nicht <strong>aktiv</strong></p>
     <% end %>
 
     <!-- Show if product is not seasonally -->
     <% if !activeProduct?(product) %>
-      <p class="alert"><%= product.title %> ist ab <%= product.sale_start_date.strftime("%B") %> wieder verfügbar </p>
+      <p class="alert alert-warning">Ist ab <%= product.sale_start_date.strftime("%B") %> wieder verfügbar. </p>
     <% end %>
 
     <!-- Check if we have to show sale price -->
@@ -25,7 +25,7 @@
   </div>
 
 <!-- Right side -->
-  <div class="span3 pull-right">
+  <div class="col-3 float-right">
     <% if isStoreOpen? %>
       <p class="text-right inStock">Verfügbar: <%= product.inStock %></p>
     <% end %>
@@ -46,7 +46,7 @@
               </select>
               <br /><br />
             <% end %>
-      <p class="pull-right">
+      <p class="float-right">
         <%= link_to "Edit", edit_product_path(product), class: "btn" %>
         <%= link_to "Löschen", product, method: :delete, data: {confirm: "You sure you want to delete #{product.title}"}, class: "btn btn-danger"  %>
       </p>
@@ -79,4 +79,3 @@
     <!-- Admin user -->
   </div>
 </div>
-<hr>
