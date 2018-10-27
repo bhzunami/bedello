@@ -24,7 +24,7 @@
       <% if @order.distribution_number? %>
       <%= f.input :distribution_number, label: "Versandnummer" %>
       <% else %>
-      <%= f.input :distribution_number, label: "Versandnummer", :input_html => { :value => '99.60.030204.00000' } %>
+      <%= f.input :distribution_number, label: "Versandnummer", :input_html => { :value => '99.60.030204.00001' } %>
       <% end %>
       <hr>
       <%= f.input :warning, as: :string, label: "Mahnung versendet am" %>
